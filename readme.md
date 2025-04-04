@@ -1,6 +1,8 @@
 # evallm
-
+[ ENGLISH BELOW]
 Un outil pour évaluer et comparer les performances de modèles de langage avec Ollama.
+
+![image](./static/img/preview.png)
 
 ## Français
 
