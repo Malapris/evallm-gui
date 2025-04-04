@@ -1,0 +1,63 @@
+{
+  "system_info": {
+    "os": "Windows",
+    "os_version": "10.0.19045",
+    "python_version": "3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]",
+    "ollama_version": "0.6.4",
+    "evallm_version": "4.0.0",
+    "cpu": {
+      "model": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+      "cores": 8,
+      "threads": 8,
+      "freq": {
+        "current": 3501.0,
+        "min": 0.0,
+        "max": 3501.0
+      }
+    },
+    "memory": {
+      "total_gb": 31.874404907226562,
+      "available_gb": 17.8143310546875,
+      "used_gb": 14.060073852539062,
+      "percent": 44.1
+    },
+    "gpu": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": 24576.0,
+        "memory_used": 577.0,
+        "memory_free": 23750.0,
+        "gpu_load": 25.0
+      }
+    ],
+    "hostname": "DESKTOP-GFRJJ8Q"
+  },
+  "config": {
+    "models": [
+      "deepscaler:latest",
+      "stablelm2:1.6b"
+    ],
+    "system_prompts": {
+      "systeme": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique."
+    },
+    "user_prompts": {
+      "utilisateur": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion."
+    },
+    "contexts": {
+      "sources": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes."
+    },
+    "seeds": [
+      6,
+      8,
+      68,
+      686,
+      689868
+    ],
+    "temperatures": [
+      0.0
+    ],
+    "commentaire": "",
+    "resultats": []
+  },
+  "results": []
+}

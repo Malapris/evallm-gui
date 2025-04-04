@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison de LLM avec Ollama</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f8f9fa; }
+        h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+        h2 { color: #283593; margin-top: 40px; border-bottom: 1px solid #c5cae9; padding-bottom: 10px; }
+        .results-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); table-layout: fixed; }
+        .results-table th, .results-table td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; vertical-align: top; }
+        .results-table th { background-color: #e8eaf6; font-weight: bold; color: #1a237e; }
+        .results-table tr:nth-child(even) { background-color: #f5f5f5; }
+        .results-table tr:hover { background-color: #e8eaf6; }
+        .model-header { background-color: #3f51b5; color: white; }
+        .response { max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; }
+        .response-content { padding: 10px; background-color: #f8f9fa; border-radius: 4px; cursor: pointer; }
+        .response-content:hover { background-color: #e8eaf6; }
+        .response-pre { 
+            display: none; 
+            position: fixed; 
+            top: 5%; 
+            left: 5%; 
+            width: 90%; 
+            max-height: 90vh;
+            background-color: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-y: auto; 
+            z-index: 1000; 
+        }
+        .response-pre pre { 
+            margin: 0; 
+            white-space: pre-wrap; 
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            max-height: none;
+            overflow: visible;
+        }
+        .response-pre .think-section { color: #666; font-style: italic; }
+        .think-tag { color: #5c6bc0; font-weight: bold; }
+        .response-text { white-space: pre-wrap; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                  background-color: rgba(0,0,0,0.5); z-index: 999; }
+        .close-button { position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 24px; }
+        .metadata { background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .summary-table th, .summary-table td { border: 1px solid #e0e0e0; padding: 12px; text-align: center; }
+        .summary-table th { background-color: #3f51b5; color: white; font-weight: bold; }
+        .summary-table tr:nth-child(even) { background-color: #f5f5f5; }
+        .summary-table tr:hover { background-color: #e8eaf6; }
+        .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #5c6bc0; }
+        .temp-badge { display: inline-block; background-color: #5c6bc0; color: white; padding: 2px 6px; 
+                      border-radius: 3px; font-size: 0.8em; margin-left: 8px; }
+        .json-link { display: block; text-align: right; margin: 10px 0; color: #3f51b5; text-decoration: none; }
+        .json-link:hover { text-decoration: underline; }
+        .models-list { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-family: monospace; }
+        .input-data { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .input-content { white-space: pre-wrap; background-color: #f5f5f5; padding: 10px; border-left: 4px solid #3f51b5; margin: 10px 0; }
+        .commentaire { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-style: italic; }
+        .highlighted-response { text-decoration: underline; text-decoration-color: green; text-decoration-thickness: 2px; }
+        .system-info { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .system-info h3 { color: #1a237e; margin-top: 0; }
+        .system-info table { margin: 10px 0; width: 100%; }
+        .system-info td:first-child { font-weight: bold; width: 200px; }
+        .identical { color: #666; font-style: italic; }
+        .think-section { color: #666; font-style: italic; }
+        think { display: block; color: #666; font-style: italic; margin: 5px 0; }
+        @media screen and (max-width: 768px) {
+            .results-table { display: block; overflow-x: auto; }
+            .summary-table { display: block; overflow-x: auto; }
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #5c6bc0;
+            font-size: 1.2em;
+        }
+    </style>
+    <script>
+        function showResponse(response, event) {
+            event.preventDefault();
+            const pre = document.createElement('pre');
+            // Décodage de l'encodage JSON
+            try {
+                response = JSON.parse('"' + response + '"');
+            } catch (e) {
+                // Si le décodage échoue, on garde la réponse originale
+            }
+            // Échappement des caractères spéciaux et gestion des sauts de ligne
+            const escapedResponse = response
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;')
+                .replace(/\n/g, '<br>')
+                .replace(/\r/g, '');
+            pre.innerHTML = escapedResponse;
+            const div = document.createElement('div');
+            div.className = 'response-pre';
+            div.innerHTML = '<span class="close-button" onclick="closeResponse()">&times;</span>';
+            div.appendChild(pre);
+            document.body.appendChild(div);
+            document.querySelector('.overlay').style.display = 'block';
+            div.style.display = 'block';
+        }
+        
+        function closeResponse() {
+            const pre = document.querySelector('.response-pre');
+            if (pre) {
+                pre.remove();
+            }
+            document.querySelector('.overlay').style.display = 'none';
+        }
+        
+        // Fermer avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeResponse();
+            }
+        });
+        
+        // Fermer en cliquant sur l'overlay
+        document.querySelector('.overlay').addEventListener('click', closeResponse);
+    </script>
+</head>
+<body>
+    <div class="overlay"></div>
+    <h1>evallm : comparaison de modèles avec ollama</h1>
+    <div class="header-info">
+        <h2>DESKTOP-GFRJJ8Q - Windows 10.0.19045 - 04/04/2025 15:37:17</h2>
+    </div>
+
+    <div class="system-info">
+        <h3>Informations Système</h3>
+        <table>
+            <tr>
+                <td>Nom de la machine</td>
+                <td>DESKTOP-GFRJJ8Q</td>
+            </tr>
+            <tr>
+                <td>Système d'exploitation</td>
+                <td>Windows 10.0.19045</td>
+            </tr>
+            <tr>
+                <td>Python</td>
+                <td>3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]</td>
+            </tr>
+            <tr>
+                <td>Ollama</td>
+                <td>0.6.4</td>
+            </tr>
+            <tr>
+                <td>evallm.py</td>
+                <td>4.0.1</td>
+            </tr>
+            <tr>
+                <td>CPU</td>
+                <td>Intel64 Family 6 Model 60 Stepping 3, GenuineIntel (8 cœurs, 8 threads)</td>
+            </tr>
+            <tr>
+                <td>Mémoire</td>
+                <td>31.9 GB total, 17.0 GB disponible</td>
+            </tr>
+            
+            <tr>
+                <td>GPU</td>
+                <td>
+                    
+                    NVIDIA GeForce RTX 3090 (24.0 GB VRAM)<br>
+                    
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    
+    <a href="static\results\temp_config_20250404_153706_20250404_153707.json" class="json-link">📊 Voir les données au format JSON</a>
+
+    <h2>Synthèse des Performances</h2>
+    <table class="summary-table">
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Temps moyen (s)</th>
+            <th>Temps minimum (s)</th>
+            <th>Temps maximum (s)</th>
+            <th>Nombre de tokens moyen</th>
+        </tr>
+        
+        <tr>
+            <td><a href="#model_model_stablelm2_1.6b_0_0">stablelm2:1.6b</a> <span class="temp-badge">temp=0.0</span></td>
+            <td>2.08</td>
+            <td>1.87</td>
+            <td>2.19</td>
+            <td>0</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Données d'Entrée</h2>
+    <div class="input-data">
+        <h3>Prompts Système</h3>
+        
+        <p><strong>systeme</strong></p>
+        <div class="input-content">Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.</div>
+        
+        
+        <h3>Prompts Utilisateur</h3>
+        
+        <p><strong>utilisateur</strong></p>
+        <div class="input-content">A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.</div>
+        
+        
+        <h3>Contextes</h3>
+        
+        <p><strong>sources</strong></p>
+        <div class="input-content">source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris
+source 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid 
+ source 3 : aujourd'hui je ne m'en souviens plus ! 
+ source 4 : c'est déjà passé ! 
+ source 5 : demain il sera trop tard !</div>
+        
+    </div>
+    
+    <h2>Résultats Détaillés</h2>
+    
+    
+    <h3 id="model_model_stablelm2_1.6b_0_0">Modèle: stablelm2:1.6b | Système: systeme | Prompt: utilisateur | Contexte: sources | Température: 0.0</h3>
+    <table class="results-table">
+        <tr class="model-header">
+            <th>Métrique</th>
+            
+            <th>Réponse graine 68</th>
+            
+            <th>Réponse graine 86</th>
+            
+            <th>Réponse graine 886</th>
+            
+        </tr>
+        <tr>
+            <th>Temps (s)</th>
+            
+            <td>1.87</td>
+            
+            <td>2.19</td>
+            
+            <td>2.18</td>
+            
+        </tr>
+        <tr>
+            <th>Réponse</th>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;8/09/2021\\n\\nPour calculer la date \\u00e0 partir des informations fournies dans les sources, je vais suivre ces \\u00e9tapes :\\n\\n1. Supprimer le mois et l\\u0027ann\\u00e9e de chaque source pour conserver uniquement le jour et l\\u0027heure.\\n   - Source 1: 8 septembre (aujourd\\u0027hui) -\\u003e 08/09\\n   - Source 2: 7 septembre (la veille) -\\u003e 07/09\\n   - Source 3: 6 septembre (lundi) -\\u003e 06/09\\n   - Source 4: n\\u0027importe quelle date (pas de date fournie) -\\u003e n\\u0027importe quelle date\\n   - Source 5: 8 octobre (demain) -\\u003e 08/10\\n\\n2. Convertir les jours en jour, mois et ann\\u00e9es.\\n   - Jour: 8\\n   - Mois: 9\\n   - Ann\\u00e9es: 2021\\n\\n3. Rappeler la date avec l\\u0027heure supprim\\u00e9e.\\n   - Date: 08/09 (aujourd\\u0027hui)\\n   - Heure: 07 (7h)\\n\\n4. Ajouter les heures pour obtenir la date finale.\\n   - Date finale : 08 octobre 2021 07h\\n\\n5. Convertir la date en format \\&quot;JJ/MM/AAAA\\&quot;.\\n   - Date finale : 08/09/2021\\n\\nLa date fournie est donc le 8 septembre 2021 \\u00e0 7h, conform\\u00e9ment aux instructions et \\u00e0 l\\u0027analyse minutieuse des informations fournies dans les sources.&quot;, event)">
+                    8/09/2021
+
+Pour calculer la date à partir des informations fournies dans les sources, je vais suivre ces étapes :
+
+1. Supprimer le mois et l'année de chaque source pour conserver uniquement le jour et l'heure.
+   - Source 1: 8 septembre (aujourd'hui) -> 08/09
+   - Source 2: 7 septembre (la veille) -> 07/09
+   - Source 3: 6 septembre (lundi) -> 06/09
+   - Source 4: n'importe quelle date (pas de date fournie) -> n'importe quelle date
+   - Source 5: 8 octobre (demain) -> 08/10
+
+2. Convertir les jours en jour, mois et années.
+   - Jour: 8
+   - Mois: 9
+   - Années: 2021
+
+3. Rappeler la date avec l'heure supprimée.
+   - Date: 08/09 (aujourd'hui)
+   - Heure: 07 (7h)
+
+4. Ajouter les heures pour obtenir la date finale.
+   - Date finale : 08 octobre 2021 07h
+
+5. Convertir la date en format "JJ/MM/AAAA".
+   - Date finale : 08/09/2021
+
+La date fournie est donc le 8 septembre 2021 à 7h, conformément aux instructions et à l'analyse minutieuse des informations fournies dans les sources.
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;8/09/2021\\n\\nPour calculer la date \\u00e0 partir des informations fournies dans chaque source, j\\u0027ai utilis\\u00e9 le format de num\\u00e9ration courant pour les jours (J), mois (M) et ann\\u00e9es (Y). En utilisant ces informations, j\\u0027ai pu construire une cha\\u00eene de commande de base de Python pour convertir les dates en formats appropri\\u00e9s.\\n\\nVoici la commande de conversion de date utilis\\u00e9e dans l\\u0027exemple :\\n\\n```python\\nfrom datetime import datetime\\n\\n# Cr\\u00e9er une variable avec l\\u0027information fournie dans chaque source\\ndate_sources = [\\n    \\&quot;le lendemain du 8 septembre 2021\\&quot;,\\n    \\&quot;la veille du 9/ottobre 2021\\&quot;,\\n    \\&quot;aujourd\\u0027hui je ne m\\u0027en souviens plus\\&quot;,\\n    \\&quot;c\\u0027est d\\u00e9j\\u00e0 pass\\u00e9\\&quot;,\\n    \\&quot;demain il sera trop tard\\&quot;\\n]\\n\\n# Trouver la date \\u00e0 partir de chaque source\\ndates = []\\nfor source in date_sources:\\n    date_str = source.split()\\n    try:\\n        # Convertir l\\u0027heure et les jours en seconds pour une conversion plus pr\\u00e9cise\\n        date_obj = datetime.strptime(date_str[0], \\&quot;%d %b %Y\\&quot;) + datetime.timedelta(hours=int(date_str[1]), minutes=int(date_str[2]))\\n        dates.append(str(date_obj))\\n    except ValueError:\\n        pass  # Ignore if the format is incorrect\\n\\n# Cr\\u00e9er une variable avec les dates r\\u00e9cup\\u00e9r\\u00e9es\\nfinal_date = min(dates, key=lambda x: (x[:8], x[-4:]))\\n\\nprint(final_date.strftime(\\&quot;%d/%m/%Y\\&quot;))  # Afficher la date en format \\&quot;DD/MM/YYYY\\&quot;\\n```\\n\\nEn utilisant cette commande de conversion de date, j\\u0027ai pu extraire les dates des informations fournies dans chaque source et les organiser pour que le r\\u00e9sultat soit simple et synth\\u00e9tique. La date r\\u00e9cup\\u00e9r\\u00e9e est ensuite affich\\u00e9e sous forme de jour, mois et ann\\u00e9e (par exemple : \\&quot;20/10/2021\\&quot;).&quot;, event)">
+                    8/09/2021
+
+Pour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération courant pour les jours (J), mois (M) et années (Y). En utilisant ces informations, j'ai pu construire une chaîne de commande de base de Python pour convertir les dates en formats appropriés.
+
+Voici la commande de conversion de date utilisée dans l'exemple :
+
+```python
+from datetime import datetime
+
+# Créer une variable avec l'information fournie dans chaque source
+date_sources = [
+    "le lendemain du 8 septembre 2021",
+    "la veille du 9/ottobre 2021",
+    "aujourd'hui je ne m'en souviens plus",
+    "c'est déjà passé",
+    "demain il sera trop tard"
+]
+
+# Trouver la date à partir de chaque source
+dates = []
+for source in date_sources:
+    date_str = source.split()
+    try:
+        # Convertir l'heure et les jours en seconds pour une conversion plus précise
+        date_obj = datetime.strptime(date_str[0], "%d %b %Y") + datetime.timedelta(hours=int(date_str[1]), minutes=int(date_str[2]))
+        dates.append(str(date_obj))
+    except ValueError:
+        pass  # Ignore if the format is incorrect
+
+# Créer une variable avec les dates récupérées
+final_date = min(dates, key=lambda x: (x[:8], x[-4:]))
+
+print(final_date.strftime("%d/%m/%Y"))  # Afficher la date en format "DD/MM/YYYY"
+```
+
+En utilisant cette commande de conversion de date, j'ai pu extraire les dates des informations fournies dans chaque source et les organiser pour que le résultat soit simple et synthétique. La date récupérée est ensuite affichée sous forme de jour, mois et année (par exemple : "20/10/2021").
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+        </tr>
+    </table>
+    <br>
+    
+    
+    <h2>Modèles Disponibles</h2>
+    <div class="models-list">
+        ["yi:9b", "stablelm2:12b", "stablelm2:1.6b", "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS", "deepscaler:latest", "exaone-deep:7.8b", "granite3-dense:8b", "omercelik/reka-flash-3:latest", "qwen2.5:7b", "command-r7b:7b", "mxbai-embed-large:latest", "gemma3:latest", "nomic-embed-text:latest", "mistral:latest", "llama3.2:latest", "gemma3:12b", "mistral-small:24b", "granite3.2:2b", "granite3.2:8b", "qwen2.5:14b", "gemma2:latest", "llama3.2-vision:11b", "deepseek-r1:14b", "phi4:latest", "llava:latest", "moondream:latest", "martyyz/stable-prompt:latest", "impromptu2:latest", "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest", "impromptu:latest", "gemma:latest", "simone3:latest"]
+    </div>
+    
+    <div class="footer">
+        <p>Généré avec <a href="https://github.com/Malapris/evallm">evallm.py</a> par Francis Malapris</p>
+    </div>
+</body>
+</html>

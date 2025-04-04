@@ -1,0 +1,143 @@
+
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comparaison de LLM avec Ollama</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f8f9fa; }
+            h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+            h2 { color: #283593; margin-top: 40px; border-bottom: 1px solid #c5cae9; padding-bottom: 10px; }
+            table { border-collapse: collapse; width: 100%; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            th, td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; vertical-align: top; }
+            th { background-color: #e8eaf6; font-weight: bold; color: #1a237e; }
+            tr:nth-child(even) { background-color: #f5f5f5; }
+            tr:hover { background-color: #e8eaf6; }
+            .model-header { background-color: #3f51b5; color: white; }
+            .response { max-height: 300px; overflow-y: auto; white-space: pre-wrap; }
+            .metadata { background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            .summary-table th { text-align: center; }
+            .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #5c6bc0; }
+            .temp-badge { display: inline-block; background-color: #5c6bc0; color: white; padding: 2px 6px; 
+                          border-radius: 3px; font-size: 0.8em; margin-left: 8px; }
+            .json-link { display: block; text-align: right; margin: 10px 0; color: #3f51b5; text-decoration: none; }
+            .json-link:hover { text-decoration: underline; }
+            .models-list { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                          box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-family: monospace; }
+            .input-data { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                         box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            .input-content { white-space: pre-wrap; background-color: #f5f5f5; padding: 10px; border-left: 4px solid #3f51b5; margin: 10px 0; }
+        </style>
+    </head>
+    <body>
+        <h1>Comparaison de Modèles LLM avec Ollama</h1>
+        <a href="9-9-99-hard_20250321_143122.json" class="json-link">📊 Voir les données brutes (JSON)</a>
+        <div class="metadata">
+            <p><strong>Date de génération:</strong> 2025-03-21 14:31:38</p>
+        </div>
+    
+    <h2>Synthèse des Performances</h2>
+    <table class="summary-table">
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Temps moyen (s)</th>
+            <th>Temps minimum (s)</th>
+            <th>Temps maximum (s)</th>
+            <th>Nombre de tokens moyen</th>
+        </tr>
+    
+        <tr>
+            <td><a href="#model_stablelm2_12b_0_0">stablelm2:12b</a> <span class="temp-badge">temp=0.0</span></td>
+            <td>3.06</td>
+            <td>2.98</td>
+            <td>3.08</td>
+            <td>126</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Données d'Entrée</h2>
+    <div class="input-data">
+    
+        <h3>Prompts Système</h3>
+    
+        <p><strong>systeme</strong></p>
+        <div class="input-content">Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.</div>
+        
+        <h3>Prompts Utilisateur</h3>
+    
+        <p><strong>utilisateur</strong></p>
+        <div class="input-content">Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.</div>
+        
+        <h3>Contextes</h3>
+    
+            <p><strong>sources</strong></p>
+            <div class="input-content">source 1 : C&#x27;était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.
+source 2 : C&#x27;était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.
+ source 3 : aujourd&#x27;hui je ne m&#x27;en souviens plus ! 
+ source 4 : c&#x27;était déjà passé en 2020 ! 
+ source 5 : jeudi il sera trop tard !</div>
+            
+    </div>
+    
+    <h2>Résultats Détaillés</h2>
+    
+        <h3 id="model_stablelm2_12b_0_0">Modèle: stablelm2:12b | Système: systeme | Prompt: utilisateur | Contexte: sources | Température: 0.0</h3>
+        <table>
+            <tr class="model-header">
+                <th>Métrique</th>
+        
+                <th>Réponse graine 6</th>
+            
+                <th>Réponse graine 8</th>
+            
+                <th>Réponse graine 68</th>
+            
+                <th>Réponse graine 86</th>
+            
+                <th>Réponse graine 886</th>
+            
+            </tr>
+            <tr>
+                <th>Temps (s)</th>
+        
+                <td>2.98</td>
+                
+                <td>3.08</td>
+                
+                <td>3.08</td>
+                
+                <td>3.07</td>
+                
+                <td>3.08</td>
+                
+            </tr>
+            <tr>
+                <th>Réponse</th>
+        
+                <td class="response">Voici les dates extraites des sources mentionnées :<br><br>1. Source 1 : 28/05/20xx (la date est suggérée par la comparaison avec &quot;aller à Paris et aujourd&#x27;hui en vélo&quot;)<br>2. Source 2 : 9/08/20xx + 1 mois = 08/09/20xx<br>3. Source 3 : La date n&#x27;est pas donnée, car l&#x27;auteur ne se souvient plus.<br>4. Source 4 : 2000 (année seulement mentionnée)<br>5. Source 5 : Il n&#x27;y a pas de date précise, mais &quot;jeudi il sera trop tard&quot; suggère que la référence est à une semaine future par rapport au moment où l&#x27;auteur a écrit cette phrase.<br><br>Notez que pour les sources 3 et 5, aucune date spécifique ne peut être fournie en raison des informations manquantes.</td>
+                
+                <td class="response">Voici les dates extraites des sources mentionnées :<br><br>1. Source 1 : 28/05/20XX (la date n&#x27;est pas complète, mais on sait qu&#x27;il y a eu un changement dans le mode de transport pour aller à Paris).<br>2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.<br>3. Source 3 : La date n&#x27;est pas donnée car l&#x27;auteur ne se souvient plus.<br>4. Source 4 : 2000 (année seulement mentionnée).<br>5. Source 5 : Il n&#x27;y a pas de date précise, mais la mention &quot;jeudi&quot; et &quot;trop tard&quot;, indiquant probablement une semaine à venir.<br><br>Notez que pour les sources où seule une partie de la date est fournie, j&#x27;ai donné la meilleure estimation possible en fonction des informations disponibles.</td>
+                
+                <td class="response">Voici les dates extraites des sources mentionnées :<br><br>1. Source 1 : 28/05/20XX (la date n&#x27;est pas complète, mais on sait qu&#x27;il y a eu un changement dans le mode de transport pour aller à Paris).<br>2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.<br>3. Source 3 : La date n&#x27;est pas donnée car l&#x27;auteur ne se souvient plus.<br>4. Source 4 : 2000 (année seulement mentionnée).<br>5. Source 5 : Il n&#x27;y a pas de date précise, mais la mention &quot;jeudi&quot; et &quot;trop tard&quot;, indiquant probablement une semaine à venir.<br><br>Notez que pour les sources où seule une partie de la date est fournie, j&#x27;ai donné la meilleure estimation possible en fonction des informations disponibles.</td>
+                
+                <td class="response">Voici les dates extraites des sources mentionnées :<br><br>1. Source 1 : 28/05/20XX (la date n&#x27;est pas complète, mais on sait qu&#x27;il y a eu un changement dans le mode de transport pour aller à Paris).<br>2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.<br>3. Source 3 : La date n&#x27;est pas donnée car l&#x27;auteur ne se souvient plus.<br>4. Source 4 : 2000 (année seulement mentionnée).<br>5. Source 5 : Il n&#x27;y a pas de date précise, mais la mention &quot;jeudi&quot; et &quot;trop tard&quot;, indiquant probablement une semaine à venir.<br><br>Notez que pour les sources où seule une partie de la date est fournie, j&#x27;ai donné la meilleure estimation possible en fonction des informations disponibles.</td>
+                
+                <td class="response">Voici les dates extraites des sources mentionnées :<br><br>1. Source 1 : 28/05/20XX (la date n&#x27;est pas complète, mais on sait qu&#x27;il y a eu un changement dans le mode de transport pour aller à Paris).<br>2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.<br>3. Source 3 : La date n&#x27;est pas donnée car l&#x27;auteur ne se souvient plus.<br>4. Source 4 : 2000 (année seulement mentionnée).<br>5. Source 5 : Il n&#x27;y a pas de date précise, mais la mention &quot;jeudi&quot; et &quot;trop tard&quot;, indiquant probablement une semaine à venir.<br><br>Notez que pour les sources où seule une partie de la date est fournie, j&#x27;ai donné la meilleure estimation possible en fonction des informations disponibles.</td>
+                
+            </tr>
+        </table>
+        <br>
+        
+    <h2>Modèles Disponibles</h2>
+    <div class="models-list">
+        ["yi:9b", "stablelm2:12b", "stablelm2:1.6b", "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS", "deepscaler:latest", "exaone-deep:7.8b", "granite3-dense:8b", "omercelik/reka-flash-3:latest", "qwen2.5:7b", "command-r7b:7b", "mxbai-embed-large:latest", "gemma3:latest", "nomic-embed-text:latest", "mistral:latest", "llama3.2:latest", "gemma3:12b", "mistral-small:24b", "granite3.2:2b", "granite3.2:8b", "qwen2.5:14b", "gemma2:latest", "llama3.2-vision:11b", "deepseek-r1:14b", "phi4:latest", "llava:latest", "moondream:latest", "martyyz/stable-prompt:latest", "impromptu2:latest", "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest", "impromptu:latest", "gemma:latest", "simone3:latest"]
+    </div>
+    
+        <div class="footer">
+            <p>Généré avec le script de comparaison LLM pour Ollama</p>
+        </div>
+    </body>
+    </html>
+    

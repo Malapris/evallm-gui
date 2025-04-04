@@ -1,0 +1,17 @@
+{
+  "models": [ "llama3.2:latest" ],
+  "system_prompts": {
+    "systeme_francis": "systeme.md"
+    "systeme_perplexity": "systeme_perplexity.md"
+  },
+  "user_prompts": {
+    "utilisateur_francis": "utilisateur.md"
+	"utilisateur_perplexity": "utilisateur_perplexity.md"
+  },
+  "contexts": {
+    "context": "context.md"
+  },
+  "seeds": [6,68,886],
+  "temperatures": [0.0]
+
+}

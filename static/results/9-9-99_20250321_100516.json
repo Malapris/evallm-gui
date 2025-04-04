@@ -1,0 +1,93 @@
+[
+  {
+    "model": "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 6,
+    "temperature": 0.0,
+    "response": "09/09/1999",
+    "response_time": 0.6841025352478027
+  },
+  {
+    "model": "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 8,
+    "temperature": 0.0,
+    "response": "09/09/1999",
+    "response_time": 0.42502355575561523
+  },
+  {
+    "model": "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 68,
+    "temperature": 0.0,
+    "response": "09/09/1999",
+    "response_time": 0.4207279682159424
+  },
+  {
+    "model": "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 86,
+    "temperature": 0.0,
+    "response": "09/09/1999",
+    "response_time": 0.4214951992034912
+  },
+  {
+    "model": "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 886,
+    "temperature": 0.0,
+    "response": "09/09/1999",
+    "response_time": 0.42020487785339355
+  },
+  {
+    "model": "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 668,
+    "temperature": 0.0,
+    "response": "09/09/1999",
+    "response_time": 0.42087602615356445
+  },
+  {
+    "model": "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 686,
+    "temperature": 0.0,
+    "response": "09/09/1999",
+    "response_time": 0.42614126205444336
+  }
+]

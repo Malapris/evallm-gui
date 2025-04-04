@@ -1,0 +1,107 @@
+{
+  "config": {
+    "models": [
+      "stablelm2:1.6b"
+    ],
+    "system_prompts": {
+      "systeme": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique."
+    },
+    "user_prompts": {
+      "utilisateur": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date."
+    },
+    "contexts": {
+      "sources": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !"
+    },
+    "seeds": [
+      68,
+      86,
+      886
+    ],
+    "temperatures": [
+      0.0
+    ],
+    "commentaire": "",
+    "resultats": []
+  },
+  "results": [
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+      "context_id": "sources",
+      "seed": 68,
+      "temperature": 0.0,
+      "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans les sources, je vais suivre ces étapes :\n\n1. Supprimer le mois et l'année de chaque source pour conserver uniquement le jour et l'heure.\n   - Source 1: 8 septembre (aujourd'hui) -> 08/09\n   - Source 2: 7 septembre (la veille) -> 07/09\n   - Source 3: 6 septembre (lundi) -> 06/09\n   - Source 4: n'importe quelle date (pas de date fournie) -> n'importe quelle date\n   - Source 5: 8 octobre (demain) -> 08/10\n\n2. Convertir les jours en jour, mois et années.\n   - Jour: 8\n   - Mois: 9\n   - Années: 2021\n\n3. Rappeler la date avec l'heure supprimée.\n   - Date: 08/09 (aujourd'hui)\n   - Heure: 07 (7h)\n\n4. Ajouter les heures pour obtenir la date finale.\n   - Date finale : 08 octobre 2021 07h\n\n5. Convertir la date en format \"JJ/MM/AAAA\".\n   - Date finale : 08/09/2021\n\nLa date fournie est donc le 8 septembre 2021 à 7h, conformément aux instructions et à l'analyse minutieuse des informations fournies dans les sources.",
+      "response_time": 1.8742032051086426,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+      "context_id": "sources",
+      "seed": 86,
+      "temperature": 0.0,
+      "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération courant pour les jours (J), mois (M) et années (Y). En utilisant ces informations, j'ai pu construire une chaîne de commande de base de Python pour convertir les dates en formats appropriés.\n\nVoici la commande de conversion de date utilisée dans l'exemple :\n\n```python\nfrom datetime import datetime\n\n# Créer une variable avec l'information fournie dans chaque source\ndate_sources = [\n    \"le lendemain du 8 septembre 2021\",\n    \"la veille du 9/ottobre 2021\",\n    \"aujourd'hui je ne m'en souviens plus\",\n    \"c'est déjà passé\",\n    \"demain il sera trop tard\"\n]\n\n# Trouver la date à partir de chaque source\ndates = []\nfor source in date_sources:\n    date_str = source.split()\n    try:\n        # Convertir l'heure et les jours en seconds pour une conversion plus précise\n        date_obj = datetime.strptime(date_str[0], \"%d %b %Y\") + datetime.timedelta(hours=int(date_str[1]), minutes=int(date_str[2]))\n        dates.append(str(date_obj))\n    except ValueError:\n        pass  # Ignore if the format is incorrect\n\n# Créer une variable avec les dates récupérées\nfinal_date = min(dates, key=lambda x: (x[:8], x[-4:]))\n\nprint(final_date.strftime(\"%d/%m/%Y\"))  # Afficher la date en format \"DD/MM/YYYY\"\n```\n\nEn utilisant cette commande de conversion de date, j'ai pu extraire les dates des informations fournies dans chaque source et les organiser pour que le résultat soit simple et synthétique. La date récupérée est ensuite affichée sous forme de jour, mois et année (par exemple : \"20/10/2021\").",
+      "response_time": 2.1945481300354004,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+      "context_id": "sources",
+      "seed": 886,
+      "temperature": 0.0,
+      "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération courant pour les jours (J), mois (M) et années (Y). En utilisant ces informations, j'ai pu construire une chaîne de commande de base de Python pour convertir les dates en formats appropriés.\n\nVoici la commande de conversion de date utilisée dans l'exemple :\n\n```python\nfrom datetime import datetime\n\n# Créer une variable avec l'information fournie dans chaque source\ndate_sources = [\n    \"le lendemain du 8 septembre 2021\",\n    \"la veille du 9/ottobre 2021\",\n    \"aujourd'hui je ne m'en souviens plus\",\n    \"c'est déjà passé\",\n    \"demain il sera trop tard\"\n]\n\n# Trouver la date à partir de chaque source\ndates = []\nfor source in date_sources:\n    date_str = source.split()\n    try:\n        # Convertir l'heure et les jours en seconds pour une conversion plus précise\n        date_obj = datetime.strptime(date_str[0], \"%d %b %Y\") + datetime.timedelta(hours=int(date_str[1]), minutes=int(date_str[2]))\n        dates.append(str(date_obj))\n    except ValueError:\n        pass  # Ignore if the format is incorrect\n\n# Créer une variable avec les dates récupérées\nfinal_date = min(dates, key=lambda x: (x[:8], x[-4:]))\n\nprint(final_date.strftime(\"%d/%m/%Y\"))  # Afficher la date en format \"DD/MM/YYYY\"\n```\n\nEn utilisant cette commande de conversion de date, j'ai pu extraire les dates des informations fournies dans chaque source et les organiser pour que le résultat soit simple et synthétique. La date récupérée est ensuite affichée sous forme de jour, mois et année (par exemple : \"20/10/2021\").",
+      "response_time": 2.1843936443328857,
+      "commentaire": "",
+      "Resultats": null
+    }
+  ],
+  "system_info": {
+    "os": "Windows",
+    "os_version": "10.0.19045",
+    "python_version": "3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]",
+    "ollama_version": "0.6.4",
+    "evallm_version": "4.0.1",
+    "cpu": {
+      "model": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+      "cores": 8,
+      "threads": 8,
+      "freq": {
+        "current": 3501.0,
+        "min": 0.0,
+        "max": 3501.0
+      }
+    },
+    "memory": {
+      "total_gb": 31.874404907226562,
+      "available_gb": 17.067230224609375,
+      "used_gb": 14.807174682617188,
+      "percent": 46.5
+    },
+    "gpu": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": 24576.0,
+        "memory_used": 7625.0,
+        "memory_free": 16702.0,
+        "gpu_load": 25.0
+      }
+    ],
+    "hostname": "DESKTOP-GFRJJ8Q"
+  },
+  "timestamp": "2025-04-04T15:37:20.496359"
+}

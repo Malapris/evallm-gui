@@ -1,0 +1,139 @@
+
+            <!DOCTYPE html>
+            <html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Résultats du test test</title>
+                <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+            </head>
+            <body class="bg-gray-100 p-8">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-3xl font-bold mb-8">Résultats du test test</h1>
+                    <div class="bg-white rounded-lg shadow p-6 mb-8">
+                        <h2 class="text-xl font-semibold mb-4">Configuration</h2>
+                        <pre class="bg-gray-50 p-4 rounded overflow-x-auto">{
+  "models": [
+    "stablelm2:12b",
+    "stablelm2:1.6b"
+  ],
+  "system_prompts": {
+    "systeme": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique."
+  },
+  "user_prompts": {
+    "utilisateur": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date."
+  },
+  "contexts": {
+    "sources": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !"
+  },
+  "seeds": [
+    6,
+    8,
+    68
+  ],
+  "temperatures": [
+    0.0
+  ],
+  "commentaire": "",
+  "resultats": []
+}</pre>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h2 class="text-xl font-semibold mb-4">Résultats</h2>
+                        <pre class="bg-gray-50 p-4 rounded overflow-x-auto">[
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 6,
+    "temperature": 0.0,
+    "response": "Voici les dates demandées à partir des sources fournies :\n\n1. Source 1 : Le lendemain du 8 septembre (9/09/20XX)\n2. Source 2 : La veille du 9/9 (08/09/20XX)\n3. Source 3 : Aucune information sur la date, car l'auteur ne s'en souvient plus.\n4. Source 4 : Il n'y a pas d'indication claire sur une date spécifique, mais on peut supposer qu'il s'agit du jour après le mentionné dans les autres sources (9/09/20XX).\n5. Source 5 : Demain, ce sera \"trop tard\", donc si nous considérons demain comme étant le 9 septembre, la date est 08/09/20XX.\n\nNotez que pour Source 2 et Source 4, j'ai dû supposer une année (20XX) car elle n'a pas été mentionnée.",
+    "response_time": 3.1821696758270264,
+    "commentaire": "",
+    "Resultats": null
+  },
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 8,
+    "temperature": 0.0,
+    "response": "Voici les dates demandées à partir des sources fournies :\n\nsource 1 : 9/9/2019 (le lendemain du 8 septembre)\nsource 2 : 30/9 ou 9/10/2019 (la veille du 9/9, en supposant que la date est écrite avec le mois avant le jour)\nsource 3 : Aucune information disponible sur la date.\nsource 4 : Il n'y a pas d'indication précise sur une date spécifique, mais on peut supposer qu'il s'agit d'un événement récent. Donnons un exemple plausible : 1er/09/2019 ou un autre jour proche.\nsource 5 : Demain signifie \"lors du jour suivant\", donc si nous considérons que cette information a été donnée le 4 septembre, la date serait 5/9/2019. Cependant, sans indication précise sur une date, on ne peut fournir qu'une estimation ; par exemple, supposons que c'est demain après le 3 septembre : 4/9/2019.",
+    "response_time": 3.611905336380005,
+    "commentaire": "",
+    "Resultats": null
+  },
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 68,
+    "temperature": 0.0,
+    "response": "Voici les dates demandées à partir des sources fournies :\n\nsource 1 : 9/9/2019 (le lendemain du 8 septembre)\nsource 2 : 30/9 ou 9/10/2019 (la veille du 9/9, en supposant que la date est écrite avec le mois avant le jour)\nsource 3 : Aucune information disponible sur la date.\nsource 4 : Il n'y a pas d'indication précise sur une date spécifique, mais on peut supposer qu'il s'agit d'un événement récent. Donnons un exemple plausible : 1er/09/2019 ou un autre jour proche.\nsource 5 : Demain signifie \"lors du jour suivant\", donc si nous considérons que cette information a été donnée le 4 septembre, la date serait 5/9/2019. Cependant, sans indication précise sur une date, on ne peut fournir qu'une estimation ; par exemple, supposons que c'est demain après le 3 septembre : 4/9/2019.",
+    "response_time": 3.635873317718506,
+    "commentaire": "",
+    "Resultats": null
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 6,
+    "temperature": 0.0,
+    "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/24 + 0 + 0 = 76\n- De source 2 : 9 + 1/4 + 0 + 0 = 15\n- De source 3 : 0 + 1/1 + 0 + 0 = 1\n- De source 4 : 0 + 0 + 6 + 0 = 6\n- De source 5 : 20 (année) + 0 + 0 + 0 = 20\n\nJ'ai trouvé la date correspondante pour chaque source et en utilisant ces valeurs, j'ai pu calculer la date à partir de toutes les informations fournies.",
+    "response_time": 1.1247386932373047,
+    "commentaire": "",
+    "Resultats": null
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 8,
+    "temperature": 0.0,
+    "response": "8/09/2022\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du jour, mois et année. En utilisant un peu de logique, nous pouvons remplacer les noms de jours par leur numéro correspondant (lundi, mardi, etc.) pour calculer la date.\n\nSource 1: Le lendemain du 8 septembre 2021 quand nous avons pris le train pour aller à Paris\nNuméro du jour: 8\nNuméro du mois: 9\nAnnée: 2021\n\nSource 2: La veille du 9 août 2021, je me souviens qu'il faisait froid \nNuméro du jour: 9\nNuméro du mois: 8\nAnnée: 2021\n\nSource 3: Aujourd'hui je ne m'en souviens plus\nDate: n/a (non disponible)\n\nSource 4: C'est déjà passé!\nDate: n/a (non disponible)\n\nSource 5: Demain il sera trop tard\nDate: n/a (non disponible)\n\nEn utilisant ces informations, nous pouvons calculer la date suivante:\n\n8/09/2022\n\nCeci correspond à l'année 2022, au mois septembre et au jour le lendemain du 8 septembre.",
+    "response_time": 1.5718843936920166,
+    "commentaire": "",
+    "Resultats": null
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 68,
+    "temperature": 0.0,
+    "response": "8/09/2022\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du jour, mois et année. En utilisant un peu de logique, nous pouvons remplacer les noms de jours par leur numéro correspondant (lundi, mardi, etc.) pour calculer la date.\n\nSource 1: Le lendemain du 8 septembre 2021 quand nous avons pris le train pour aller à Paris\nNuméro du jour: 8\nNuméro du mois: 9\nAnnée: 2021\n\nSource 2: La veille du 9 août 2021, je me souviens qu'il faisait froid \nNuméro du jour: 9\nNuméro du mois: 8\nAnnée: 2021\n\nSource 3: Aujourd'hui je ne m'en souviens plus\nDate: n/a (non disponible)\n\nSource 4: C'est déjà passé!\nDate: n/a (non disponible)\n\nSource 5: Demain il sera trop tard\nDate: n/a (non disponible)\n\nEn utilisant ces informations, nous pouvons calculer la date suivante:\n\n8/09/2022\n\nCeci correspond à l'année 2022, au mois septembre et au jour le lendemain du 8 septembre.",
+    "response_time": 1.6094260215759277,
+    "commentaire": "",
+    "Resultats": null
+  }
+]</pre>
+                    </div>
+                </div>
+            </body>
+            </html>
+            

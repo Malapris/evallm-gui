@@ -1,0 +1,67 @@
+[
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+    "context_id": "sources",
+    "seed": 6,
+    "temperature": 0.0,
+    "response": "Voici les dates extraites des sources mentionnées :\n\n1. Source 1 : 28/05/20xx (la date est suggérée par la comparaison avec \"aller à Paris et aujourd'hui en vélo\")\n2. Source 2 : 9/08/20xx + 1 mois = 08/09/20xx\n3. Source 3 : La date n'est pas donnée, car l'auteur ne se souvient plus.\n4. Source 4 : 2000 (année seulement mentionnée)\n5. Source 5 : Il n'y a pas de date précise, mais \"jeudi il sera trop tard\" suggère que la référence est à une semaine future par rapport au moment où l'auteur a écrit cette phrase.\n\nNotez que pour les sources 3 et 5, aucune date spécifique ne peut être fournie en raison des informations manquantes.",
+    "response_time": 2.977410078048706
+  },
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+    "context_id": "sources",
+    "seed": 8,
+    "temperature": 0.0,
+    "response": "Voici les dates extraites des sources mentionnées :\n\n1. Source 1 : 28/05/20XX (la date n'est pas complète, mais on sait qu'il y a eu un changement dans le mode de transport pour aller à Paris).\n2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.\n3. Source 3 : La date n'est pas donnée car l'auteur ne se souvient plus.\n4. Source 4 : 2000 (année seulement mentionnée).\n5. Source 5 : Il n'y a pas de date précise, mais la mention \"jeudi\" et \"trop tard\", indiquant probablement une semaine à venir.\n\nNotez que pour les sources où seule une partie de la date est fournie, j'ai donné la meilleure estimation possible en fonction des informations disponibles.",
+    "response_time": 3.0759148597717285
+  },
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+    "context_id": "sources",
+    "seed": 68,
+    "temperature": 0.0,
+    "response": "Voici les dates extraites des sources mentionnées :\n\n1. Source 1 : 28/05/20XX (la date n'est pas complète, mais on sait qu'il y a eu un changement dans le mode de transport pour aller à Paris).\n2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.\n3. Source 3 : La date n'est pas donnée car l'auteur ne se souvient plus.\n4. Source 4 : 2000 (année seulement mentionnée).\n5. Source 5 : Il n'y a pas de date précise, mais la mention \"jeudi\" et \"trop tard\", indiquant probablement une semaine à venir.\n\nNotez que pour les sources où seule une partie de la date est fournie, j'ai donné la meilleure estimation possible en fonction des informations disponibles.",
+    "response_time": 3.07578706741333
+  },
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+    "context_id": "sources",
+    "seed": 86,
+    "temperature": 0.0,
+    "response": "Voici les dates extraites des sources mentionnées :\n\n1. Source 1 : 28/05/20XX (la date n'est pas complète, mais on sait qu'il y a eu un changement dans le mode de transport pour aller à Paris).\n2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.\n3. Source 3 : La date n'est pas donnée car l'auteur ne se souvient plus.\n4. Source 4 : 2000 (année seulement mentionnée).\n5. Source 5 : Il n'y a pas de date précise, mais la mention \"jeudi\" et \"trop tard\", indiquant probablement une semaine à venir.\n\nNotez que pour les sources où seule une partie de la date est fournie, j'ai donné la meilleure estimation possible en fonction des informations disponibles.",
+    "response_time": 3.067413091659546
+  },
+  {
+    "model": "stablelm2:12b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+    "context_id": "sources",
+    "seed": 886,
+    "temperature": 0.0,
+    "response": "Voici les dates extraites des sources mentionnées :\n\n1. Source 1 : 28/05/20XX (la date n'est pas complète, mais on sait qu'il y a eu un changement dans le mode de transport pour aller à Paris).\n2. Source 2 : 9/08/20XX + 1 mois (environ septembre 20XX), probablement vers 15h et il faisait froid à Limoges.\n3. Source 3 : La date n'est pas donnée car l'auteur ne se souvient plus.\n4. Source 4 : 2000 (année seulement mentionnée).\n5. Source 5 : Il n'y a pas de date précise, mais la mention \"jeudi\" et \"trop tard\", indiquant probablement une semaine à venir.\n\nNotez que pour les sources où seule une partie de la date est fournie, j'ai donné la meilleure estimation possible en fonction des informations disponibles.",
+    "response_time": 3.079181671142578
+  }
+]

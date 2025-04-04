@@ -1,0 +1,279 @@
+
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comparaison de LLM avec Ollama</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f8f9fa; }
+            h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+            h2 { color: #283593; margin-top: 40px; border-bottom: 1px solid #c5cae9; padding-bottom: 10px; }
+            table { border-collapse: collapse; width: 100%; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            th, td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; vertical-align: top; }
+            th { background-color: #e8eaf6; font-weight: bold; color: #1a237e; }
+            tr:nth-child(even) { background-color: #f5f5f5; }
+            tr:hover { background-color: #e8eaf6; }
+            .model-header { background-color: #3f51b5; color: white; }
+            .response { max-height: 300px; overflow-y: auto; white-space: pre-wrap; }
+            .metadata { background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            .summary-table th { text-align: center; }
+            .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #5c6bc0; }
+            .temp-badge { display: inline-block; background-color: #5c6bc0; color: white; padding: 2px 6px; 
+                          border-radius: 3px; font-size: 0.8em; margin-left: 8px; }
+            .json-link { display: block; text-align: right; margin: 10px 0; color: #3f51b5; text-decoration: none; }
+            .json-link:hover { text-decoration: underline; }
+            .models-list { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                          box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-family: monospace; }
+        </style>
+    </head>
+    <body>
+        <h1>Comparaison de Modèles LLM avec Ollama</h1>
+        <a href="merge01_20250320_231125.json" class="json-link">📊 Voir les données brutes (JSON)</a>
+        <div class="metadata">
+            <p><strong>Date de génération:</strong> 2025-03-20 23:17:04</p>
+        </div>
+
+        <h2>Modèles Disponibles</h2>
+        <div class="models-list">
+            ["exaone-deep:7.8b", "granite3-dense:8b", "omercelik/reka-flash-3:latest", "qwen2.5:7b", "command-r7b:7b", "mxbai-embed-large:latest", "gemma3:latest", "nomic-embed-text:latest", "mistral:latest", "llama3.2:latest", "gemma3:12b", "mistral-small:24b", "granite3.2:2b", "granite3.2:8b", "qwen2.5:14b", "gemma2:latest", "llama3.2-vision:11b", "deepseek-r1:14b", "phi4:latest", "llava:latest", "moondream:latest", "martyyz/stable-prompt:latest", "impromptu2:latest", "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest", "impromptu:latest", "gemma:latest", "simone3:latest"]
+        </div>
+    
+    <h2>Synthèse des Performances</h2>
+    <table class="summary-table">
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Temps moyen (s)</th>
+            <th>Temps minimum (s)</th>
+            <th>Temps maximum (s)</th>
+            <th>Nombre de tokens moyen</th>
+        </tr>
+    
+        <tr>
+            <td>exaone-deep:7.8b <span class="temp-badge">temp=0.0</span></td>
+            <td>36.77</td>
+            <td>36.57</td>
+            <td>37.01</td>
+            <td>1725</td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest <span class="temp-badge">temp=0.0</span></td>
+            <td>4.64</td>
+            <td>4.62</td>
+            <td>4.65</td>
+            <td>50</td>
+        </tr>
+        
+        <tr>
+            <td>phi4:latest <span class="temp-badge">temp=0.0</span></td>
+            <td>6.72</td>
+            <td>6.69</td>
+            <td>6.76</td>
+            <td>98</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:14b <span class="temp-badge">temp=0.0</span></td>
+            <td>6.54</td>
+            <td>6.53</td>
+            <td>6.55</td>
+            <td>65</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b <span class="temp-badge">temp=0.0</span></td>
+            <td>2.86</td>
+            <td>2.84</td>
+            <td>2.88</td>
+            <td>41</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Résultats Détaillés</h2>
+    <table>
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Système</th>
+            <th>Prompt</th>
+            <th>Contexte</th>
+            <th>Graine</th>
+            <th>Température</th>
+            <th>Temps (s)</th>
+            <th>Réponse</th>
+        </tr>
+    
+        <tr>
+            <td>exaone-deep:7.8b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>36.72</td>
+            <td class="response"><thought><br>Okay, I need to process this JSON data from the user's request. Let me start by understanding what they're asking for. The input is a JSON object containing details about an art competition, including information like deadlines, fees, and museum details. The user wants me to format this data into a structured markdown table. <br><br>First, I'll look at the structure of the provided JSON. The main keys include "Theme", "Portee", "Prix", "Eligibilite", "Date", "Selection", "Frais", and "URL". Each of these corresponds to specific sections in the desired table. <br><br>The table needs to have headers like "Theme", "Deadline", "Fee", "Eligibility", "Dates", "Selection", "Prize", and "URL". The "Dates" column should list all the dates from the "Date" key, separated by commas. The "Eligibility" column should combine the "Eligibilite" value, which mentions regional and California artists. <br><br>I need to ensure that all the data from the JSON is correctly mapped into the table. For example, the "Theme" is a combination of the online and physical themes. The "Dates" are split into start and end dates for the exhibition. The "Eligibility" is straightforward from the "Eligibilite" field. <br><br>I should check for any missing data points or formatting issues. The "URL" has two entries separated by a pipe, so I'll list them both in the table. The "Frais" field has two entries for entry and additional entries, so I'll present them as "$20.00 USD | $10.00 USD". <br><br>I also need to make sure the table is properly aligned and that all entries are correctly placed. Let me go through each row step by step to avoid mistakes. <br><br>Wait, the "Theme" in the JSON has both "Peinture" and "Dessin" under "Theme", so the table should list them separated by a slash. The "Portee" is 7, which I believe refers to the number of jury members, but the user didn't mention including that in the table. Maybe I should check if "Portee" is part of the required data. Looking back at the user's example, the headers don't include "Portee", so perhaps it's an extra field that can be omitted. <br><br>Similarly, the "Selection" field just says "Jury", which might not be necessary in the table. The user's example didn't include it either, so I'll skip that. <br><br>The "URL" has two URLs separated by a pipe, so I'll list them both in the same cell. <br><br>Now, compiling all this into a markdown table. Let me structure each row based on the JSON data. The main entry is the one provided, so the table will have one row with all the details filled in. <br><br>Wait, the user's example shows a table with headers and a single row of data. The JSON provided seems to be the data for that single entry. So the table should have one row with all the information from that object. <br><br>Let me double-check each field:<br><br>- Theme: "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne" → split by | into the table cell.<br>- Deadline: The "Date" key has multiple dates separated by |, so list them as "2025/03/21 | 2025/06/04 | 2025/06/06 | 2025/06/03".<br>- Fee: "$20.00 USD | $10.00 USD" as per the "Frais" field.<br>- Eligibility: "Artistes régionaux des États-Unis|Artistes de Californie" from "Eligibilite".<br>- Dates: The same as the Deadline? Wait, maybe "Dates" refers to the exhibition dates. The "Date" key includes the exhibition dates like "2025/06/04" etc. So the "Dates" column should list those dates separated by commas. Let me check the exact wording in the user's example. The user's example shows "Dates" as a column, so I need to extract the dates from the "Date" key. The "Date" key has entries like "2025/03/21", which might be the deadline, and others like "2025/06/04" as the exhibition start. The user probably wants all the dates listed in the "Dates" column. <br><br>Wait, looking at the user's example in the problem statement, the "Dates" column includes entries like "2025/03/21", "2025/06/04", etc. So I should list all the dates from the "Date" key separated by commas. The "Date" key has four entries: "2025/03/21", "2025/06/04", "2025/06/06", "2025/06/03". So combining those into one cell with commas.<br><br>The "Selection" column in the user's example just has "Jury", but the JSON has "Selection": "Jury". So that's straightforward.<br><br>The "Prize" column is "Prize" from the JSON, which is "Prize". Wait, the JSON has "Prix" as a key with value "Prize". So the "Prize" column should have "Prize".<br><br>Putting it all together, the table should look like this:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>| Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, no, the "Theme" is a combination of the themes separated by |, not slashes. Let me correct that. The "Theme" cell should have the themes separated by | as in the JSON. So:<br><br>Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne<br><br>The "Eligibility" is the same as the "Eligibilite" value, so that's correct.<br><br>The "Dates" column lists all the dates from the "Date" key separated by commas. The "Deadline" might refer to the primary date, but according to the user's example, the "Deadline" column includes the earliest date, perhaps. But the user's example shows "Deadline" as "2025/03/21", which is the first date in the "Date" list. However, the user might want all dates in the "Dates" column. Let me check the user's example again. In their example, the "Dates" column includes multiple dates, so I should follow that.<br><br>Therefore, the "Dates" column will have all the dates from the "Date" key joined by commas. The "Deadline" column might be the primary deadline, but perhaps the user expects "Deadline" to be the earliest date. However, since the user's example includes all dates in the "Dates" column, I'll proceed with that.<br><br>Wait, looking back at the user's problem statement, the example they provided in the problem (the one with the table) has the "Dates" column with entries like "2025/03/21", "2025/06/04", etc. So the "Dates" column should list all the dates from the "Date" key separated by commas. The "Deadline" column might be redundant, but perhaps it's the main date. However, the user's instruction says to structure the data into a table with the specified headers, so I need to map each key to the appropriate column.<br><br>The "Date" key in the JSON has four entries separated by |, so the "Dates" column should list them all separated by commas. The "Deadline" column might be the first date, but the user's example includes "Deadline" as "2025/03/21", which is the first date. However, the user might want all dates in the "Dates" column. To align with the example, I'll put all dates in the "Dates" column.<br><br>Wait, the user's example in the problem statement shows a table with "Dates" as a column that includes multiple dates. So the correct approach is to take all the dates from the "Date" key and put them in the "Dates" column, separated by commas. The "Deadline" column might be a separate field, but perhaps the user intended "Deadline" to be the primary date. However, the problem says to structure the data into a table with the specified headers, so each key should map to a column. The headers are: Theme, Deadline, Fee, Eligibility, Dates, Selection, Prize, URL.<br><br>Therefore:<br><br>- Theme: the value from "Theme" key, which is the combination of themes separated by |.<br>- Deadline: perhaps the first date, but the user's example has "Deadline" as "2025/03/21", which is the first date in the "Date" list. But maybe the "Deadline" is the earliest date, and the "Dates" column includes all dates. Alternatively, maybe "Deadline" is the same as the first date, and "Dates" includes all dates. To match the user's example, perhaps "Deadline" is the first date, and "Dates" includes all dates. Let me check the user's example again.<br><br>In the problem statement's example, the table has:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>| Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, in that example, the "Dates" column includes all the dates separated by commas, and the "Deadline" is the first date. So the "Dates" column has all dates from the "Date" key joined by commas, and "Deadline" is the first date. Therefore, in the JSON, the "Date" key has four entries separated by |, so the "Dates" column will have all four dates joined by commas, and the "Deadline" column will have the first date.<br><br>Therefore, the correct table is:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>|Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, but the "Dates" column in the example includes all the dates separated by commas. Let me count the dates in the JSON's "Date" key:<br><br>The JSON's "Date" key has four entries: "2025/03/21", "2025/06/04", "2025/06/06", "2025/06/03". So joined by commas, it would be:<br><br>"2025/03/21, 2025/06/04, 2025/06/06, 2025/06/03"<br><br>But in the user's example, the "Dates" column has "2025/03/21, 2025/06/04, 2025/06/06, 2025/06/03". So that's correct.<br><br>The "Deadline" is the first date: "2025/03/21".<br><br>Therefore, the final table should have:<br><br>- Theme: the themes joined by |<br>- Deadline: first date<br>- Fee: "$20.00 USD"<br>- Eligibility: the eligibility text joined by | (but in the example it's "Artistes régionaux des États-Unis|Artistes de Californie", but actually the JSON's "Eligibility" key has two parts separated by |, so it should be displayed as is.<br><br>Wait, the JSON's "Eligibility" key has two parts separated by |, so the value is "Artistes régionaux des États-Unis|Artistes de Californie". So in the table, it should display as is, with the | included.<br><br>Similarly, the "URL" column has the value from the "URL" key, which is "https://example.com/artists?id=123".<br><br>Putting it all together, the correct table is as per the user's example, with the Dates column containing all dates separated by commas, Deadline being the first date, and the other fields correctly populated.<br><br>Therefore, the final answer is the table as shown in the example, with the specific values from the given JSON data.<br></thought><br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>|Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |</td>
+        </tr>
+        
+        <tr>
+            <td>exaone-deep:7.8b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>37.01</td>
+            <td class="response"><thought><br>Okay, I need to process this JSON data from the user's request. Let me start by understanding what they're asking for. The input is a JSON object containing details about an art competition, including information like deadlines, fees, and museum details. The user wants me to format this data into a structured markdown table. <br><br>First, I'll look at the structure of the provided JSON. The main keys include "Theme", "Portee", "Prix", "Eligibilite", "Date", "Selection", "Frais", and "URL". Each of these corresponds to specific sections in the desired table. <br><br>The table needs to have headers like "Theme", "Deadline", "Fee", "Eligibility", "Dates", "Selection", "Prize", and "URL". The "Dates" column should list all the dates from the "Date" key, separated by commas. The "Eligibility" column should combine the "Eligibilite" value, which mentions regional and California artists. <br><br>I need to ensure that all the data from the JSON is correctly mapped into the table. For example, the "Theme" is a combination of the online and physical themes. The "Dates" are split into start and end dates for the exhibition. The "Eligibility" is straightforward from the "Eligibilite" field. <br><br>I should check for any missing data points or formatting issues. The "URL" has two entries separated by a pipe, so I'll list them both in the table. The "Frais" field has two entries for entry and additional entries, so I'll present them as "$20.00 USD | $10.00 USD". <br><br>I also need to make sure the table is properly aligned and that all entries are correctly placed. Let me go through each row step by step to avoid mistakes. <br><br>Wait, the "Theme" in the JSON has both "Peinture" and "Dessin" under "Theme", so the table should list them separated by a slash. The "Portee" is 7, which I believe refers to the number of jury members, but the user didn't mention including that in the table. Maybe I should check if "Portee" is part of the required data. Looking back at the user's example, the headers don't include "Portee", so perhaps it's an extra field that can be omitted. <br><br>Similarly, the "Selection" field just says "Jury", which might not be necessary in the table. The user's example didn't include it either, so I'll skip that. <br><br>The "URL" has two URLs separated by a pipe, so I'll list them both in the same cell. <br><br>Now, compiling all this into a markdown table. Let me structure each row based on the JSON data. The main entry is the one provided, so the table will have one row with all the details filled in. <br><br>Wait, the user's example shows a table with headers and a single row of data. The JSON provided seems to be the data for that single entry. So the table should have one row with all the information from that object. <br><br>Let me double-check each field:<br><br>- Theme: "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne" → split by | into the table cell.<br>- Deadline: The "Date" key has multiple dates separated by |, so list them as "2025/03/21 | 2025/06/04 | 2025/06/06 | 2025/06/03".<br>- Fee: "$20.00 USD | $10.00 USD" as per the "Frais" field.<br>- Eligibility: "Artistes régionaux des États-Unis|Artistes de Californie" from "Eligibilite".<br>- Dates: The same as the Deadline? Wait, maybe "Dates" refers to the exhibition dates. The "Date" key includes the exhibition dates like "2025/06/04" etc. So the "Dates" column should list those dates separated by commas. Let me check the exact wording in the user's example. The user's example shows "Dates" as a column, so I need to extract the dates from the "Date" key. The "Date" key has entries like "2025/03/21", which might be the deadline, and others like "2025/06/04" as the exhibition start. The user probably wants all the dates listed in the "Dates" column. <br><br>Wait, looking at the user's example in the problem statement, the "Dates" column includes entries like "2025/03/21", "2025/06/04", etc. So I should list all the dates from the "Date" key separated by commas. The "Date" key has four entries: "2025/03/21", "2025/06/04", "2025/06/06", "2025/06/03". So combining those into one cell with commas.<br><br>The "Selection" column in the user's example just has "Jury", but the JSON has "Selection": "Jury". So that's straightforward.<br><br>The "Prize" column is "Prize" from the JSON, which is "Prize". Wait, the JSON has "Prix" as a key with value "Prize". So the "Prize" column should have "Prize".<br><br>Putting it all together, the table should look like this:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>| Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, no, the "Theme" is a combination of the themes separated by |, not slashes. Let me correct that. The "Theme" cell should have the themes separated by | as in the JSON. So:<br><br>Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne<br><br>The "Eligibility" is the same as the "Eligibilite" value, so that's correct.<br><br>The "Dates" column lists all the dates from the "Date" key separated by commas. The "Deadline" might refer to the primary date, but according to the user's example, the "Deadline" column includes the earliest date, perhaps. But the user's example shows "Deadline" as "2025/03/21", which is the first date in the "Date" list. However, the user might want all dates in the "Dates" column. Let me check the user's example again. In their example, the "Dates" column includes multiple dates, so I should follow that.<br><br>Therefore, the "Dates" column will have all the dates from the "Date" key joined by commas. The "Deadline" column might be the primary deadline, but perhaps the user expects "Deadline" to be the earliest date. However, since the user's example includes all dates in the "Dates" column, I'll proceed with that.<br><br>Wait, looking back at the user's problem statement, the example they provided in the problem (the one with the table) has the "Dates" column with entries like "2025/03/21", "2025/06/04", etc. So the "Dates" column should list all the dates from the "Date" key separated by commas. The "Deadline" column might be redundant, but perhaps it's the main date. However, the user's instruction says to structure the data into a table with the specified headers, so I need to map each key to the appropriate column.<br><br>The "Date" key in the JSON has four entries separated by |, so the "Dates" column should list them all separated by commas. The "Deadline" column might be the first date, but the user's example includes "Deadline" as "2025/03/21", which is the first date. However, the user might want all dates in the "Dates" column. To align with the example, I'll put all dates in the "Dates" column.<br><br>Wait, the user's example in the problem statement shows a table with "Dates" as a column that includes multiple dates. So the correct approach is to take all the dates from the "Date" key and put them in the "Dates" column, separated by commas. The "Deadline" column might be a separate field, but perhaps the user intended "Deadline" to be the primary date. However, the problem says to structure the data into a table with the specified headers, so each key should map to a column. The headers are: Theme, Deadline, Fee, Eligibility, Dates, Selection, Prize, URL.<br><br>Therefore:<br><br>- Theme: the value from "Theme" key, which is the combination of themes separated by |.<br>- Deadline: perhaps the first date, but the user's example has "Deadline" as "2025/03/21", which is the first date in the "Date" list. But maybe the "Deadline" is the earliest date, and the "Dates" column includes all dates. Alternatively, maybe "Deadline" is the same as the first date, and "Dates" includes all dates. To match the user's example, perhaps "Deadline" is the first date, and "Dates" includes all dates. Let me check the user's example again.<br><br>In the problem statement's example, the table has:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>| Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, in that example, the "Dates" column includes all the dates separated by commas, and the "Deadline" is the first date. So the "Dates" column has all dates from the "Date" key joined by commas, and "Deadline" is the first date. Therefore, in the JSON, the "Date" key has four entries separated by |, so the "Dates" column will have all four dates joined by commas, and the "Deadline" column will have the first date.<br><br>Therefore, the correct table is:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>|Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, but the "Dates" column in the example includes all the dates separated by commas. Let me count the dates in the JSON's "Date" key:<br><br>The JSON's "Date" key has four entries: "2025/03/21", "2025/06/04", "2025/06/06", "2025/06/03". So joined by commas, it would be:<br><br>"2025/03/21, 2025/06/04, 2025/06/06, 2025/06/03"<br><br>But in the user's example, the "Dates" column has "2025/03/21, 2025/06/04, 2025/06/06, 2025/06/03". So that's correct.<br><br>The "Deadline" is the first date: "2025/03/21".<br><br>Therefore, the final table should have:<br><br>- Theme: the themes joined by |<br>- Deadline: first date<br>- Fee: "$20.00 USD"<br>- Eligibility: the eligibility text joined by | (but in the example it's "Artistes régionaux des États-Unis|Artistes de Californie", but actually the JSON's "Eligibility" key has two parts separated by |, so it should be displayed as is.<br><br>Wait, the JSON's "Eligibility" key has two parts separated by |, so the value is "Artistes régionaux des États-Unis|Artistes de Californie". So in the table, it should display as is, with the | included.<br><br>Similarly, the "URL" column has the value from the "URL" key, which is "https://example.com/artists?id=123".<br><br>Putting it all together, the correct table is as per the user's example, with the Dates column containing all dates separated by commas, Deadline being the first date, and the other fields correctly populated.<br><br>Therefore, the final answer is the table as shown in the example, with the specific values from the given JSON data.<br></thought><br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>|Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |</td>
+        </tr>
+        
+        <tr>
+            <td>exaone-deep:7.8b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>36.57</td>
+            <td class="response"><thought><br>Okay, I need to process this JSON data from the user's request. Let me start by understanding what they're asking for. The input is a JSON object containing details about an art competition, including information like deadlines, fees, and museum details. The user wants me to format this data into a structured markdown table. <br><br>First, I'll look at the structure of the provided JSON. The main keys include "Theme", "Portee", "Prix", "Eligibilite", "Date", "Selection", "Frais", and "URL". Each of these corresponds to specific sections in the desired table. <br><br>The table needs to have headers like "Theme", "Deadline", "Fee", "Eligibility", "Dates", "Selection", "Prize", and "URL". The "Dates" column should list all the dates from the "Date" key, separated by commas. The "Eligibility" column should combine the "Eligibilite" value, which mentions regional and California artists. <br><br>I need to ensure that all the data from the JSON is correctly mapped into the table. For example, the "Theme" is a combination of the online and physical themes. The "Dates" are split into start and end dates for the exhibition. The "Eligibility" is straightforward from the "Eligibilite" field. <br><br>I should check for any missing data points or formatting issues. The "URL" has two entries separated by a pipe, so I'll list them both in the table. The "Frais" field has two entries for entry and additional entries, so I'll present them as "$20.00 USD | $10.00 USD". <br><br>I also need to make sure the table is properly aligned and that all entries are correctly placed. Let me go through each row step by step to avoid mistakes. <br><br>Wait, the "Theme" in the JSON has both "Peinture" and "Dessin" under "Theme", so the table should list them separated by a slash. The "Portee" is 7, which I believe refers to the number of jury members, but the user didn't mention including that in the table. Maybe I should check if "Portee" is part of the required data. Looking back at the user's example, the headers don't include "Portee", so perhaps it's an extra field that can be omitted. <br><br>Similarly, the "Selection" field just says "Jury", which might not be necessary in the table. The user's example didn't include it either, so I'll skip that. <br><br>The "URL" has two URLs separated by a pipe, so I'll list them both in the same cell. <br><br>Now, compiling all this into a markdown table. Let me structure each row based on the JSON data. The main entry is the one provided, so the table will have one row with all the details filled in. <br><br>Wait, the user's example shows a table with headers and a single row of data. The JSON provided seems to be the data for that single entry. So the table should have one row with all the information from that object. <br><br>Let me double-check each field:<br><br>- Theme: "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne" → split by | into the table cell.<br>- Deadline: The "Date" key has multiple dates separated by |, so list them as "2025/03/21 | 2025/06/04 | 2025/06/06 | 2025/06/03".<br>- Fee: "$20.00 USD | $10.00 USD" as per the "Frais" field.<br>- Eligibility: "Artistes régionaux des États-Unis|Artistes de Californie" from "Eligibilite".<br>- Dates: The same as the Deadline? Wait, maybe "Dates" refers to the exhibition dates. The "Date" key includes the exhibition dates like "2025/06/04" etc. So the "Dates" column should list those dates separated by commas. Let me check the exact wording in the user's example. The user's example shows "Dates" as a column, so I need to extract the dates from the "Date" key. The "Date" key has entries like "2025/03/21", which might be the deadline, and others like "2025/06/04" as the exhibition start. The user probably wants all the dates listed in the "Dates" column. <br><br>Wait, looking at the user's example in the problem statement, the "Dates" column includes entries like "2025/03/21", "2025/06/04", etc. So I should list all the dates from the "Date" key separated by commas. The "Date" key has four entries: "2025/03/21", "2025/06/04", "2025/06/06", "2025/06/03". So combining those into one cell with commas.<br><br>The "Selection" column in the user's example just has "Jury", but the JSON has "Selection": "Jury". So that's straightforward.<br><br>The "Prize" column is "Prize" from the JSON, which is "Prize". Wait, the JSON has "Prix" as a key with value "Prize". So the "Prize" column should have "Prize".<br><br>Putting it all together, the table should look like this:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>| Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, no, the "Theme" is a combination of the themes separated by |, not slashes. Let me correct that. The "Theme" cell should have the themes separated by | as in the JSON. So:<br><br>Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne<br><br>The "Eligibility" is the same as the "Eligibilite" value, so that's correct.<br><br>The "Dates" column lists all the dates from the "Date" key separated by commas. The "Deadline" might refer to the primary date, but according to the user's example, the "Deadline" column includes the earliest date, perhaps. But the user's example shows "Deadline" as "2025/03/21", which is the first date in the "Date" list. However, the user might want all dates in the "Dates" column. Let me check the user's example again. In their example, the "Dates" column includes multiple dates, so I should follow that.<br><br>Therefore, the "Dates" column will have all the dates from the "Date" key joined by commas. The "Deadline" column might be the primary deadline, but perhaps the user expects "Deadline" to be the earliest date. However, since the user's example includes all dates in the "Dates" column, I'll proceed with that.<br><br>Wait, looking back at the user's problem statement, the example they provided in the problem (the one with the table) has the "Dates" column with entries like "2025/03/21", "2025/06/04", etc. So the "Dates" column should list all the dates from the "Date" key separated by commas. The "Deadline" column might be redundant, but perhaps it's the main date. However, the user's instruction says to structure the data into a table with the specified headers, so I need to map each key to the appropriate column.<br><br>The "Date" key in the JSON has four entries separated by |, so the "Dates" column should list them all separated by commas. The "Deadline" column might be the first date, but the user's example includes "Deadline" as "2025/03/21", which is the first date. However, the user might want all dates in the "Dates" column. To align with the example, I'll put all dates in the "Dates" column.<br><br>Wait, the user's example in the problem statement shows a table with "Dates" as a column that includes multiple dates. So the correct approach is to take all the dates from the "Date" key and put them in the "Dates" column, separated by commas. The "Deadline" column might be a separate field, but perhaps the user intended "Deadline" to be the primary date. However, the problem says to structure the data into a table with the specified headers, so each key should map to a column. The headers are: Theme, Deadline, Fee, Eligibility, Dates, Selection, Prize, URL.<br><br>Therefore:<br><br>- Theme: the value from "Theme" key, which is the combination of themes separated by |.<br>- Deadline: perhaps the first date, but the user's example has "Deadline" as "2025/03/21", which is the first date in the "Date" list. But maybe the "Deadline" is the earliest date, and the "Dates" column includes all dates. Alternatively, maybe "Deadline" is the same as the first date, and "Dates" includes all dates. To match the user's example, perhaps "Deadline" is the first date, and "Dates" includes all dates. Let me check the user's example again.<br><br>In the problem statement's example, the table has:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>| Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, in that example, the "Dates" column includes all the dates separated by commas, and the "Deadline" is the first date. So the "Dates" column has all dates from the "Date" key joined by commas, and "Deadline" is the first date. Therefore, in the JSON, the "Date" key has four entries separated by |, so the "Dates" column will have all four dates joined by commas, and the "Deadline" column will have the first date.<br><br>Therefore, the correct table is:<br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>|Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |<br><br>Wait, but the "Dates" column in the example includes all the dates separated by commas. Let me count the dates in the JSON's "Date" key:<br><br>The JSON's "Date" key has four entries: "2025/03/21", "2025/06/04", "2025/06/06", "2025/06/03". So joined by commas, it would be:<br><br>"2025/03/21, 2025/06/04, 2025/06/06, 2025/06/03"<br><br>But in the user's example, the "Dates" column has "2025/03/21, 2025/06/04, 2025/06/06, 2025/06/03". So that's correct.<br><br>The "Deadline" is the first date: "2025/03/21".<br><br>Therefore, the final table should have:<br><br>- Theme: the themes joined by |<br>- Deadline: first date<br>- Fee: "$20.00 USD"<br>- Eligibility: the eligibility text joined by | (but in the example it's "Artistes régionaux des États-Unis|Artistes de Californie", but actually the JSON's "Eligibility" key has two parts separated by |, so it should be displayed as is.<br><br>Wait, the JSON's "Eligibility" key has two parts separated by |, so the value is "Artistes régionaux des États-Unis|Artistes de Californie". So in the table, it should display as is, with the | included.<br><br>Similarly, the "URL" column has the value from the "URL" key, which is "https://example.com/artists?id=123".<br><br>Putting it all together, the correct table is as per the user's example, with the Dates column containing all dates separated by commas, Deadline being the first date, and the other fields correctly populated.<br><br>Therefore, the final answer is the table as shown in the example, with the specific values from the given JSON data.<br></thought><br><br>| Theme                  | Deadline       | Fee              | Eligibility               | Dates                     | Selection  | Prize | URL                                  |<br>|------------------------|-----------------|-------------------|----------------------------|---------------------------|------------|--------|---------------------------------------|<br>|Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne        |2025/03/21 | $20.00 USD | $10.00 USD |Artistes régionaux des États-Unis|Artistes de Californie |</td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>4.62</td>
+            <td class="response">{"Titre":"Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)","Prix":"Exposition individuelle|Solo exhibition","Date":"2025/03/21|2025/06/04|2025/06/06|2025/06/03","Eligibilite":"Artistes régionaux des États-Unis|Artistes de Californie","Theme":"Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne","Frais":"20.00 USD|10.00 USD","URL":"https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"} <br></td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>4.64</td>
+            <td class="response">{"Titre":"Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)","Prix":"Exposition individuelle|Solo exhibition","Date":"2025/03/21|2025/06/04|2025/06/06|2025/06/03","Eligibilite":"Artistes régionaux des États-Unis|Artistes de Californie","Theme":"Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne","Frais":"20.00 USD|10.00 USD","URL":"https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"} <br></td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>4.65</td>
+            <td class="response">{"Titre":"Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)","Prix":"Exposition individuelle|Solo exhibition","Date":"2025/03/21|2025/06/04|2025/06/06|2025/06/03","Eligibilite":"Artistes régionaux des États-Unis|Artistes de Californie","Theme":"Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne","Frais":"20.00 USD|10.00 USD","URL":"https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"} <br></td>
+        </tr>
+        
+        <tr>
+            <td>phi4:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>6.76</td>
+            <td class="response">```json<br>{<br>    "Titre": [<br>        "Salon at the Triton 2025",<br>        "Compete Salon at the Triton 2025",<br>        "Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila",<br>        "Triton Online 2025: Explorations in Drawing (Spring)",<br>        "Triton Online 2025: Expedition in Watercolor (Spring)",<br>        "Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)"<br>    ],<br>    "Prix": [<br>        "Exposition individuelle",<br>        "Solo exhibition"<br>    ],<br>    "Date": [<br>        "2025/03/21",<br>        "2025/06/04",<br>        "2025/06/06",<br>        "2025/06/03"<br>    ],<br>    "Frais": [<br>        "20.00 USD",<br>        "10.00 USD"<br>    ],<br>    "Theme": [<br>        "Peinture",<br>        "Dessin",<br>        "Gravure",<br>        "Photographie",<br>        "Techniques mixtes",<br>        "Egypte ancienne"<br>    ],<br>    "Eligibilite": [<br>        "Artistes régionaux des États-Unis",<br>        "Artistes de Californie"<br>    ],<br>    "URL": [<br>        "https://artdeadline.com/ops/triton/",<br>        "https://www.tritonmuseum.org/"<br>    ]<br>}<br>```</td>
+        </tr>
+        
+        <tr>
+            <td>phi4:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>6.72</td>
+            <td class="response">```json<br>{<br>    "Titre": [<br>        "Salon at the Triton 2025",<br>        "Compete Salon at the Triton 2025",<br>        "Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila",<br>        "Triton Online 2025: Explorations in Drawing (Spring)",<br>        "Triton Online 2025: Expedition in Watercolor (Spring)",<br>        "Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)"<br>    ],<br>    "Prix": [<br>        "Exposition individuelle",<br>        "Solo exhibition"<br>    ],<br>    "Date": [<br>        "2025/03/21",<br>        "2025/06/04",<br>        "2025/06/06",<br>        "2025/06/03"<br>    ],<br>    "Frais": [<br>        "20.00 USD",<br>        "10.00 USD"<br>    ],<br>    "Theme": [<br>        "Peinture",<br>        "Dessin",<br>        "Gravure",<br>        "Photographie",<br>        "Techniques mixtes",<br>        "Egypte ancienne"<br>    ],<br>    "Eligibilite": [<br>        "Artistes régionaux des États-Unis",<br>        "Artistes de Californie"<br>    ],<br>    "URL": [<br>        "https://artdeadline.com/ops/triton/",<br>        "https://www.tritonmuseum.org/"<br>    ]<br>}<br>```</td>
+        </tr>
+        
+        <tr>
+            <td>phi4:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>6.69</td>
+            <td class="response">```json<br>{<br>    "Titre": [<br>        "Salon at the Triton 2025",<br>        "Compete Salon at the Triton 2025",<br>        "Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila",<br>        "Triton Online 2025: Explorations in Drawing (Spring)",<br>        "Triton Online 2025: Expedition in Watercolor (Spring)",<br>        "Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)"<br>    ],<br>    "Prix": [<br>        "Exposition individuelle",<br>        "Solo exhibition"<br>    ],<br>    "Date": [<br>        "2025/03/21",<br>        "2025/06/04",<br>        "2025/06/06",<br>        "2025/06/03"<br>    ],<br>    "Frais": [<br>        "20.00 USD",<br>        "10.00 USD"<br>    ],<br>    "Theme": [<br>        "Peinture",<br>        "Dessin",<br>        "Gravure",<br>        "Photographie",<br>        "Techniques mixtes",<br>        "Egypte ancienne"<br>    ],<br>    "Eligibilite": [<br>        "Artistes régionaux des États-Unis",<br>        "Artistes de Californie"<br>    ],<br>    "URL": [<br>        "https://artdeadline.com/ops/triton/",<br>        "https://www.tritonmuseum.org/"<br>    ]<br>}<br>```</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:14b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>6.54</td>
+            <td class="response">{<br>  "Titre": "Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)",<br>  "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>  "Prix": "Exposition individuelle|Solo exhibition",<br>  "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>  "Date": "2025/03/21|2025/06/04|2025/06/06|2025/06/03",<br>  "Frais": "20.00 USD|10.00 USD",<br>  "URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:14b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>6.55</td>
+            <td class="response">{<br>  "Titre": "Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)",<br>  "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>  "Prix": "Exposition individuelle|Solo exhibition",<br>  "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>  "Date": "2025/03/21|2025/06/04|2025/06/06|2025/06/03",<br>  "Frais": "20.00 USD|10.00 USD",<br>  "URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:14b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>6.53</td>
+            <td class="response">{<br>  "Titre": "Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)",<br>  "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>  "Prix": "Exposition individuelle|Solo exhibition",<br>  "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>  "Date": "2025/03/21|2025/06/04|2025/06/06|2025/06/03",<br>  "Frais": "20.00 USD|10.00 USD",<br>  "URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>2.88</td>
+            <td class="response">{<br>    "Titre": "Salon at the Triton 2025",<br>    "Prix": "Exposition individuelle|Solo exhibition",<br>    "Date": "2025-03-21|2025-06-04|2025-06-06|2025-06-03",<br>    "Selection": "Jury",<br>    "Frais": "20.00 USD|10.00 USD",<br>    "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>    "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>    "Portee": 7,<br>    "URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>2.84</td>
+            <td class="response">{<br>    "Titre": "Salon at the Triton 2025",<br>    "Prix": "Exposition individuelle, Solo exhibition",<br>    "Date": "2025-03-21|2025-06-04|2025-06-06|2025-06-03",<br>    "Selection": "Jury",<br>    "Frais": "20.00 USD, 10.00 USD",<br>    "Theme": "Peinture, Dessin, Gravure, Photographie, Techniques mixtes, Egypte ancienne",<br>    "Eligibilite": "Artistes régionaux des États-Unis, Artistes de Californie",<br>    "Portee": 7,<br>    "URL": "https://artdeadline.com/ops/triton/, https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>2.84</td>
+            <td class="response">{<br>    "Titre": "Salon at the Triton 2025",<br>    "Prix": "Exposition individuelle, Solo exhibition",<br>    "Date": "2025-03-21|2025-06-04|2025-06-06|2025-06-03",<br>    "Selection": "Jury",<br>    "Frais": "20.00 USD, 10.00 USD",<br>    "Theme": "Peinture, Dessin, Gravure, Photographie, Techniques mixtes, Egypte ancienne",<br>    "Eligibilite": "Artistes régionaux des États-Unis, Artistes de Californie",<br>    "Portee": 7,<br>    "URL": "https://artdeadline.com/ops/triton/, https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+    </table>
+    
+        <div class="footer">
+            <p>Généré avec le script de comparaison LLM pour Ollama</p>
+        </div>
+    </body>
+    </html>
+    

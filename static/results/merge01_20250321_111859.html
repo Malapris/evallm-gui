@@ -1,0 +1,221 @@
+
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comparaison de LLM avec Ollama</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f8f9fa; }
+            h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+            h2 { color: #283593; margin-top: 40px; border-bottom: 1px solid #c5cae9; padding-bottom: 10px; }
+            table { border-collapse: collapse; width: 100%; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            th, td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; vertical-align: top; }
+            th { background-color: #e8eaf6; font-weight: bold; color: #1a237e; }
+            tr:nth-child(even) { background-color: #f5f5f5; }
+            tr:hover { background-color: #e8eaf6; }
+            .model-header { background-color: #3f51b5; color: white; }
+            .response { max-height: 300px; overflow-y: auto; white-space: pre-wrap; }
+            .metadata { background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            .summary-table th { text-align: center; }
+            .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #5c6bc0; }
+            .temp-badge { display: inline-block; background-color: #5c6bc0; color: white; padding: 2px 6px; 
+                          border-radius: 3px; font-size: 0.8em; margin-left: 8px; }
+            .json-link { display: block; text-align: right; margin: 10px 0; color: #3f51b5; text-decoration: none; }
+            .json-link:hover { text-decoration: underline; }
+            .models-list { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                          box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-family: monospace; }
+            .input-data { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                         box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            .input-content { white-space: pre-wrap; background-color: #f5f5f5; padding: 10px; border-left: 4px solid #3f51b5; margin: 10px 0; }
+        </style>
+    </head>
+    <body>
+        <h1>Comparaison de Modèles LLM avec Ollama</h1>
+        <a href="merge01_20250321_111859.json" class="json-link">📊 Voir les données brutes (JSON)</a>
+        <div class="metadata">
+            <p><strong>Date de génération:</strong> 2025-03-21 11:19:55</p>
+        </div>
+    
+    <h2>Synthèse des Performances</h2>
+    <table class="summary-table">
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Temps moyen (s)</th>
+            <th>Temps minimum (s)</th>
+            <th>Temps maximum (s)</th>
+            <th>Nombre de tokens moyen</th>
+        </tr>
+    
+        <tr>
+            <td>stablelm2:12b <span class="temp-badge">temp=0.0</span></td>
+            <td>6.84</td>
+            <td>6.82</td>
+            <td>6.86</td>
+            <td>128</td>
+        </tr>
+        
+        <tr>
+            <td>yi:9b <span class="temp-badge">temp=0.0</span></td>
+            <td>6.05</td>
+            <td>6.05</td>
+            <td>6.07</td>
+            <td>192</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Données d'Entrée</h2>
+    <div class="input-data">
+    
+        <h3>Prompts Système</h3>
+    
+        <p><strong>systeme</strong></p>
+        <div class="input-content">GOAL:
+Merge the following JSON objects into a single JSON by merging each values separated by '|' and avoid duplicate values.
+For similar values, try to find a synthesis between them, otherwise concatenate the values with '|' as a separator.
+You must absolutely respect the OUTPUT JSON FORMAT .
+ALL JSON OBJECTS ARE VALID AND REPRESENT THE VERY SAME CONTEST.
+IMPORTANT : Return only the merged JSON, without introductions, comments or explanations.
+Return only one JSON, nothing else. Do not return a list, return only one JSON.
+
+OUTPUT JSON FORMAT you must respect absolutely (key:meaning) :
+[ {
+    "Titre": "the contest title. You must summarize the different values in one with all the details.",
+    "Type": "the type of contest (example: photo, drawing, painting, etc.).",
+    "Organisateur": "the name of the contest organizer with their nationality and location.",
+    "Description": "generate a synthetic summary in French from the original description, without considering tone, with only interesting information that you can list (separated by '|').",
+    "Description_originale": "complete and original description of the contest without translation or summary.",
+    "Images": "complete URLs of images associated with the contest, separated by '|'. Only take those related to the contest!",
+    "Theme": "The theme of the contest (example: portrait, human, nature, animals, artistic, etc.), there can be multiple separated by '|'.",
+    "Portee": "The scope of the contest with a score from 0 to 10 where 10 is maximum, meaning the interest in participating with the visibility/notoriety it can bring and the prizes it offers.",
+    "Prix": "the prizes to be won with this contest (money, gifts, internship, etc.). If it's money you give the amount directly. If there are several, you make a list with separation by '|'.",
+    "Eligibilite": "The terms and conditions for participating in the contest (particularly check nationality, age, location and gender).",
+    "Date": "the deadline for contest participation in Year/Month/Day format (example: 2025/12/31). If you don't have the information, don't put the date.",
+    "Selection": "how the selection process works: jury or vote or others.",
+    "Frais": "participation or registration fees for the contest. If you have the amount put it with the currency, if you just know it's paid, put 'Paid'. If there are several amounts, separate them with '|'.",
+    "URL": "links associated with the contest, they must be separated by '|', keep them intact."
+} ]
+</div>
+        
+        <h3>Prompts Utilisateur</h3>
+    
+        <p><strong>utilisateur</strong></p>
+        <div class="input-content">You are a JSON expert.
+
+GOAL:
+analyze the JSON values separated by '|', then think about the main idea of each key and merge all values in one.
+Here is the list of JSON keys you must merge : 'Titre', 'Prix', 'Date', 'Frais', 'Theme', 'Eligibilite', 'URL', 'Images'.
+
+IMPORTANT:
+- Return only ONE value for each key.
+- If values are missing for a key : foget the key.
+- Some values are separated by '|': you must merge them if possible.
+- Some keys may be redundant, you must merge them.
+- Return only ONE merged JSON object, without introduction, without comments, without explanations.
+
+Here is the list of JSON values to merge:
+</div>
+        
+        <h3>Contextes</h3>
+    
+            <p><strong>context</strong></p>
+            <div class="input-content">{"Titre":"Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations 
+in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)","Type":"Painting|Drawing|Printmaking|Photography|Mixed Media|peinture|dessin|aquarelle|art","Organisateur":"Triton Museum of Art (United States, Santa Clara)|Triton Museum of Art (USA, Santa Clara, CA)|Mei-Ying Dell'Aquila|Jeff Bramschreiber","Description":"Concours pour gagner une exposition individuelle au Triton Museum of Art|Concours artistique ouvert aux artistes de Californie|Les œuvres soumises doivent être originales et réalisées entre 2020 et 2025|Les catégories sont : peinture, dessin, gravure, photographie et techniques mixtes|Le gagnant du Best of Show recevra une exposition personnelle au Triton Museum of Art l'année suivante.|Cours de peinture sur le thème du Pop Art pour enfants|Mercredis de 15h30 à 17h00|Du 30 avril au 4 juin 2025|Cours de dessin en ligne|Vendredis de 18h00 à 20h00|Du 4 avril au 6 juin|Cours d'aquarelle en ligne|Mercredis de 18h00 à 20h00|Du 2 avril au 4 juin|Cours d'art en ligne sur le thème de l'Egypte ancienne|Mardis de 18h00 à 20h00|Du 1er avril au 3 juin","Description_originale":"The Triton Museum of Art announces a call for artists for its upcoming 2025 Salon.  Enter our competition for your chance to win a solo show at the Triton Museum of Art…|U.S. Regional Deadline: March 21, 2025 – The Triton Museum of Art announces a call for artists for its upcoming 2025 Salon. Enter our competition for your chance to win a solo show at the Triton Museum of Art!\n\nOn display May 17 – August 17, 2025.\n\nELIGIBILITY & REQUIREMENTS\nThe competition is open to all California artists. All works of art submitted must be an original work created by the artist and have been completed within the last 5 years (between 2020 – 2025). Entries will be accepted in five categories: Painting, Drawing, Printmaking, Photography, and Mixed Media.*\n\n*A note about Mixed Media: While mixed media may include digitally altered or enhanced works, submissions created by AI apps/programs will not be accepted. Should an accepted work be discovered to be AI created in any way, it will be disqualified. The final product of mixed media works should also be entirely 2D. 3D additions to artwork, or 3D works in general are not allowed.\n\nJUROR\nThis year’s guest juror is Pancho Jiménez. Pancho holds an M.F.A. in Sculptural Ceramics from San Francisco State University and a B.A. from Santa Clara University. He has 
+exhibited internationally in London, throughout the San Francisco Bay Area, and nationally at universities, private galleries, and civic spaces. His work is part of the permanent collections of the Crocker Art Museum in Sacramento, the Autry Museum of the American West in Los Angeles, the Triton Museum of Art in Santa Clara, and the University of San Francisco.\n\nAWARDS\nPlace Awards will be given in each of the five categories. In addition, a Best of Show award will be given. The Best of Show winner will receive a solo exhibition at the Triton Museum of Art the following year. Awards and recipients will be posted at the Artists’ Reception on May 17, 2025, and subsequently on the Museum’s webpage and social media.\n\nFEES\nEntry fee is $20.00/one entry, $10.00 for each additional entry. The maximum number of entries is 10. All fees are non-refundable.\n\nArtists will be notified of selection results (acceptance and non-acceptance) by email between Wednesday, April 9 – Friday, April 11, 2025.\n\nSALES\nThe Museum is not involved in the selling of artists’ work and will receive no commission. All purchase inquiries will be passed directly to the artist.\n\nCALENDAR\n\n  * March 21, 2025, midnight Submission deadline\n  * April 9 – April 11, 2025 Notification of selection results (by email)\n  * April 12 – April 25, 2025 Deadline for delivery* of work\n  * May 17, 2025 Exhibition opens\n  * May 17, 2025 Artists’ Reception 2:00 pm – 4:00 pm\n  * August 17, 2025 Exhibition 
+closes\n  * August 21 – September 5, 2025 Pick-up* of artwork from Museum\n\n*During normal Museum open hours: Tuesdays – Sundays, between 11am – 4:30pm\n\nPlease note: The Museum will be closed on Sunday, April 20, 2025 in observance of the Easter holiday.\n\nPlease contact competition@tritonmuseum.org for general inquiries.\n\nFor 55 years, the Triton Museum of Art has been a destination for the community, providing a venue where local artists exhibit their work alongside regional and national artists, and where students of all ages learn about art and the creative process. Located across the street from the Santa Clara Civic Center, the Triton Museum of Art collects and exhibits contemporary and historical works with an emphasis on artists of the Greater Bay Area.\n\n[Triton Museum of Art](https://www.tritonmuseum.org/)\n1505 Warburton Avenue\nSanta Clara, CA 95050\n(408) 247-2438|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila\n\nMei-Ying Dell'Aquila\n\nWednesdays from 3:30PM-5:00PM, April 30th through June 4th, 2025|Triton Online 2025: Explorations in Drawing (Spring)\n\nJeff Bramschreiber\n\nFriday Evenings 6:00PM-8:00PM; April 4 through June 6|Triton Online 2025: Expedition in Watercolor (Spring)\n\nJeff Bramschreiber\n\nWednesday Evenings 6:00PM-8:00PM; April 2 through June 4|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)\n\nJeff Bramschreiber\n\nTuesday Evenings 6:00PM-8:00PM; April 1 through June 3","Theme":"Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne","Portee":7,"Prix":"Exposition individuelle|Solo exhibition","Eligibilite":"Artistes régionaux des États-Unis|Artistes de Californie","Date":"2025/03/21|2025/06/04|2025/06/06|2025/06/03","Selection":"Jury","Frais":"20.00 USD|10.00 USD","URL":"https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"} </div>
+            
+    </div>
+    
+    <h2>Résultats Détaillés</h2>
+    <table>
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Système</th>
+            <th>Prompt</th>
+            <th>Contexte</th>
+            <th>Graine</th>
+            <th>Température</th>
+            <th>Temps (s)</th>
+            <th>Réponse</th>
+        </tr>
+    
+        <tr>
+            <td>stablelm2:12b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>6.86</td>
+            <td class="response">Here is the merged JSON object:<br><br>{<br>    "Titre": "Salon at the Triton",<br>    "Type": "Painting|Drawing|Printmaking|Photography|Mixed Media|peinture|dessin|aquarelle|art",<br>    "Organisateur": "Triton Museum of Art (United States, Santa Clara)|Triton Museum of Art (USA, Santa Clara, CA)|Mei-Ying Dell'Aquila|Jeff Bramschreiber",<br>    "Description": "Concours pour gagner une exposition individuelle au Triton Museum of Art|Concours artistique ouvert aux artistes de Californie|Les œuvres soumises doivent être originales et réalisées entre 2021 et 2025|Les catégories sont : peinture, dessin, gravure, photographie et techniques mixtes|Le gagnant du Best of Show recevra une exposition personnelle au Triton Museum of Art l'année suivante.|Cours de peinture sur le thème Sweet Pop Art avec Mei-Ying Dell'Aquila...",<br>    "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>    "Portee": 7,<br>    "Prix": "Exposition individuelle|Solo exhibition",<br>    "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>    "Date": "5/1/2025|5/1/2025|5/1/2025|5/1/2025",<br>    "Selection": "Jury",<br>    "Frais": "$5.00 USD|$6.00 USD",<br>    "URL": ["https://artdeadline.com/ops/triton/", "https://www.tritonmuseum.org/"]<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>stablelm2:12b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>6.83</td>
+            <td class="response">Here is the merged JSON object:<br><br>{<br>    "Titre": "Salon at the Triton",<br>    "Type": "Painting|Drawing|Printmaking|Photography|Mixed Media|peinture|dessin|aquarelle|art",<br>    "Organisateur": "Triton Museum of Art (United States, Santa Clara)|Triton Museum of Art (USA, Santa Clara, CA)|Mei-Ying Dell'Aquila|Jeff Bramschreiber",<br>    "Description": "Concours pour gagner une exposition individuelle au Triton Museum of Art|Concours artistique ouvert aux artistes de Californie|Les œuvres soumises doivent être originales et réalisées entre 2021 et 2025|Les catégories sont : peinture, dessin, gravure, photographie et techniques mixtes|Le gagnant du Best of Show recevra une exposition personnelle au Triton Museum of Art l'année suivante.|Cours de peinture sur le thème Sweet Pop Art avec Mei-Ying Dell'Aquila...",<br>    "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>    "Portee": 7,<br>    "Prix": "Exposition individuelle|Solo exhibition",<br>    "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>    "Date": "5/1/2025|5/1/2025|5/1/2025|5/1/2025",<br>    "Selection": "Jury",<br>    "Frais": "$5.00 USD|$6.00 USD",<br>    "URL": ["https://artdeadline.com/ops/triton/", "https://www.tritonmuseum.org/"]<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>stablelm2:12b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>6.82</td>
+            <td class="response">Here is the merged JSON object:<br><br>{<br>    "Titre": "Salon at the Triton",<br>    "Type": "Painting|Drawing|Printmaking|Photography|Mixed Media|peinture|dessin|aquarelle|art",<br>    "Organisateur": "Triton Museum of Art (United States, Santa Clara)|Triton Museum of Art (USA, Santa Clara, CA)|Mei-Ying Dell'Aquila|Jeff Bramschreiber",<br>    "Description": "Concours pour gagner une exposition individuelle au Triton Museum of Art|Concours artistique ouvert aux artistes de Californie|Les œuvres soumises doivent être originales et réalisées entre 2021 et 2025|Les catégories sont : peinture, dessin, gravure, photographie et techniques mixtes|Le gagnant du Best of Show recevra une exposition personnelle au Triton Museum of Art l'année suivante.|Cours de peinture sur le thème Sweet Pop Art avec Mei-Ying Dell'Aquila...",<br>    "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>    "Portee": 7,<br>    "Prix": "Exposition individuelle|Solo exhibition",<br>    "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>    "Date": "5/1/2025|5/1/2025|5/1/2025|5/1/2025",<br>    "Selection": "Jury",<br>    "Frais": "$5.00 USD|$6.00 USD",<br>    "URL": ["https://artdeadline.com/ops/triton/", "https://www.tritonmuseum.org/"]<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>yi:9b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>6.07</td>
+            <td class="response">To merge the given JSON-like text into a single object with all properties and values, we can use JavaScript's `JSON.parse` method to convert it into a JavaScript object, then manipulate this object as needed before converting back into JSON format using `JSON.stringify`. Here is how you can do it:<br><br>```javascript<br>const jsonString = `{<br>"Title": "Triton Museum Exhibition 2025",<br>"Description": "For 55 years, the Triton Museum of Art has been a destination for the community, providing a venue where local artists exhibit their work alongside regional and national artists, and where students of all ages learn about art and the creative process. Located across the street from the Santa Clara Civic Center, the Triton Museum of Art collects and exhibits contemporary and historical works with an emphasis on artists of the Greater Bay Area.",<br>"Date": "2025/03/21|2025/06/04|2025/06/06|2025/06/03",<br>"Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>"Portee": 7,<br>"Prix": "Exposition individuelle|Solo exhibition",<br>"Selection": "Jury",<br>"Frais": "20.00 USD|10.00 USD",<br>"URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}`;<br>const mergedObject = JSON.parse(jsonString);<br><br>// Now you can add more properties or modify existing ones as needed<br>mergedObject['NewProperty'] = 'Value';<br><br>console.log(JSON.stringify(mergedObject, null, 2)); // Use stringify to convert back into JSON format for storage or transmission<br>```</td>
+        </tr>
+        
+        <tr>
+            <td>yi:9b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>6.05</td>
+            <td class="response">To merge the given JSON-like text into a single object with all properties and values, we can use JavaScript's `JSON.parse` method to convert it into a JavaScript object, then manipulate this object as needed before converting back into JSON format using `JSON.stringify`. Here is how you can do it:<br><br>```javascript<br>const jsonString = `{<br>"Title": "Triton Museum Exhibition 2025",<br>"Description": "For 55 years, the Triton Museum of Art has been a destination for the community, providing a venue where local artists exhibit their work alongside regional and national artists, and where students of all ages learn about art and the creative process. Located across the street from the Santa Clara Civic Center, the Triton Museum of Art collects and exhibits contemporary and historical works with an emphasis on artists of the Greater Bay Area.",<br>"Date": "2025/03/21|2025/06/04|2025/06/06|2025/06/03",<br>"Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>"Portee": 7,<br>"Prix": "Exposition individuelle|Solo exhibition",<br>"Selection": "Jury",<br>"Frais": "20.00 USD|10.00 USD",<br>"URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}`;<br>const mergedObject = JSON.parse(jsonString);<br><br>// Now you can add more properties or modify existing ones as needed<br>mergedObject['NewProperty'] = 'Value';<br><br>console.log(JSON.stringify(mergedObject, null, 2)); // Use stringify to convert back into JSON format for storage or transmission<br>```</td>
+        </tr>
+        
+        <tr>
+            <td>yi:9b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>6.05</td>
+            <td class="response">To merge the given JSON-like text into a single object with all properties and values, we can use JavaScript's `JSON.parse` method to convert it into a JavaScript object, then manipulate this object as needed before converting back into JSON format using `JSON.stringify`. Here is how you can do it:<br><br>```javascript<br>const jsonString = `{<br>"Title": "Triton Museum Exhibition 2025",<br>"Description": "For 55 years, the Triton Museum of Art has been a destination for the community, providing a venue where local artists exhibit their work alongside regional and national artists, and where students of all ages learn about art and the creative process. Located across the street from the Santa Clara Civic Center, the Triton Museum of Art collects and exhibits contemporary and historical works with an emphasis on artists of the Greater Bay Area.",<br>"Date": "2025/03/21|2025/06/04|2025/06/06|2025/06/03",<br>"Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>"Portee": 7,<br>"Prix": "Exposition individuelle|Solo exhibition",<br>"Selection": "Jury",<br>"Frais": "20.00 USD|10.00 USD",<br>"URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}`;<br>const mergedObject = JSON.parse(jsonString);<br><br>// Now you can add more properties or modify existing ones as needed<br>mergedObject['NewProperty'] = 'Value';<br><br>console.log(JSON.stringify(mergedObject, null, 2)); // Use stringify to convert back into JSON format for storage or transmission<br>```</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Modèles Disponibles</h2>
+    <div class="models-list">
+        ["yi:9b", "stablelm2:12b", "stablelm2:1.6b", "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS", "deepscaler:latest", "exaone-deep:7.8b", "granite3-dense:8b", "omercelik/reka-flash-3:latest", "qwen2.5:7b", "command-r7b:7b", "mxbai-embed-large:latest", "gemma3:latest", "nomic-embed-text:latest", "mistral:latest", "llama3.2:latest", "gemma3:12b", "mistral-small:24b", "granite3.2:2b", "granite3.2:8b", "qwen2.5:14b", "gemma2:latest", "llama3.2-vision:11b", "deepseek-r1:14b", "phi4:latest", "llava:latest", "moondream:latest", "martyyz/stable-prompt:latest", "impromptu2:latest", "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest", "impromptu:latest", "gemma:latest", "simone3:latest"]
+    </div>
+    
+        <div class="footer">
+            <p>Généré avec le script de comparaison LLM pour Ollama</p>
+        </div>
+    </body>
+    </html>
+    

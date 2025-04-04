@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison de LLM avec Ollama</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f8f9fa; }
+        h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+        h2 { color: #283593; margin-top: 40px; border-bottom: 1px solid #c5cae9; padding-bottom: 10px; }
+        .results-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); table-layout: fixed; }
+        .results-table th, .results-table td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; vertical-align: top; }
+        .results-table th { background-color: #e8eaf6; font-weight: bold; color: #1a237e; }
+        .results-table tr:nth-child(even) { background-color: #f5f5f5; }
+        .results-table tr:hover { background-color: #e8eaf6; }
+        .model-header { background-color: #3f51b5; color: white; }
+        .response { max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; }
+        .response-content { padding: 10px; background-color: #f8f9fa; border-radius: 4px; cursor: pointer; }
+        .response-content:hover { background-color: #e8eaf6; }
+        .response-pre { 
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 80%; 
+            max-height: 80vh;
+            background-color: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-y: auto; 
+            z-index: 1000; 
+        }
+        .response-pre pre { 
+            margin: 0; 
+            white-space: pre-wrap; 
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            max-height: none;
+            overflow: visible;
+        }
+        .response-pre .think-section { color: #666; font-style: italic; }
+        .think-tag { color: #5c6bc0; font-weight: bold; }
+        .response-text { white-space: pre-wrap; }
+        .overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            z-index: 999; 
+        }
+        .close-button { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            cursor: pointer; 
+            font-size: 24px; 
+            color: #666;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+        .close-button:hover {
+            color: #000;
+        }
+        .metadata { background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .summary-table th, .summary-table td { border: 1px solid #e0e0e0; padding: 12px; text-align: center; }
+        .summary-table th { background-color: #3f51b5; color: white; font-weight: bold; }
+        .summary-table tr:nth-child(even) { background-color: #f5f5f5; }
+        .summary-table tr:hover { background-color: #e8eaf6; }
+        .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #5c6bc0; }
+        .temp-badge { display: inline-block; background-color: #5c6bc0; color: white; padding: 2px 6px; 
+                      border-radius: 3px; font-size: 0.8em; margin-left: 8px; }
+        .json-link { 
+            display: block; 
+            text-align: right; 
+            margin: 10px 0; 
+            color: #3f51b5; 
+            text-decoration: none;
+            padding: 8px 15px;
+            background-color: #e8eaf6;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .json-link:hover { 
+            text-decoration: none;
+            background-color: #c5cae9;
+        }
+        .models-list { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-family: monospace; }
+        .input-data { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .input-content { white-space: pre-wrap; background-color: #f5f5f5; padding: 10px; border-left: 4px solid #3f51b5; margin: 10px 0; }
+        .commentaire { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-style: italic; }
+        .highlighted-response { text-decoration: underline; text-decoration-color: green; text-decoration-thickness: 2px; }
+        .system-info { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .system-info h3 { color: #1a237e; margin-top: 0; }
+        .system-info table { margin: 10px 0; width: 100%; }
+        .system-info td:first-child { font-weight: bold; width: 200px; }
+        .identical { color: #666; font-style: italic; }
+        .think-section { color: #666; font-style: italic; }
+        think { display: block; color: #666; font-style: italic; margin: 5px 0; }
+        @media screen and (max-width: 768px) {
+            .results-table { display: block; overflow-x: auto; }
+            .summary-table { display: block; overflow-x: auto; }
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #5c6bc0;
+            font-size: 1.2em;
+        }
+    </style>
+    <script>
+        function showResponse(response, event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Création de l'overlay s'il n'existe pas
+            if (!document.querySelector('.overlay')) {
+                const overlay = document.createElement('div');
+                overlay.className = 'overlay';
+                document.body.appendChild(overlay);
+            }
+            
+            // Suppression de l'ancien popup s'il existe
+            const oldPopup = document.querySelector('.response-pre');
+            if (oldPopup) {
+                oldPopup.remove();
+            }
+            
+            const pre = document.createElement('pre');
+            try {
+                response = JSON.parse('"' + response + '"');
+            } catch (e) {
+                // Si le décodage échoue, on garde la réponse originale
+            }
+            
+            const escapedResponse = response
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;')
+                .replace(/\n/g, '<br>')
+                .replace(/\r/g, '');
+                
+            pre.innerHTML = escapedResponse;
+            
+            const div = document.createElement('div');
+            div.className = 'response-pre';
+            div.innerHTML = '<button class="close-button" onclick="closeResponse()">&times;</button>';
+            div.appendChild(pre);
+            
+            document.body.appendChild(div);
+            document.querySelector('.overlay').style.display = 'block';
+            div.style.display = 'block';
+        }
+        
+        function closeResponse() {
+            const popup = document.querySelector('.response-pre');
+            const overlay = document.querySelector('.overlay');
+            if (popup) {
+                popup.remove();
+            }
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        }
+        
+        // Fermer avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeResponse();
+            }
+        });
+        
+        // Fermer en cliquant sur l'overlay
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('overlay')) {
+                closeResponse();
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="overlay"></div>
+    <h1>evallm : comparaison de modèles avec ollama</h1>
+    <div class="header-info">
+        <h2>DESKTOP-GFRJJ8Q - Windows 10.0.19045 - 04/04/2025 15:53:55</h2>
+    </div>
+
+    <div class="system-info">
+        <h3>Informations Système</h3>
+        <table>
+            <tr>
+                <td>Nom de la machine</td>
+                <td>DESKTOP-GFRJJ8Q</td>
+            </tr>
+            <tr>
+                <td>Système d'exploitation</td>
+                <td>Windows 10.0.19045</td>
+            </tr>
+            <tr>
+                <td>Python</td>
+                <td>3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]</td>
+            </tr>
+            <tr>
+                <td>Ollama</td>
+                <td>0.6.4</td>
+            </tr>
+            <tr>
+                <td>evallm.py</td>
+                <td>4.0.1</td>
+            </tr>
+            <tr>
+                <td>CPU</td>
+                <td>Intel64 Family 6 Model 60 Stepping 3, GenuineIntel (8 cœurs, 8 threads)</td>
+            </tr>
+            <tr>
+                <td>Mémoire</td>
+                <td>31.9 GB total, 17.2 GB disponible</td>
+            </tr>
+            
+            <tr>
+                <td>GPU</td>
+                <td>
+                    
+                    NVIDIA GeForce RTX 3090 (24.0 GB VRAM)<br>
+                    
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    
+    <a href="static/results/test_20250404_155346_20250404_155347.json" class="json-link">📊 Voir les données au format JSON</a>
+
+    <h2>Synthèse des Performances</h2>
+    <table class="summary-table">
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Temps moyen (s)</th>
+            <th>Temps minimum (s)</th>
+            <th>Temps maximum (s)</th>
+            <th>Nombre de tokens moyen</th>
+        </tr>
+        
+        <tr>
+            <td><a href="#model_model_stablelm2_1.6b_0_0">stablelm2:1.6b</a> <span class="temp-badge">temp=0.0</span></td>
+            <td>1.44</td>
+            <td>1.14</td>
+            <td>1.59</td>
+            <td>0</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Données d'Entrée</h2>
+    <div class="input-data">
+        <h3>Prompts Système</h3>
+        
+        <p><strong>systeme</strong></p>
+        <div class="input-content">Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.</div>
+        
+        
+        <h3>Prompts Utilisateur</h3>
+        
+        <p><strong>utilisateur</strong></p>
+        <div class="input-content">A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.</div>
+        
+        
+        <h3>Contextes</h3>
+        
+        <p><strong>sources</strong></p>
+        <div class="input-content">source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris
+source 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid 
+ source 3 : aujourd'hui je ne m'en souviens plus ! 
+ source 4 : c'est déjà passé ! 
+ source 5 : demain il sera trop tard !</div>
+        
+    </div>
+    
+    <h2>Résultats Détaillés</h2>
+    
+    
+    <h3 id="model_model_stablelm2_1.6b_0_0">Modèle: stablelm2:1.6b | Système: systeme | Prompt: utilisateur | Contexte: sources | Température: 0.0</h3>
+    <table class="results-table">
+        <tr class="model-header">
+            <th>Métrique</th>
+            
+            <th>Réponse graine 68</th>
+            
+            <th>Réponse graine 86</th>
+            
+            <th>Réponse graine 886</th>
+            
+        </tr>
+        <tr>
+            <th>Temps (s)</th>
+            
+            <td>1.14</td>
+            
+            <td>1.59</td>
+            
+            <td>1.57</td>
+            
+        </tr>
+        <tr>
+            <th>Réponse</th>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;8/09/2021\\n\\nPour calculer la date \\u00e0 partir des informations fournies dans chaque source, j\\u0027ai utilis\\u00e9 le format de num\\u00e9ration du mois (par exemple, 09 pour septembre) et l\\u0027ann\\u00e9e. En utilisant ces formules math\\u00e9matiques :\\n\\n- De source 1 : 8 + 9/24 + 0 + 0 = 76\\n- De source 2 : 9 + 1/4 + 0 + 0 = 15\\n- De source 3 : 0 + 1/1 + 0 + 0 = 1\\n- De source 4 : 0 + 0 + 6 + 0 = 6\\n- De source 5 : 20 (ann\\u00e9e) + 0 + 0 + 0 = 20\\n\\nJ\\u0027ai trouv\\u00e9 la date correspondante pour chaque source et en utilisant ces valeurs, j\\u0027ai pu calculer la date \\u00e0 partir de toutes les informations fournies.&quot;, event)">
+                    8/09/2021
+
+Pour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :
+
+- De source 1 : 8 + 9/24 + 0 + 0 = 76
+- De source 2 : 9 + 1/4 + 0 + 0 = 15
+- De source 3 : 0 + 1/1 + 0 + 0 = 1
+- De source 4 : 0 + 0 + 6 + 0 = 6
+- De source 5 : 20 (année) + 0 + 0 + 0 = 20
+
+J'ai trouvé la date correspondante pour chaque source et en utilisant ces valeurs, j'ai pu calculer la date à partir de toutes les informations fournies.
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;8/09/2022\\n\\nPour calculer la date \\u00e0 partir des informations fournies dans chaque source, j\\u0027ai utilis\\u00e9 le format de num\\u00e9ration du jour, mois et ann\\u00e9e. En utilisant un peu de logique, nous pouvons remplacer les noms de jours par leur num\\u00e9ro correspondant (lundi, mardi, etc.) pour calculer la date.\\n\\nSource 1: Le lendemain du 8 septembre 2021 quand nous avons pris le train pour aller \\u00e0 Paris\\nNum\\u00e9ro du jour: 8\\nNum\\u00e9ro du mois: 9\\nAnn\\u00e9e: 2021\\n\\nSource 2: La veille du 9 ao\\u00fbt 2021, je me souviens qu\\u0027il faisait froid \\nNum\\u00e9ro du jour: 9\\nNum\\u00e9ro du mois: 8\\nAnn\\u00e9e: 2021\\n\\nSource 3: Aujourd\\u0027hui je ne m\\u0027en souviens plus\\nDate: n/a (non disponible)\\n\\nSource 4: C\\u0027est d\\u00e9j\\u00e0 pass\\u00e9!\\nDate: n/a (non disponible)\\n\\nSource 5: Demain il sera trop tard\\nDate: n/a (non disponible)\\n\\nEn utilisant ces informations, nous pouvons calculer la date suivante:\\n\\n8/09/2022\\n\\nCeci correspond \\u00e0 l\\u0027ann\\u00e9e 2022, au mois septembre et au jour le lendemain du 8 septembre.&quot;, event)">
+                    8/09/2022
+
+Pour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du jour, mois et année. En utilisant un peu de logique, nous pouvons remplacer les noms de jours par leur numéro correspondant (lundi, mardi, etc.) pour calculer la date.
+
+Source 1: Le lendemain du 8 septembre 2021 quand nous avons pris le train pour aller à Paris
+Numéro du jour: 8
+Numéro du mois: 9
+Année: 2021
+
+Source 2: La veille du 9 août 2021, je me souviens qu'il faisait froid 
+Numéro du jour: 9
+Numéro du mois: 8
+Année: 2021
+
+Source 3: Aujourd'hui je ne m'en souviens plus
+Date: n/a (non disponible)
+
+Source 4: C'est déjà passé!
+Date: n/a (non disponible)
+
+Source 5: Demain il sera trop tard
+Date: n/a (non disponible)
+
+En utilisant ces informations, nous pouvons calculer la date suivante:
+
+8/09/2022
+
+Ceci correspond à l'année 2022, au mois septembre et au jour le lendemain du 8 septembre.
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+        </tr>
+    </table>
+    <br>
+    
+    
+    <h2>Modèles Disponibles</h2>
+    <div class="models-list">
+        ["yi:9b", "stablelm2:12b", "stablelm2:1.6b", "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS", "deepscaler:latest", "exaone-deep:7.8b", "granite3-dense:8b", "omercelik/reka-flash-3:latest", "qwen2.5:7b", "command-r7b:7b", "mxbai-embed-large:latest", "gemma3:latest", "nomic-embed-text:latest", "mistral:latest", "llama3.2:latest", "gemma3:12b", "mistral-small:24b", "granite3.2:2b", "granite3.2:8b", "qwen2.5:14b", "gemma2:latest", "llama3.2-vision:11b", "deepseek-r1:14b", "phi4:latest", "llava:latest", "moondream:latest", "martyyz/stable-prompt:latest", "impromptu2:latest", "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest", "impromptu:latest", "gemma:latest", "simone3:latest"]
+    </div>
+    
+    <div class="footer">
+        <p>Généré avec <a href="https://github.com/Malapris/evallm">evallm.py</a> par Francis Malapris</p>
+    </div>
+</body>
+</html>

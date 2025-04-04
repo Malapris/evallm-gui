@@ -1,0 +1,279 @@
+
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comparaison de LLM avec Ollama</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f8f9fa; }
+            h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+            h2 { color: #283593; margin-top: 40px; border-bottom: 1px solid #c5cae9; padding-bottom: 10px; }
+            table { border-collapse: collapse; width: 100%; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            th, td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; vertical-align: top; }
+            th { background-color: #e8eaf6; font-weight: bold; color: #1a237e; }
+            tr:nth-child(even) { background-color: #f5f5f5; }
+            tr:hover { background-color: #e8eaf6; }
+            .model-header { background-color: #3f51b5; color: white; }
+            .response { max-height: 300px; overflow-y: auto; white-space: pre-wrap; }
+            .metadata { background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+            .summary-table th { text-align: center; }
+            .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #5c6bc0; }
+            .temp-badge { display: inline-block; background-color: #5c6bc0; color: white; padding: 2px 6px; 
+                          border-radius: 3px; font-size: 0.8em; margin-left: 8px; }
+            .json-link { display: block; text-align: right; margin: 10px 0; color: #3f51b5; text-decoration: none; }
+            .json-link:hover { text-decoration: underline; }
+            .models-list { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                          box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-family: monospace; }
+        </style>
+    </head>
+    <body>
+        <h1>Comparaison de Modèles LLM avec Ollama</h1>
+        <a href="merge01_20250320_225139.json" class="json-link">📊 Voir les données brutes (JSON)</a>
+        <div class="metadata">
+            <p><strong>Date de génération:</strong> 2025-03-20 22:56:35</p>
+        </div>
+
+        <h2>Modèles Disponibles</h2>
+        <div class="models-list">
+            ["granite3-dense:8b", "omercelik/reka-flash-3:latest", "qwen2.5:7b", "command-r7b:7b", "mxbai-embed-large:latest", "gemma3:latest", "nomic-embed-text:latest", "mistral:latest", "llama3.2:latest", "gemma3:12b", "mistral-small:24b", "granite3.2:2b", "granite3.2:8b", "qwen2.5:14b", "gemma2:latest", "llama3.2-vision:11b", "deepseek-r1:14b", "phi4:latest", "llava:latest", "moondream:latest", "martyyz/stable-prompt:latest", "impromptu2:latest", "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest", "impromptu:latest", "gemma:latest", "simone3:latest"]
+        </div>
+    
+    <h2>Synthèse des Performances</h2>
+    <table class="summary-table">
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Temps moyen (s)</th>
+            <th>Temps minimum (s)</th>
+            <th>Temps maximum (s)</th>
+            <th>Nombre de tokens moyen</th>
+        </tr>
+    
+        <tr>
+            <td>command-r7b:7b <span class="temp-badge">temp=0.0</span></td>
+            <td>4.54</td>
+            <td>3.88</td>
+            <td>5.84</td>
+            <td>81</td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest <span class="temp-badge">temp=0.0</span></td>
+            <td>4.54</td>
+            <td>4.53</td>
+            <td>4.54</td>
+            <td>50</td>
+        </tr>
+        
+        <tr>
+            <td>granite3-dense:8b <span class="temp-badge">temp=0.0</span></td>
+            <td>5.16</td>
+            <td>2.89</td>
+            <td>6.31</td>
+            <td>200</td>
+        </tr>
+        
+        <tr>
+            <td>omercelik/reka-flash-3:latest <span class="temp-badge">temp=0.0</span></td>
+            <td>27.89</td>
+            <td>27.76</td>
+            <td>28.09</td>
+            <td>568</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b <span class="temp-badge">temp=0.0</span></td>
+            <td>2.85</td>
+            <td>2.83</td>
+            <td>2.88</td>
+            <td>41</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Résultats Détaillés</h2>
+    <table>
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Système</th>
+            <th>Prompt</th>
+            <th>Contexte</th>
+            <th>Graine</th>
+            <th>Température</th>
+            <th>Temps (s)</th>
+            <th>Réponse</th>
+        </tr>
+    
+        <tr>
+            <td>command-r7b:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>5.84</td>
+            <td class="response">{<br>  "Titre": "Triton Museum of Art 2025 Salon",<br>  "Prix": "Exposition individuelle (Best of Show)",<br>  "Date": "2025-03-21, 2025-04-09 to 2025-04-11, 2025-04-12 to 2025-04-25, 2025-06-01",<br>  "Date": "2025-06-01",<br>  "Frais": "$20 (pour la participation)",<br>  "Lieu": "Santa Clara, CA",<br>  "Site web": "https://www.tritonmuseum.org",<br>  "Sélection": "Jury",<br>  "Thème": "Art contemporain",<br>  "Description": "Concours d'art pour les artistes professionnels et amateurs",<br>  "Prix": [<br>    {<br>      "Nom": "Best Art Award",<br>      "Valeur": "10 000 $"<br>    },<br>    {<br>      "Nom": "Second Prize",<br>      "Valeur": "5 000 $"<br>    },<br>    {<br>      "Nom": "Third Prize",<br>      "Valeur": "2 000 $"<br>    }<br>  ],<br>  "Catégories": [<br>    "Peinture",<br>    "Sculpture",<br>    "Photographie",<br>    "Design graphique",<br>    "Art numérique"<br>  ],<br>  "Date limite de soumission": "2025-06-30",<br>  "Lieu de la manifestation": "Santa Clara, CA",<br>  "Site web": "https://www.santaclaramuseum.org",<br>  "Contact": "info@santaclaramuseum.org"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>command-r7b:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>3.89</td>
+            <td class="response">{<br>  "Titre": "Triton Museum of Art 2025 Salon",<br>  "Prix": "Exposition individuelle (Best of Show)",<br>  "Date": "2025-03-21, 2025-04-09 to 2025-04-11, 2025-04-12 to 2025-04-25, 2025-06-01",<br>  "Date": "2025-06-01",<br>  "Frais": "$20 (pour la participation)",<br>  "Lieu": "Santa Clara, CA",<br>  "Site web": "https://www.tritonmuseum.org",<br>  "Thème": "Art contemporain",<br>  "Description": "Concours d'art pour les artistes professionnels et amateurs",<br>  "Sélection": "Par jury",<br>  "Prix": "1er prix : 5000€, 2e prix : 3000€, 3e prix : 1000€"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>command-r7b:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>3.88</td>
+            <td class="response">{<br>  "Titre": "Triton Museum of Art 2025 Salon",<br>  "Prix": "Exposition individuelle (Best of Show)",<br>  "Date": "2025-03-21, 2025-04-09 to 2025-04-11, 2025-04-12 to 2025-04-25, 2025-06-01",<br>  "Date": "2025-06-01",<br>  "Frais": "$20 (pour la participation)",<br>  "Lieu": "Santa Clara, CA",<br>  "Site web": "https://www.tritonmuseum.org",<br>  "Thème": "Art contemporain",<br>  "Description": "Concours d'art pour les artistes professionnels et amateurs",<br>  "Sélection": "Par jury",<br>  "Prix": "1er prix : 5000€, 2e prix : 3000€, 3e prix : 1000€"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>4.54</td>
+            <td class="response">{"Titre":"Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)","Prix":"Exposition individuelle|Solo exhibition","Date":"2025/03/21|2025/06/04|2025/06/06|2025/06/03","Eligibilite":"Artistes régionaux des États-Unis|Artistes de Californie","Theme":"Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne","Frais":"20.00 USD|10.00 USD","URL":"https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"} <br></td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>4.54</td>
+            <td class="response">{"Titre":"Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)","Prix":"Exposition individuelle|Solo exhibition","Date":"2025/03/21|2025/06/04|2025/06/06|2025/06/03","Eligibilite":"Artistes régionaux des États-Unis|Artistes de Californie","Theme":"Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne","Frais":"20.00 USD|10.00 USD","URL":"https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"} <br></td>
+        </tr>
+        
+        <tr>
+            <td>gemma2:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>4.53</td>
+            <td class="response">{"Titre":"Salon at the Triton 2025|Compete Salon at the Triton 2025|Sweet Pop Art: A Playful Painting Camp with Mei-Ying Dell'Aquila|Triton Online 2025: Explorations in Drawing (Spring)|Triton Online 2025: Expedition in Watercolor (Spring)|Triton Online 2025: Artistic Escape to Ancient Egypt (Spring)","Prix":"Exposition individuelle|Solo exhibition","Date":"2025/03/21|2025/06/04|2025/06/06|2025/06/03","Eligibilite":"Artistes régionaux des États-Unis|Artistes de Californie","Theme":"Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne","Frais":"20.00 USD|10.00 USD","URL":"https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"} <br></td>
+        </tr>
+        
+        <tr>
+            <td>granite3-dense:8b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>2.89</td>
+            <td class="response">The Triton Museum of Art is hosting a competition for artists in the United States, specifically those from California. The theme of the competition is "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne". The deadline for submission is March 21, 2025, and the notification of selection results will be sent between April 9-11, 2025. The exhibition will open on May 17, 2025, and the artwork must be delivered by April 25, 2025. The Museum is not involved in the selling of artists’ work and will receive no commission. All purchase inquiries will be passed directly to the artist.</td>
+        </tr>
+        
+        <tr>
+            <td>granite3-dense:8b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>6.31</td>
+            <td class="response">The Triton Museum of Art is hosting a regional art competition in the United States, specifically for artists from California. The theme of the competition is "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne", which translates to "Painting|Drawing|Engraving|Photography|Mixed Techniques|Ancient Egypt".<br><br>The competition has a fee of $20.00 for one entry and $10.00 for each additional entry, with a maximum of 10 entries per artist. The deadline for submission is March 21, 2025, at midnight.<br><br>The selected artists will have their work exhibited at the Triton Museum of Art from May 17 to August 17, 2025. The exhibition will be opened on May 17, 2025, with an artists' reception from 2:00 pm to 4:00 pm. The artwork must be delivered to the museum by April 25, 2025.<br><br>The selected artists will receive a solo exhibition at the Triton Museum of Art. The museum is not involved in the selling of artists' work and will receive no commission. All purchase inquiries will be passed directly to the artist.<br><br>The Triton Museum of Art has been a destination for the community, providing a venue where local artists exhibit their work alongside regional and national artists, and where students of all ages learn about art and the creative process. Located across the street from the Santa Clara Civic Center, the Triton Museum of Art collects and exhibits contemporary and historical works with an emphasis on artists of the Greater Bay Area.<br><br>The competition is open to regional artists in the United States, specifically those from California. The selection process involves a jury.</td>
+        </tr>
+        
+        <tr>
+            <td>granite3-dense:8b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>6.28</td>
+            <td class="response">The Triton Museum of Art is hosting a regional art competition in the United States, specifically for artists from California. The theme of the competition is "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne", which translates to "Painting|Drawing|Engraving|Photography|Mixed Techniques|Ancient Egypt".<br><br>The competition has a fee of $20.00 for one entry and $10.00 for each additional entry, with a maximum of 10 entries per artist. The deadline for submission is March 21, 2025, at midnight.<br><br>The selected artists will have their work exhibited at the Triton Museum of Art from May 17 to August 17, 2025. The exhibition will be opened on May 17, 2025, with an artists' reception from 2:00 pm to 4:00 pm. The artwork must be delivered to the museum by April 25, 2025.<br><br>The selected artists will receive a solo exhibition at the Triton Museum of Art. The museum is not involved in the selling of artists' work and will receive no commission. All purchase inquiries will be passed directly to the artist.<br><br>The Triton Museum of Art has been a destination for the community, providing a venue where local artists exhibit their work alongside regional and national artists, and where students of all ages learn about art and the creative process. Located across the street from the Santa Clara Civic Center, the Triton Museum of Art collects and exhibits contemporary and historical works with an emphasis on artists of the Greater Bay Area.<br><br>The competition is open to regional artists in the United States, specifically those from California. The selection process involves a jury.</td>
+        </tr>
+        
+        <tr>
+            <td>omercelik/reka-flash-3:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>27.82</td>
+            <td class="response"> <reasoning><br>Let's tackle this JSON merging task. The user wants all the useful information about contests merged into a single JSON object, focusing on specific keys. First, I need to go through each provided JSON and extract the relevant data.<br><br>Starting with the 'Titre' key. The original value has multiple titles separated by '|'. I should list them as an array to keep all options. Next, 'Prix' has entries like "Exposition individuelle" and "Solo exhibition". These seem similar, so maybe combine them into a single string mentioning both in French and English.<br><br>Looking at 'Date', there are several dates listed. The main submission deadline is March 21, 2025, which is the most critical date. Other dates might be part of event schedules but since the user didn't specify handling multiple dates, I'll prioritize the submission deadline.<br><br>For 'Frais', the entry fees are $20 and $10 for additional entries. I need to present this clearly, perhaps as a formatted string indicating the per-entry cost. <br><br>The 'URL' key has two URLs. Since both are relevant (one for deadlines and one for the museum), I'll list them in an array to include all.<br><br>Now, checking other keys like 'Theme', which includes painting, drawing, etc., and 'Eligibilite' with regional artists. These should be combined into arrays if there are multiple entries separated by '|'.<br><br>The 'Description' from the original JSON is quite detailed, but the user didn't mention it as a required key. However, since the task is to include all useful info, maybe extract key points like entry fees, notification dates, and exhibition details.<br><br>Wait, the user specified only certain keys: Titre, Prix, Date, Frais, URL, Theme, Eligibilite. So I should focus on those. Let me ensure each of these keys is addressed properly.<br><br>For 'Theme', combining all listed themes into an array. Similarly, 'Eligibilite' should have both entries as separate items in an array.<br><br>Putting it all together, the final JSON should have each key with merged and formatted values where necessary. Making sure to handle arrays for multiple entries and clean up any redundant information.<br></reasoning><br><br>```json<br>{<br>  "Titre": [<br>    "Salon d'art du Triton 2025",<br>    "Sweet Pop Art: Atelier de peinture ludique avec Mei-Ying Dell'Aquila",<br>    "Triton Online 2025 : Explorations en dessin (Printemps)",<br>    "Triton Online 2025 : Expédition en aquarelle (Printemps)",<br>    "Triton Online 2025 : Évasion artistique égyptienne (Printemps)"<br>  ],<br>  "Prix": [<br>    "Exposition individuelle au musée",<br>    "Solo exhibition (en anglais)",<br>    "Ateliers et formations artistiques"<br>  ],<br>  "Date": {<br>    "Déadline de soumission": "2025-03-21 (minuit)",<br>    "Notification des résultats": "2025-04-09 au 11",<br>    "Livraison des œuvres": "2025-04-12 au 25",<br>    "Ouverture de l'exposition": "2025-05-17",<br>    "Clôture de l'exposition": "2025-08-17"<br>  },<br>  "Frais": {<br>    "Tarif unique": "20,00 $ USD par entrée",<br>    "Tarifs supplémentaires": "10,00 $ USD par entrée supplémentaire (max 10 entrées)"<br>  },<br>  "URL": [<br>    "https://artdeadline.com/ops/triton/",<br>    "https://www.tritonmuseum.org/"<br>  ],<br>  "Theme": [<br>    "Peinture",<br>    "Dessin",<br>    "Aquarelle",<br>    "Techniques mixtes",<br>    "Art égyptien ancien"<br>  ],<br>  "Eligibilite": [<br>    "Artistes résidents des États-Unis (focus Caléfornie)",<br>    "Étudiants et amateurs d'art de tous âges",<br>    "Professionnels de l'art du Grand Bassin de San Francisco"<br>  ],<br>  "Description": "Le Salon d'art du Triton 2025 propose un programme varié incluant des compétitions, des ateliers en ligne et une exposition collective. Les frais d'inscription sont modérés avec des tarifs avantageux pour les multiples participations. L'événement met en valeur la diversité artistique tout en soutenant les créateurs locaux.",<br>  "Selection": "Jury professionnel",<br>  "Portee": "Régionale (Grand Bassin de San Francisco)",<br>  "Contact": {<br>    "Email": "competition@tritonmuseum.org",<br>    "Adresse postale": "1505 Warburton Avenue, Santa Clara, CA 95050"<br>  }<br>}<br>```<br><br> </td>
+        </tr>
+        
+        <tr>
+            <td>omercelik/reka-flash-3:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>28.09</td>
+            <td class="response"> <reasoning><br>Let's tackle this JSON merging task. The user wants all the useful information about contests merged into a single JSON object, focusing on specific keys. First, I need to go through each provided JSON and extract the relevant data.<br><br>Starting with the 'Titre' key. The original value has multiple titles separated by '|'. I should list them as an array to keep all options. Next, 'Prix' has entries like "Exposition individuelle" and "Solo exhibition". These seem similar, so maybe combine them into a single string mentioning both in French and English.<br><br>Looking at 'Date', there are several dates listed. The main submission deadline is March 21, 2025, which is the most critical date. Other dates might be part of event schedules but since the user didn't specify handling multiple dates, I'll prioritize the submission deadline.<br><br>For 'Frais', the entry fees are $20 and $10 for additional entries. I need to present this clearly, perhaps as a formatted string indicating the per-entry cost. <br><br>The 'URL' key has two URLs. Since both are relevant (one for deadlines and one for the museum), I'll list them in an array to include all.<br><br>Now, checking other keys like 'Theme', which includes painting, drawing, etc., and 'Eligibilite' with regional artists. These should be combined into arrays if there are multiple entries separated by '|'.<br><br>The 'Description' from the original JSON is quite detailed, but the user didn't mention it as a required key. However, since the task is to include all useful info, maybe extract key points like entry fees, notification dates, and exhibition details.<br><br>Wait, the user specified only certain keys: Titre, Prix, Date, Frais, URL, Theme, Eligibilite. So I should focus on those. Let me ensure each of these keys is addressed properly.<br><br>For 'Theme', combining all listed themes into an array. Similarly, 'Eligibilite' should have both entries as separate items in an array.<br><br>Putting it all together, the final JSON should have each key with merged and formatted values where necessary. Making sure to handle arrays for multiple entries and clean up any redundant information.<br></reasoning><br><br>```json<br>{<br>  "Titre": [<br>    "Salon d'art du Triton 2025",<br>    "Sweet Pop Art: Atelier de peinture ludique avec Mei-Ying Dell'Aquila",<br>    "Triton Online 2025 : Explorations en dessin (Printemps)",<br>    "Triton Online 2025 : Expédition en aquarelle (Printemps)",<br>    "Triton Online 2025 : Évasion artistique égyptienne (Printemps)"<br>  ],<br>  "Prix": [<br>    "Exposition individuelle au musée",<br>    "Solo exhibition (en anglais)",<br>    "Ateliers et formations artistiques"<br>  ],<br>  "Date": {<br>    "Déadline de soumission": "2025-03-21 (minuit)",<br>    "Notification des résultats": "2025-04-09 au 11",<br>    "Livraison des œuvres": "2025-04-12 au 25",<br>    "Ouverture de l'exposition": "2025-05-17",<br>    "Clôture de l'exposition": "2025-08-17"<br>  },<br>  "Frais": {<br>    "Tarif unique": "20,00 $ USD par entrée",<br>    "Tarifs supplémentaires": "10,00 $ USD par entrée supplémentaire (max 10 entrées)"<br>  },<br>  "URL": [<br>    "https://artdeadline.com/ops/triton/",<br>    "https://www.tritonmuseum.org/"<br>  ],<br>  "Theme": [<br>    "Peinture",<br>    "Dessin",<br>    "Aquarelle",<br>    "Techniques mixtes",<br>    "Art égyptien ancien"<br>  ],<br>  "Eligibilite": [<br>    "Artistes résidents des États-Unis (focus Caléfornie)",<br>    "Étudiants et amateurs d'art de tous âges",<br>    "Professionnels de l'art du Grand Bassin de San Francisco"<br>  ],<br>  "Description": "Le Salon d'art du Triton 2025 propose un programme varié incluant des compétitions, des ateliers en ligne et une exposition collective. Les frais d'inscription sont modérés avec des tarifs avantageux pour les multiples participations. L'événement met en valeur la diversité artistique tout en soutenant les créateurs locaux.",<br>  "Selection": "Jury professionnel",<br>  "Portee": "Régionale (Grand Bassin de San Francisco)",<br>  "Contact": {<br>    "Email": "competition@tritonmuseum.org",<br>    "Adresse postale": "1505 Warburton Avenue, Santa Clara, CA 95050"<br>  }<br>}<br>```<br><br> </td>
+        </tr>
+        
+        <tr>
+            <td>omercelik/reka-flash-3:latest</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>27.76</td>
+            <td class="response"> <reasoning><br>Let's tackle this JSON merging task. The user wants all the useful information about contests merged into a single JSON object, focusing on specific keys. First, I need to go through each provided JSON and extract the relevant data.<br><br>Starting with the 'Titre' key. The original value has multiple titles separated by '|'. I should list them as an array to keep all options. Next, 'Prix' has entries like "Exposition individuelle" and "Solo exhibition". These seem similar, so maybe combine them into a single string mentioning both in French and English.<br><br>Looking at 'Date', there are several dates listed. The main submission deadline is March 21, 2025, which is the most critical date. Other dates might be part of event schedules but since the user didn't specify handling multiple dates, I'll prioritize the submission deadline.<br><br>For 'Frais', the entry fees are $20 and $10 for additional entries. I need to present this clearly, perhaps as a formatted string indicating the per-entry cost. <br><br>The 'URL' key has two URLs. Since both are relevant (one for deadlines and one for the museum), I'll list them in an array to include all.<br><br>Now, checking other keys like 'Theme', which includes painting, drawing, etc., and 'Eligibilite' with regional artists. These should be combined into arrays if there are multiple entries separated by '|'.<br><br>The 'Description' from the original JSON is quite detailed, but the user didn't mention it as a required key. However, since the task is to include all useful info, maybe extract key points like entry fees, notification dates, and exhibition details.<br><br>Wait, the user specified only certain keys: Titre, Prix, Date, Frais, URL, Theme, Eligibilite. So I should focus on those. Let me ensure each of these keys is addressed properly.<br><br>For 'Theme', combining all listed themes into an array. Similarly, 'Eligibilite' should have both entries as separate items in an array.<br><br>Putting it all together, the final JSON should have each key with merged and formatted values where necessary. Making sure to handle arrays for multiple entries and clean up any redundant information.<br></reasoning><br><br>```json<br>{<br>  "Titre": [<br>    "Salon d'art du Triton 2025",<br>    "Sweet Pop Art: Atelier de peinture ludique avec Mei-Ying Dell'Aquila",<br>    "Triton Online 2025 : Explorations en dessin (Printemps)",<br>    "Triton Online 2025 : Expédition en aquarelle (Printemps)",<br>    "Triton Online 2025 : Évasion artistique égyptienne (Printemps)"<br>  ],<br>  "Prix": [<br>    "Exposition individuelle au musée",<br>    "Solo exhibition (en anglais)",<br>    "Ateliers et formations artistiques"<br>  ],<br>  "Date": {<br>    "Déadline de soumission": "2025-03-21 (minuit)",<br>    "Notification des résultats": "2025-04-09 au 11",<br>    "Livraison des œuvres": "2025-04-12 au 25",<br>    "Ouverture de l'exposition": "2025-05-17",<br>    "Clôture de l'exposition": "2025-08-17"<br>  },<br>  "Frais": {<br>    "Tarif unique": "20,00 $ USD par entrée",<br>    "Tarifs supplémentaires": "10,00 $ USD par entrée supplémentaire (max 10 entrées)"<br>  },<br>  "URL": [<br>    "https://artdeadline.com/ops/triton/",<br>    "https://www.tritonmuseum.org/"<br>  ],<br>  "Theme": [<br>    "Peinture",<br>    "Dessin",<br>    "Aquarelle",<br>    "Techniques mixtes",<br>    "Art égyptien ancien"<br>  ],<br>  "Eligibilite": [<br>    "Artistes résidents des États-Unis (focus Caléfornie)",<br>    "Étudiants et amateurs d'art de tous âges",<br>    "Professionnels de l'art du Grand Bassin de San Francisco"<br>  ],<br>  "Description": "Le Salon d'art du Triton 2025 propose un programme varié incluant des compétitions, des ateliers en ligne et une exposition collective. Les frais d'inscription sont modérés avec des tarifs avantageux pour les multiples participations. L'événement met en valeur la diversité artistique tout en soutenant les créateurs locaux.",<br>  "Selection": "Jury professionnel",<br>  "Portee": "Régionale (Grand Bassin de San Francisco)",<br>  "Contact": {<br>    "Email": "competition@tritonmuseum.org",<br>    "Adresse postale": "1505 Warburton Avenue, Santa Clara, CA 95050"<br>  }<br>}<br>```<br><br> </td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>6</td>
+            <td>0.0</td>
+            <td>2.88</td>
+            <td class="response">{<br>    "Titre": "Salon at the Triton 2025",<br>    "Prix": "Exposition individuelle|Solo exhibition",<br>    "Date": "2025-03-21|2025-06-04|2025-06-06|2025-06-03",<br>    "Selection": "Jury",<br>    "Frais": "20.00 USD|10.00 USD",<br>    "Theme": "Peinture|Dessin|Gravure|Photographie|Techniques mixtes|Egypte ancienne",<br>    "Eligibilite": "Artistes régionaux des États-Unis|Artistes de Californie",<br>    "Portee": 7,<br>    "URL": "https://artdeadline.com/ops/triton/|https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>68</td>
+            <td>0.0</td>
+            <td>2.83</td>
+            <td class="response">{<br>    "Titre": "Salon at the Triton 2025",<br>    "Prix": "Exposition individuelle, Solo exhibition",<br>    "Date": "2025-03-21|2025-06-04|2025-06-06|2025-06-03",<br>    "Selection": "Jury",<br>    "Frais": "20.00 USD, 10.00 USD",<br>    "Theme": "Peinture, Dessin, Gravure, Photographie, Techniques mixtes, Egypte ancienne",<br>    "Eligibilite": "Artistes régionaux des États-Unis, Artistes de Californie",<br>    "Portee": 7,<br>    "URL": "https://artdeadline.com/ops/triton/, https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+        <tr>
+            <td>qwen2.5:7b</td>
+            <td>systeme</td>
+            <td>utilisateur</td>
+            <td>context</td>
+            <td>886</td>
+            <td>0.0</td>
+            <td>2.83</td>
+            <td class="response">{<br>    "Titre": "Salon at the Triton 2025",<br>    "Prix": "Exposition individuelle, Solo exhibition",<br>    "Date": "2025-03-21|2025-06-04|2025-06-06|2025-06-03",<br>    "Selection": "Jury",<br>    "Frais": "20.00 USD, 10.00 USD",<br>    "Theme": "Peinture, Dessin, Gravure, Photographie, Techniques mixtes, Egypte ancienne",<br>    "Eligibilite": "Artistes régionaux des États-Unis, Artistes de Californie",<br>    "Portee": 7,<br>    "URL": "https://artdeadline.com/ops/triton/, https://www.tritonmuseum.org/"<br>}</td>
+        </tr>
+        
+    </table>
+    
+        <div class="footer">
+            <p>Généré avec le script de comparaison LLM pour Ollama</p>
+        </div>
+    </body>
+    </html>
+    

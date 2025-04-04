@@ -1,0 +1,108 @@
+{
+  "config": {
+    "models": [
+      "stablelm2:1.6b"
+    ],
+    "system_prompts": {
+      "systeme": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique."
+    },
+    "user_prompts": {
+      "utilisateur": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date."
+    },
+    "contexts": {
+      "sources": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !"
+    },
+    "seeds": [
+      68,
+      86,
+      886
+    ],
+    "temperatures": [
+      0.0
+    ],
+    "nom_test": "petit test",
+    "commentaire": "",
+    "resultats": []
+  },
+  "results": [
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+      "context_id": "sources",
+      "seed": 68,
+      "temperature": 0.0,
+      "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/24 + 0 + 0 = 76\n- De source 2 : 9 + 1/4 + 0 + 0 = 15\n- De source 3 : 0 + 1/1 + 0 + 0 = 1\n- De source 4 : 0 + 0 + 6 + 0 = 6\n- De source 5 : 20 (année) + 0 + 0 + 0 = 20\n\nJ'ai trouvé la date correspondante pour chaque source et en utilisant ces valeurs, j'ai pu calculer la date à partir de toutes les informations fournies.",
+      "response_time": 1.1181890964508057,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+      "context_id": "sources",
+      "seed": 86,
+      "temperature": 0.0,
+      "response": "8/09/2022\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du jour, mois et année. En utilisant un peu de logique, nous pouvons remplacer les noms de jours par leur numéro correspondant (lundi, mardi, etc.) pour calculer la date.\n\nSource 1: Le lendemain du 8 septembre 2021 quand nous avons pris le train pour aller à Paris\nNuméro du jour: 8\nNuméro du mois: 9\nAnnée: 2021\n\nSource 2: La veille du 9 août 2021, je me souviens qu'il faisait froid \nNuméro du jour: 9\nNuméro du mois: 8\nAnnée: 2021\n\nSource 3: Aujourd'hui je ne m'en souviens plus\nDate: n/a (non disponible)\n\nSource 4: C'est déjà passé!\nDate: n/a (non disponible)\n\nSource 5: Demain il sera trop tard\nDate: n/a (non disponible)\n\nEn utilisant ces informations, nous pouvons calculer la date suivante:\n\n8/09/2022\n\nCeci correspond à l'année 2022, au mois septembre et au jour le lendemain du 8 septembre.",
+      "response_time": 1.7125341892242432,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+      "context_id": "sources",
+      "seed": 886,
+      "temperature": 0.0,
+      "response": "8/09/2022\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du jour, mois et année. En utilisant un peu de logique, nous pouvons remplacer les noms de jours par leur numéro correspondant (lundi, mardi, etc.) pour calculer la date.\n\nSource 1: Le lendemain du 8 septembre 2021 quand nous avons pris le train pour aller à Paris\nNuméro du jour: 8\nNuméro du mois: 9\nAnnée: 2021\n\nSource 2: La veille du 9 août 2021, je me souviens qu'il faisait froid \nNuméro du jour: 9\nNuméro du mois: 8\nAnnée: 2021\n\nSource 3: Aujourd'hui je ne m'en souviens plus\nDate: n/a (non disponible)\n\nSource 4: C'est déjà passé!\nDate: n/a (non disponible)\n\nSource 5: Demain il sera trop tard\nDate: n/a (non disponible)\n\nEn utilisant ces informations, nous pouvons calculer la date suivante:\n\n8/09/2022\n\nCeci correspond à l'année 2022, au mois septembre et au jour le lendemain du 8 septembre.",
+      "response_time": 1.576594591140747,
+      "commentaire": "",
+      "Resultats": null
+    }
+  ],
+  "system_info": {
+    "os": "Windows",
+    "os_version": "10.0.19045",
+    "python_version": "3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]",
+    "ollama_version": "0.6.4",
+    "evallm_version": "4.0.1",
+    "cpu": {
+      "model": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+      "cores": 8,
+      "threads": 8,
+      "freq": {
+        "current": 3501.0,
+        "min": 0.0,
+        "max": 3501.0
+      }
+    },
+    "memory": {
+      "total_gb": 31.874404907226562,
+      "available_gb": 16.50823211669922,
+      "used_gb": 15.366172790527344,
+      "percent": 48.2
+    },
+    "gpu": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": 24576.0,
+        "memory_used": 3908.0,
+        "memory_free": 20419.0,
+        "gpu_load": 57.99999999999999
+      }
+    ],
+    "hostname": "DESKTOP-GFRJJ8Q"
+  },
+  "timestamp": "2025-04-04T16:08:59.587962"
+}

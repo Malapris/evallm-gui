@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison de LLM avec Ollama</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #f8f9fa; }
+        h1 { color: #1a237e; text-align: center; margin-bottom: 30px; }
+        h2 { color: #283593; margin-top: 40px; border-bottom: 1px solid #c5cae9; padding-bottom: 10px; }
+        .results-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); table-layout: fixed; }
+        .results-table th, .results-table td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; vertical-align: top; }
+        .results-table th { background-color: #e8eaf6; font-weight: bold; color: #1a237e; }
+        .results-table tr:nth-child(even) { background-color: #f5f5f5; }
+        .results-table tr:hover { background-color: #e8eaf6; }
+        .model-header { background-color: #3f51b5; color: white; }
+        .response { max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; }
+        .response-content { padding: 10px; background-color: #f8f9fa; border-radius: 4px; cursor: pointer; }
+        .response-content:hover { background-color: #e8eaf6; }
+        .response-pre { 
+            display: none; 
+            position: fixed; 
+            top: 5%; 
+            left: 5%; 
+            width: 90%; 
+            max-height: 90vh;
+            background-color: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-y: auto; 
+            z-index: 1000; 
+        }
+        .response-pre pre { 
+            margin: 0; 
+            white-space: pre-wrap; 
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            max-height: none;
+            overflow: visible;
+        }
+        .response-pre .think-section { color: #666; font-style: italic; }
+        .think-tag { color: #5c6bc0; font-weight: bold; }
+        .response-text { white-space: pre-wrap; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                  background-color: rgba(0,0,0,0.5); z-index: 999; }
+        .close-button { position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 24px; }
+        .metadata { background-color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .summary-table th, .summary-table td { border: 1px solid #e0e0e0; padding: 12px; text-align: center; }
+        .summary-table th { background-color: #3f51b5; color: white; font-weight: bold; }
+        .summary-table tr:nth-child(even) { background-color: #f5f5f5; }
+        .summary-table tr:hover { background-color: #e8eaf6; }
+        .footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #5c6bc0; }
+        .temp-badge { display: inline-block; background-color: #5c6bc0; color: white; padding: 2px 6px; 
+                      border-radius: 3px; font-size: 0.8em; margin-left: 8px; }
+        .json-link { display: block; text-align: right; margin: 10px 0; color: #3f51b5; text-decoration: none; }
+        .json-link:hover { text-decoration: underline; }
+        .models-list { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0; 
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-family: monospace; }
+        .input-data { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .input-content { white-space: pre-wrap; background-color: #f5f5f5; padding: 10px; border-left: 4px solid #3f51b5; margin: 10px 0; }
+        .commentaire { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-style: italic; }
+        .highlighted-response { text-decoration: underline; text-decoration-color: green; text-decoration-thickness: 2px; }
+        .system-info { background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;
+                      box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+        .system-info h3 { color: #1a237e; margin-top: 0; }
+        .system-info table { margin: 10px 0; width: 100%; }
+        .system-info td:first-child { font-weight: bold; width: 200px; }
+        .identical { color: #666; font-style: italic; }
+        .think-section { color: #666; font-style: italic; }
+        think { display: block; color: #666; font-style: italic; margin: 5px 0; }
+        @media screen and (max-width: 768px) {
+            .results-table { display: block; overflow-x: auto; }
+            .summary-table { display: block; overflow-x: auto; }
+        }
+        .header-info {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #5c6bc0;
+            font-size: 1.2em;
+        }
+    </style>
+    <script>
+        function showResponse(response, event) {
+            event.preventDefault();
+            const pre = document.createElement('pre');
+            // Décodage de l'encodage JSON
+            try {
+                response = JSON.parse('"' + response + '"');
+            } catch (e) {
+                // Si le décodage échoue, on garde la réponse originale
+            }
+            // Échappement des caractères spéciaux et gestion des sauts de ligne
+            const escapedResponse = response
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;')
+                .replace(/\n/g, '<br>')
+                .replace(/\r/g, '');
+            pre.innerHTML = escapedResponse;
+            const div = document.createElement('div');
+            div.className = 'response-pre';
+            div.innerHTML = '<span class="close-button" onclick="closeResponse()">&times;</span>';
+            div.appendChild(pre);
+            document.body.appendChild(div);
+            document.querySelector('.overlay').style.display = 'block';
+            div.style.display = 'block';
+        }
+        
+        function closeResponse() {
+            const pre = document.querySelector('.response-pre');
+            if (pre) {
+                pre.remove();
+            }
+            document.querySelector('.overlay').style.display = 'none';
+        }
+        
+        // Fermer avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeResponse();
+            }
+        });
+        
+        // Fermer en cliquant sur l'overlay
+        document.querySelector('.overlay').addEventListener('click', closeResponse);
+    </script>
+</head>
+<body>
+    <div class="overlay"></div>
+    <h1>evallm : comparaison de modèles avec ollama</h1>
+    <div class="header-info">
+        <h2>DESKTOP-GFRJJ8Q - Windows 10.0.19045 - 04/04/2025 14:08:44</h2>
+    </div>
+
+    <div class="system-info">
+        <h3>Informations Système</h3>
+        <table>
+            <tr>
+                <td>Nom de la machine</td>
+                <td>DESKTOP-GFRJJ8Q</td>
+            </tr>
+            <tr>
+                <td>Système d'exploitation</td>
+                <td>Windows 10.0.19045</td>
+            </tr>
+            <tr>
+                <td>Python</td>
+                <td>3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]</td>
+            </tr>
+            <tr>
+                <td>Ollama</td>
+                <td>0.6.4</td>
+            </tr>
+            <tr>
+                <td>evallm.py</td>
+                <td>4.0.0</td>
+            </tr>
+            <tr>
+                <td>CPU</td>
+                <td>Intel64 Family 6 Model 60 Stepping 3, GenuineIntel (8 cœurs, 8 threads)</td>
+            </tr>
+            <tr>
+                <td>Mémoire</td>
+                <td>31.9 GB total, 14.9 GB disponible</td>
+            </tr>
+            
+            <tr>
+                <td>GPU</td>
+                <td>
+                    
+                    NVIDIA GeForce RTX 3090 (24.0 GB VRAM)<br>
+                    
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    
+    <a href="resume02_20250404_140815.json" class="json-link">📊 Voir les données au format JSON</a>
+
+    <h2>Synthèse des Performances</h2>
+    <table class="summary-table">
+        <tr class="model-header">
+            <th>Modèle</th>
+            <th>Temps moyen (s)</th>
+            <th>Temps minimum (s)</th>
+            <th>Temps maximum (s)</th>
+            <th>Nombre de tokens moyen</th>
+        </tr>
+        
+        <tr>
+            <td><a href="#model_model_deepscaler_latest_0_0">deepscaler:latest</a> <span class="temp-badge">temp=0.0</span></td>
+            <td>2.77</td>
+            <td>2.65</td>
+            <td>2.85</td>
+            <td>0</td>
+        </tr>
+        
+        <tr>
+            <td><a href="#model_model_stablelm2_1.6b_0_0">stablelm2:1.6b</a> <span class="temp-badge">temp=0.0</span></td>
+            <td>1.28</td>
+            <td>1.18</td>
+            <td>1.55</td>
+            <td>0</td>
+        </tr>
+        
+    </table>
+    
+    <h2>Données d'Entrée</h2>
+    <div class="input-data">
+        <h3>Prompts Système</h3>
+        
+        <p><strong>systeme</strong></p>
+        <div class="input-content">Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.</div>
+        
+        
+        <h3>Prompts Utilisateur</h3>
+        
+        <p><strong>utilisateur</strong></p>
+        <div class="input-content">Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.</div>
+        
+        
+        <h3>Contextes</h3>
+        
+        <p><strong>sources</strong></p>
+        <div class="input-content">Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.</div>
+        
+    </div>
+    
+    <h2>Résultats Détaillés</h2>
+    
+    
+    <h3 id="model_model_deepscaler_latest_0_0">Modèle: deepscaler:latest | Système: systeme | Prompt: utilisateur | Contexte: sources | Température: 0.0</h3>
+    <table class="results-table">
+        <tr class="model-header">
+            <th>Métrique</th>
+            
+            <th>Réponse graine 6</th>
+            
+            <th>Réponse graine 8</th>
+            
+            <th>Réponse graine 68</th>
+            
+            <th>Réponse graine 686</th>
+            
+            <th>Réponse graine 689868</th>
+            
+        </tr>
+        <tr>
+            <th>Temps (s)</th>
+            
+            <td>2.65</td>
+            
+            <td>2.77</td>
+            
+            <td>2.79</td>
+            
+            <td>2.78</td>
+            
+            <td>2.85</td>
+            
+        </tr>
+        <tr>
+            <th>Réponse</th>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;\\u003cthink\\u003e\\nOkay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. \\n\\nLooking at the text, it mentions several prizes like Grand Prix, Page de Profile d\\u0027Artiste, Exposition suppl\\u00e9mentaire, and others. It also talks about prices in dollars and mentions that all media except son and vid\\u00e9o are accepted. There\\u0027s a mention of a page for an artiste on CollexArt and some details about the costs involved.\\n\\nThe text doesn\\u0027t specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. \\n\\nSince the user wants a note between 10 and 0, I need to determine if it\\u0027s very interesting (10) or not at all (0). The text is detailed but doesn\\u0027t provide specific numerical ratings for each prize. It might be considered interesting because there are multiple prizes with significant values, but without clear scoring criteria.\\n\\nTherefore, considering the context and lack of explicit numerical scores, I\\u0027ll assign a note value between 1-5 based on interest. Since it\\u0027s detailed and covers various aspects, maybe around 4 or 5.\\n\\u003c/think\\u003e\\n\\nNote: 4&quot;, event)">
+                    <span class="think-tag">&lt;think&gt;</span>
+Okay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. 
+
+Looking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.
+
+The text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. 
+
+Since the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text is detailed but doesn't provide specific numerical ratings for each prize. It might be considered interesting because there are multiple prizes with significant values, but without clear scoring criteria.
+
+Therefore, considering the context and lack of explicit numerical scores, I'll assign a note value between 1-5 based on interest. Since it's detailed and covers various aspects, maybe around 4 or 5.
+<span class="think-tag">&lt;/think&gt;</span>
+
+Note: 4
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;\\u003cthink\\u003e\\nOkay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. \\n\\nLooking at the text, it mentions several prizes like Grand Prix, Page de Profile d\\u0027Artiste, Exposition suppl\\u00e9mentaire, and others. It also talks about prices in dollars and mentions that all media except son and vid\\u00e9o are accepted. There\\u0027s a mention of a page for an artiste on CollexArt and some details about the costs involved.\\n\\nThe text doesn\\u0027t specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. \\n\\nSince the user wants a note between 10 and 0, I need to determine if it\\u0027s very interesting (10) or not at all (0). The text discusses various prizes but doesn\\u0027t provide specific numerical values for each prize. It also mentions that all media except son and vid\\u00e9o are accepted, which might imply high interest in different categories.\\n\\nGiven the lack of specific numerical scores and just a general note on interest, I think it\\u0027s more about whether there\\u0027s any value or if it\\u0027s purely promotional without real prizes. So perhaps it\\u0027s not very interesting (0) because while there are mentions of prizes, they aren\\u0027t clearly quantified.\\n\\u003c/think\\u003e\\n\\n0&quot;, event)">
+                    <span class="think-tag">&lt;think&gt;</span>
+Okay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. 
+
+Looking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.
+
+The text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. 
+
+Since the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.
+
+Given the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.
+<span class="think-tag">&lt;/think&gt;</span>
+
+0
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+        </tr>
+    </table>
+    <br>
+    
+    
+    <h3 id="model_model_stablelm2_1.6b_0_0">Modèle: stablelm2:1.6b | Système: systeme | Prompt: utilisateur | Contexte: sources | Température: 0.0</h3>
+    <table class="results-table">
+        <tr class="model-header">
+            <th>Métrique</th>
+            
+            <th>Réponse graine 6</th>
+            
+            <th>Réponse graine 8</th>
+            
+            <th>Réponse graine 68</th>
+            
+            <th>Réponse graine 686</th>
+            
+            <th>Réponse graine 689868</th>
+            
+        </tr>
+        <tr>
+            <th>Temps (s)</th>
+            
+            <td>1.55</td>
+            
+            <td>1.19</td>
+            
+            <td>1.20</td>
+            
+            <td>1.18</td>
+            
+            <td>1.27</td>
+            
+        </tr>
+        <tr>
+            <th>Réponse</th>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;La note attribu\\u00e9e au concours est de 8/10. Cela signifie que, globalement, le concours r\\u00e9pond aux crit\\u00e8res mentionn\\u00e9s (primes \\u00e0 gagner et visibilit\\u00e9 internationale) et offre une certaine qualit\\u00e9 dans la pr\\u00e9sentation des \\u0153uvres r\\u00e9alis\\u00e9es par les participants.\\n\\nCependant, il reste un peu insistant sur certains points. Le concours est ouvert \\u00e0 tous les th\\u00e8mes, mais n\\u0027offre pas de choix de m\\u00e9diums sp\\u00e9cifiques (par exemple, pour les photographes). De plus, le montant des prix et la valeur du site web FolioLink sont relativement bas.\\n\\nEn conclusion, le concours r\\u00e9pond aux exigences g\\u00e9n\\u00e9rales, mais manque un peu de diversit\\u00e9 dans le choix des m\\u00e9diums et d\\u0027un certain nombre de param\\u00e8tres. Cependant, il offre une bonne visibilit\\u00e9 internationale et la possibilit\\u00e9 pour les artistes de cr\\u00e9er leur site Web FolioLink, ce qui peut \\u00eatre un atout pour certains participants.\\n\\nLa note attribu\\u00e9e est donc 8/10, mais il reste int\\u00e9ressant et prometteur pour ceux qui sont passionn\\u00e9s par l\\u0027art et souhaitent concourir dans un environnement international.&quot;, event)">
+                    La note attribuée au concours est de 8/10. Cela signifie que, globalement, le concours répond aux critères mentionnés (primes à gagner et visibilité internationale) et offre une certaine qualité dans la présentation des œuvres réalisées par les participants.
+
+Cependant, il reste un peu insistant sur certains points. Le concours est ouvert à tous les thèmes, mais n'offre pas de choix de médiums spécifiques (par exemple, pour les photographes). De plus, le montant des prix et la valeur du site web FolioLink sont relativement bas.
+
+En conclusion, le concours répond aux exigences générales, mais manque un peu de diversité dans le choix des médiums et d'un certain nombre de paramètres. Cependant, il offre une bonne visibilité internationale et la possibilité pour les artistes de créer leur site Web FolioLink, ce qui peut être un atout pour certains participants.
+
+La note attribuée est donc 8/10, mais il reste intéressant et prometteur pour ceux qui sont passionnés par l'art et souhaitent concourir dans un environnement international.
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content response-text" onclick="showResponse(&quot;La note attribu\\u00e9e au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilit\\u00e9 d\\u0027un site web FolioLink pour l\\u0027artiste et un grand prix avec des r\\u00e9compenses totales de 9 $ (cadre + esp\\u00e8ces). Cependant, il manque une mention sur le fait que les th\\u00e8mes sont libres. Les m\\u00e9diums accept\\u00e9s sont tous except\\u00e9 le son et la vid\\u00e9o. Le concours artistique est ouvert \\u00e0 tous, mais certains artistes pourraient b\\u00e9n\\u00e9ficier d\\u0027une exposition suppl\\u00e9mentaire. La note attribu\\u00e9e est de 8/10, car elle refl\\u00e8te l\\u0027attrait du concours pour les participants int\\u00e9ress\\u00e9s par un grand prix et la possibilit\\u00e9 d\\u0027un site web FolioLink. Cependant, il y a une lacune dans le choix des th\\u00e8mes, qui peut \\u00eatre am\\u00e9lior\\u00e9 pour offrir une exp\\u00e9rience plus compl\\u00e8te aux participants.&quot;, event)">
+                    La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.
+                </div>
+                
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+            <td class="response">
+                
+                <div class="response-content identical">(identique)</div>
+                
+            </td>
+            
+        </tr>
+    </table>
+    <br>
+    
+    
+    <h2>Modèles Disponibles</h2>
+    <div class="models-list">
+        ["yi:9b", "stablelm2:12b", "stablelm2:1.6b", "technobyte/Llama-3.3-70B-Abliterated:IQ2_XXS", "deepscaler:latest", "exaone-deep:7.8b", "granite3-dense:8b", "omercelik/reka-flash-3:latest", "qwen2.5:7b", "command-r7b:7b", "mxbai-embed-large:latest", "gemma3:latest", "nomic-embed-text:latest", "mistral:latest", "llama3.2:latest", "gemma3:12b", "mistral-small:24b", "granite3.2:2b", "granite3.2:8b", "qwen2.5:14b", "gemma2:latest", "llama3.2-vision:11b", "deepseek-r1:14b", "phi4:latest", "llava:latest", "moondream:latest", "martyyz/stable-prompt:latest", "impromptu2:latest", "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest", "impromptu:latest", "gemma:latest", "simone3:latest"]
+    </div>
+    
+    <div class="footer">
+        <p>Généré avec <a href="https://github.com/Malapris/evallm">evallm.py</a> par Francis Malapris</p>
+    </div>
+</body>
+</html>

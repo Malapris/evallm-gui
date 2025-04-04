@@ -1,0 +1,93 @@
+[
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 6,
+    "temperature": 0.0,
+    "response": "8/9/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 9 pour septembre) et l'année. Voici les étapes :\n\n1. Lecture de la première source : \"le lendemain du 8 septembre 2021\" -> date = 8/9/2021\n2..\n3. Lecture de la deuxième source : \"la veille du 9/9/2021\" -> date = 9/9/2021 (remplacer le 9 par 8 pour correspondre au format donné)\n4. Lecture de la troisième source : \"aoutjourd'hui je ne m'en souviens plus\" -> date = (date = 8/8/2021) (remplacer 8 par 7 pour correspondre au format donné)\n5. Lecture de la quatrième source : \"c'est déjà passé\" -> date = (date = 2021) (remplacer 2021 par quelque chose comme 2020 pour correspondre au format donné)\n6. Lecture de la cinquième source : \"demon'arrière il sera trop tard\" -> date = (date = 9/9/2021) (remplacer 9 par 8 pour correspondre au format donné)\n\nEn utilisant ces dates et en les remplaçant dans le format final, j'ai pu calculer la date à partir des informations fournies dans chaque source.",
+    "response_time": 1.7408583164215088
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 8,
+    "temperature": 0.0,
+    "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/2 + 4 = 8/09/2021\n- De source 2 : 9 + 5/1 + 4 = 9/6/2021 (le jour de la semaine est omis pour simplifier)\n- De source 3 : 0 + 9/2 + 1 = 10/2/2021\n- De source 4 : 2 + 5/1 + 0 = 7/1/2021 (le mois est omis pour simplifier)\n- De source 5 : 10/6/2021 (le jour de la semaine est omis pour simplifier)\n\nJ'ai choisi la date avec le plus grand sens pratique, qui est celle mentionnée dans source 1.",
+    "response_time": 1.2576260566711426
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 68,
+    "temperature": 0.0,
+    "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/2 + 4 = 8/09/2021\n- De source 2 : 9 + 5/1 + 4 = 9/6/2021 (le jour de la semaine est omis pour simplifier)\n- De source 3 : 0 + 9/2 + 1 = 10/2/2021\n- De source 4 : 2 + 5/1 + 0 = 7/1/2021 (le mois est omis pour simplifier)\n- De source 5 : 10/6/2021 (le jour de la semaine est omis pour simplifier)\n\nJ'ai choisi la date avec le plus grand sens pratique, qui est celle mentionnée dans source 1.",
+    "response_time": 1.221144676208496
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 86,
+    "temperature": 0.0,
+    "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/2 + 4 = 8/09/2021\n- De source 2 : 9 + 5/1 + 4 = 9/6/2021 (le jour de la semaine est omis pour simplifier)\n- De source 3 : 0 + 9/2 + 1 = 10/2/2021\n- De source 4 : 2 + 5/1 + 0 = 7/1/2021 (le mois est omis pour simplifier)\n- De source 5 : 10/6/2021 (le jour de la semaine est omis pour simplifier)\n\nJ'ai choisi la date avec le plus grand sens pratique, qui est celle mentionnée dans source 1.",
+    "response_time": 1.267756700515747
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 886,
+    "temperature": 0.0,
+    "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/2 + 4 = 8/09/2021\n- De source 2 : 9 + 5/1 + 4 = 9/6/2021 (le jour de la semaine est omis pour simplifier)\n- De source 3 : 0 + 9/2 + 1 = 10/2/2021\n- De source 4 : 2 + 5/1 + 0 = 7/1/2021 (le mois est omis pour simplifier)\n- De source 5 : 10/6/2021 (le jour de la semaine est omis pour simplifier)\n\nJ'ai choisi la date avec le plus grand sens pratique, qui est celle mentionnée dans source 1.",
+    "response_time": 1.2344119548797607
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 668,
+    "temperature": 0.0,
+    "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/2 + 4 = 8/09/2021\n- De source 2 : 9 + 5/1 + 4 = 9/6/2021 (le jour de la semaine est omis pour simplifier)\n- De source 3 : 0 + 9/2 + 1 = 10/2/2021\n- De source 4 : 2 + 5/1 + 0 = 7/1/2021 (le mois est omis pour simplifier)\n- De source 5 : 10/6/2021 (le jour de la semaine est omis pour simplifier)\n\nJ'ai choisi la date avec le plus grand sens pratique, qui est celle mentionnée dans source 1.",
+    "response_time": 1.2144653797149658
+  },
+  {
+    "model": "stablelm2:1.6b",
+    "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+    "system_prompt_id": "systeme",
+    "user_prompt": "A partir des sources suivantes, donne la date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+    "user_prompt_id": "utilisateur",
+    "context": "source 1 : le lendemain du 8 septembre 1999 quand nous avons pris le train pour aller à Paris\nsource 2 : la veille du 10/9/99 10h15 je me souviens il faisait froid \n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'est déjà passé ! \n source 5 : demain il sera trop tard !",
+    "context_id": "sources",
+    "seed": 686,
+    "temperature": 0.0,
+    "response": "8/09/2021\n\nPour calculer la date à partir des informations fournies dans chaque source, j'ai utilisé le format de numération du mois (par exemple, 09 pour septembre) et l'année. En utilisant ces formules mathématiques :\n\n- De source 1 : 8 + 9/2 + 4 = 8/09/2021\n- De source 2 : 9 + 5/1 + 4 = 9/6/2021 (le jour de la semaine est omis pour simplifier)\n- De source 3 : 0 + 9/2 + 1 = 10/2/2021\n- De source 4 : 2 + 5/1 + 0 = 7/1/2021 (le mois est omis pour simplifier)\n- De source 5 : 10/6/2021 (le jour de la semaine est omis pour simplifier)\n\nJ'ai choisi la date avec le plus grand sens pratique, qui est celle mentionnée dans source 1.",
+    "response_time": 1.2679741382598877
+  }
+]

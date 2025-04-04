@@ -1,0 +1,214 @@
+{
+  "system_info": {
+    "os": "Windows",
+    "os_version": "10.0.19045",
+    "python_version": "3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]",
+    "ollama_version": "0.6.4",
+    "evallm_version": "1.0.0",
+    "cpu": {
+      "model": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+      "cores": 8,
+      "threads": 8,
+      "freq": {
+        "current": 3501.0,
+        "min": 0.0,
+        "max": 3501.0
+      }
+    },
+    "memory": {
+      "total_gb": 31.874404907226562,
+      "available_gb": 15.152885437011719,
+      "used_gb": 16.721519470214844,
+      "percent": 52.5
+    },
+    "gpu": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": 24576.0,
+        "memory_used": 7686.0,
+        "memory_free": 16641.0,
+        "gpu_load": 36.0
+      }
+    ],
+    "hostname": "DESKTOP-GFRJJ8Q"
+  },
+  "config": {
+    "models": [
+      "deepscaler:latest",
+      "stablelm2:1.6b"
+    ],
+    "system_prompts": {
+      "systeme": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique."
+    },
+    "user_prompts": {
+      "utilisateur": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion."
+    },
+    "contexts": {
+      "sources": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes."
+    },
+    "seeds": [
+      6,
+      8,
+      68,
+      686,
+      689868
+    ],
+    "temperatures": [
+      0.0
+    ],
+    "commentaire": "",
+    "resultats": []
+  },
+  "results": [
+    {
+      "model": "deepscaler:latest",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 6,
+      "temperature": 0.0,
+      "response": "<think>\nOkay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. \n\nLooking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.\n\nThe text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. \n\nSince the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text is detailed but doesn't provide specific numerical ratings for each prize. It might be considered interesting because there are multiple prizes with significant values, but without clear scoring criteria.\n\nTherefore, considering the context and lack of explicit numerical scores, I'll assign a note value between 1-5 based on interest. Since it's detailed and covers various aspects, maybe around 4 or 5.\n</think>\n\nNote: 4",
+      "response_time": 3.0635931491851807,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "deepscaler:latest",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 8,
+      "temperature": 0.0,
+      "response": "<think>\nOkay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. \n\nLooking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.\n\nThe text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. \n\nSince the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.\n\nGiven the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.\n</think>\n\n0",
+      "response_time": 3.277498245239258,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "deepscaler:latest",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 68,
+      "temperature": 0.0,
+      "response": "<think>\nOkay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. \n\nLooking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.\n\nThe text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. \n\nSince the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.\n\nGiven the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.\n</think>\n\n0",
+      "response_time": 3.105586051940918,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "deepscaler:latest",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 686,
+      "temperature": 0.0,
+      "response": "<think>\nOkay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. \n\nLooking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.\n\nThe text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. \n\nSince the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.\n\nGiven the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.\n</think>\n\n0",
+      "response_time": 3.084803581237793,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "deepscaler:latest",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 689868,
+      "temperature": 0.0,
+      "response": "<think>\nOkay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. \n\nLooking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.\n\nThe text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. \n\nSince the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.\n\nGiven the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.\n</think>\n\n0",
+      "response_time": 3.0946505069732666,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 6,
+      "temperature": 0.0,
+      "response": "La note attribuée au concours est de 8/10. Cela signifie que, globalement, le concours répond aux critères mentionnés (primes à gagner et visibilité internationale) et offre une certaine qualité dans la présentation des œuvres réalisées par les participants.\n\nCependant, il reste un peu insistant sur certains points. Le concours est ouvert à tous les thèmes, mais n'offre pas de choix de médiums spécifiques (par exemple, pour les photographes). De plus, le montant des prix et la valeur du site web FolioLink sont relativement bas.\n\nEn conclusion, le concours répond aux exigences générales, mais manque un peu de diversité dans le choix des médiums et d'un certain nombre de paramètres. Cependant, il offre une bonne visibilité internationale et la possibilité pour les artistes de créer leur site Web FolioLink, ce qui peut être un atout pour certains participants.\n\nLa note attribuée est donc 8/10, mais il reste intéressant et prometteur pour ceux qui sont passionnés par l'art et souhaitent concourir dans un environnement international.",
+      "response_time": 1.6918931007385254,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 8,
+      "temperature": 0.0,
+      "response": "La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.",
+      "response_time": 1.2710585594177246,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 68,
+      "temperature": 0.0,
+      "response": "La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.",
+      "response_time": 1.2644267082214355,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 686,
+      "temperature": 0.0,
+      "response": "La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.",
+      "response_time": 1.289245843887329,
+      "commentaire": "",
+      "Resultats": null
+    },
+    {
+      "model": "stablelm2:1.6b",
+      "system_prompt": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion.",
+      "user_prompt_id": "utilisateur",
+      "context": "Tous les médiums sont acceptés sauf le son et la vidéo . Grand Prix : 3000 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et récompenses totalisant 9500$ . Exposition supplémentaire d'artistes. Grand prix : 3000 $ . Thème libre . Espace d'exposition en ligne dans CollexArt . Prix en espèces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propulsés par FolioLink .Concours ouvert aux artistes . Tous les médiums sont acceptés sauf le son et la vidéo. Exposition supplémentaire pour certains artistes. Prix pour les artistes . Thème libre . Prix et récompenses totalisant 9500$ . Tous les médiums sont acceptés sauf le son et la vidéo.Concours artistique ouvert à tous les thèmes . Prix en espèces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilité d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition supplémentaire pour certains artistes.",
+      "context_id": "sources",
+      "seed": 689868,
+      "temperature": 0.0,
+      "response": "La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.",
+      "response_time": 1.2856600284576416,
+      "commentaire": "",
+      "Resultats": null
+    }
+  ]
+}

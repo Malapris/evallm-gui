@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison de LLM avec Ollama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+        .response {
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Comparaison de LLM avec Ollama</h1>
+        <p>Généré le 04/04/2025 08:23:02</p>
+    </div>
+
+    <div class="section">
+        <h2>Informations système</h2>
+        <table>
+            <tr>
+                <th>Système d'exploitation</th>
+                <td>Windows 10.0.19045</td>
+            </tr>
+            <tr>
+                <th>Version Python</th>
+                <td>3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]</td>
+            </tr>
+            <tr>
+                <th>CPU</th>
+                <td>Intel64 Family 6 Model 60 Stepping 3, GenuineIntel (8 cœurs)</td>
+            </tr>
+            <tr>
+                <th>Mémoire</th>
+                <td>31.87 Go (48.5% utilisée)</td>
+            </tr>
+            
+            <tr>
+                <th>GPU</th>
+                <td>
+                    
+                    NVIDIA GeForce RTX 3090 (24.00 Go)<br>
+                    
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Configuration</h2>
+        <table>
+            <tr>
+                <th>Modèles</th>
+                <td>deepscaler:latest, stablelm2:1.6b</td>
+            </tr>
+            <tr>
+                <th>Températures</th>
+                <td>0.0</td>
+            </tr>
+            <tr>
+                <th>Graines</th>
+                <td>6, 8, 68, 686, 689868</td>
+            </tr>
+            
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Résultats détaillés</h2>
+        <table>
+            <tr>
+                <th>Modèle</th>
+                <th>Température</th>
+                <th>Graine</th>
+                <th>Temps de réponse</th>
+                <th>Réponse</th>
+            </tr>
+            
+            <tr>
+                <td>deepscaler:latest</td>
+                <td>0.0</td>
+                <td>6</td>
+                <td>2.62s</td>
+                <td>
+                    <button onclick="showResponse('deepscaler:latest_0.0_6')">
+                        Afficher
+                    </button>
+                    <div id="modal_deepscaler:latest_0.0_6" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('deepscaler:latest_0.0_6')">&times;</span>
+                            <div class="response"><think>
+Okay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. 
+
+Looking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.
+
+The text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. 
+
+Since the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text is detailed but doesn't provide specific numerical ratings for each prize. It might be considered interesting because there are multiple prizes with significant values, but without clear scoring criteria.
+
+Therefore, considering the context and lack of explicit numerical scores, I'll assign a note value between 1-5 based on interest. Since it's detailed and covers various aspects, maybe around 4 or 5.
+</think>
+
+Note: 4</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>deepscaler:latest</td>
+                <td>0.0</td>
+                <td>8</td>
+                <td>2.78s</td>
+                <td>
+                    <button onclick="showResponse('deepscaler:latest_0.0_8')">
+                        Afficher
+                    </button>
+                    <div id="modal_deepscaler:latest_0.0_8" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('deepscaler:latest_0.0_8')">&times;</span>
+                            <div class="response"><think>
+Okay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. 
+
+Looking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.
+
+The text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. 
+
+Since the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.
+
+Given the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.
+</think>
+
+0</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>deepscaler:latest</td>
+                <td>0.0</td>
+                <td>68</td>
+                <td>2.85s</td>
+                <td>
+                    <button onclick="showResponse('deepscaler:latest_0.0_68')">
+                        Afficher
+                    </button>
+                    <div id="modal_deepscaler:latest_0.0_68" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('deepscaler:latest_0.0_68')">&times;</span>
+                            <div class="response"><think>
+Okay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. 
+
+Looking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.
+
+The text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. 
+
+Since the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.
+
+Given the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.
+</think>
+
+0</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>deepscaler:latest</td>
+                <td>0.0</td>
+                <td>686</td>
+                <td>2.89s</td>
+                <td>
+                    <button onclick="showResponse('deepscaler:latest_0.0_686')">
+                        Afficher
+                    </button>
+                    <div id="modal_deepscaler:latest_0.0_686" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('deepscaler:latest_0.0_686')">&times;</span>
+                            <div class="response"><think>
+Okay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. 
+
+Looking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.
+
+The text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. 
+
+Since the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.
+
+Given the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.
+</think>
+
+0</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>deepscaler:latest</td>
+                <td>0.0</td>
+                <td>689868</td>
+                <td>2.66s</td>
+                <td>
+                    <button onclick="showResponse('deepscaler:latest_0.0_689868')">
+                        Afficher
+                    </button>
+                    <div id="modal_deepscaler:latest_0.0_689868" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('deepscaler:latest_0.0_689868')">&times;</span>
+                            <div class="response"><think>
+Okay, so I need to figure out the note given based on the provided text. The user wants a concise summary with just the note value from 0 to 10. 
+
+Looking at the text, it mentions several prizes like Grand Prix, Page de Profile d'Artiste, Exposition supplémentaire, and others. It also talks about prices in dollars and mentions that all media except son and vidéo are accepted. There's a mention of a page for an artiste on CollexArt and some details about the costs involved.
+
+The text doesn't specify how many prizes or their exact values beyond mentioning certain amounts like 3000$, 9500$, etc. It seems to focus more on the structure and availability rather than numerical scores. 
+
+Since the user wants a note between 10 and 0, I need to determine if it's very interesting (10) or not at all (0). The text discusses various prizes but doesn't provide specific numerical values for each prize. It also mentions that all media except son and vidéo are accepted, which might imply high interest in different categories.
+
+Given the lack of specific numerical scores and just a general note on interest, I think it's more about whether there's any value or if it's purely promotional without real prizes. So perhaps it's not very interesting (0) because while there are mentions of prizes, they aren't clearly quantified.
+</think>
+
+0</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>stablelm2:1.6b</td>
+                <td>0.0</td>
+                <td>6</td>
+                <td>1.64s</td>
+                <td>
+                    <button onclick="showResponse('stablelm2:1.6b_0.0_6')">
+                        Afficher
+                    </button>
+                    <div id="modal_stablelm2:1.6b_0.0_6" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('stablelm2:1.6b_0.0_6')">&times;</span>
+                            <div class="response">La note attribuée au concours est de 8/10. Cela signifie que, globalement, le concours répond aux critères mentionnés (primes à gagner et visibilité internationale) et offre une certaine qualité dans la présentation des œuvres réalisées par les participants.
+
+Cependant, il reste un peu insistant sur certains points. Le concours est ouvert à tous les thèmes, mais n'offre pas de choix de médiums spécifiques (par exemple, pour les photographes). De plus, le montant des prix et la valeur du site web FolioLink sont relativement bas.
+
+En conclusion, le concours répond aux exigences générales, mais manque un peu de diversité dans le choix des médiums et d'un certain nombre de paramètres. Cependant, il offre une bonne visibilité internationale et la possibilité pour les artistes de créer leur site Web FolioLink, ce qui peut être un atout pour certains participants.
+
+La note attribuée est donc 8/10, mais il reste intéressant et prometteur pour ceux qui sont passionnés par l'art et souhaitent concourir dans un environnement international.</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>stablelm2:1.6b</td>
+                <td>0.0</td>
+                <td>8</td>
+                <td>1.19s</td>
+                <td>
+                    <button onclick="showResponse('stablelm2:1.6b_0.0_8')">
+                        Afficher
+                    </button>
+                    <div id="modal_stablelm2:1.6b_0.0_8" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('stablelm2:1.6b_0.0_8')">&times;</span>
+                            <div class="response">La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>stablelm2:1.6b</td>
+                <td>0.0</td>
+                <td>68</td>
+                <td>1.15s</td>
+                <td>
+                    <button onclick="showResponse('stablelm2:1.6b_0.0_68')">
+                        Afficher
+                    </button>
+                    <div id="modal_stablelm2:1.6b_0.0_68" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('stablelm2:1.6b_0.0_68')">&times;</span>
+                            <div class="response">La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>stablelm2:1.6b</td>
+                <td>0.0</td>
+                <td>686</td>
+                <td>1.15s</td>
+                <td>
+                    <button onclick="showResponse('stablelm2:1.6b_0.0_686')">
+                        Afficher
+                    </button>
+                    <div id="modal_stablelm2:1.6b_0.0_686" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('stablelm2:1.6b_0.0_686')">&times;</span>
+                            <div class="response">La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>stablelm2:1.6b</td>
+                <td>0.0</td>
+                <td>689868</td>
+                <td>1.15s</td>
+                <td>
+                    <button onclick="showResponse('stablelm2:1.6b_0.0_689868')">
+                        Afficher
+                    </button>
+                    <div id="modal_stablelm2:1.6b_0.0_689868" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal('stablelm2:1.6b_0.0_689868')">&times;</span>
+                            <div class="response">La note attribuée au concours est de 8/10. Le concours propose plusieurs avantages, comme la possibilité d'un site web FolioLink pour l'artiste et un grand prix avec des récompenses totales de 9 $ (cadre + espèces). Cependant, il manque une mention sur le fait que les thèmes sont libres. Les médiums acceptés sont tous excepté le son et la vidéo. Le concours artistique est ouvert à tous, mais certains artistes pourraient bénéficier d'une exposition supplémentaire. La note attribuée est de 8/10, car elle reflète l'attrait du concours pour les participants intéressés par un grand prix et la possibilité d'un site web FolioLink. Cependant, il y a une lacune dans le choix des thèmes, qui peut être amélioré pour offrir une expérience plus complète aux participants.</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+
+    <script>
+        function showResponse(id) {
+            document.getElementById('modal_' + id).style.display = 'block';
+        }
+
+        function closeModal(id) {
+            document.getElementById('modal_' + id).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html> 

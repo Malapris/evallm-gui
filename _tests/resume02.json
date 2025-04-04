@@ -1,0 +1,20 @@
+{
+    "models": [
+        "deepscaler:latest",
+        "stablelm2:1.6b"
+  ],
+  
+    "system_prompts": {
+      "systeme": "Tu es un expert en analyse de texte, tu es très précis et tu donnes un seul résultat simple et synthétique."
+    },
+    "user_prompts": {
+      "utilisateur": "Donne une note sur 10 selon l'intérêt de se concours, 0 = nul, 10 = très intéressant. Les critères principaux sont les prix à gagner (cadeaux ou montant élévé de préférence) et la visibilité (internationale de préférence). Donne uniquement la note, sans commentaire ni introduction ni conclusion."
+    },
+    "contexts": {
+      "sources": "Tous les m\u00e9diums sont accept\u00e9s sauf le son et la vid\u00e9o . Grand Prix : 3000 $ . Possibilit\u00e9 d'une page de profil d'artiste et d'exposition en ligne sur CollexArt .Concours artistique ouvert \u00e0 tous les th\u00e8mes . Prix en esp\u00e8ces : 9 500 $ .Prix pour les artistes . Page de profil d'artiste dans CollexArt . Prix et r\u00e9compenses totalisant 9500$ . Exposition suppl\u00e9mentaire d'artistes. Grand prix : 3000 $ . Th\u00e8me libre . Espace d'exposition en ligne dans CollexArt . Prix en esp\u00e8ces : 9 500 $ au total . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . 4500 $ en sites web d'artistes propuls\u00e9s par FolioLink .Concours ouvert aux artistes . Tous les m\u00e9diums sont accept\u00e9s sauf le son et la vid\u00e9o. Exposition suppl\u00e9mentaire pour certains artistes. Prix pour les artistes . Th\u00e8me libre . Prix et r\u00e9compenses totalisant 9500$ . Tous les m\u00e9diums sont accept\u00e9s sauf le son et la vid\u00e9o.Concours artistique ouvert \u00e0 tous les th\u00e8mes . Prix en esp\u00e8ces : 9 500 $ au total . Grand prix : 3000 $ . Prix d'acquisition : 2000 $ . 10 artistes recevront un site web FolioLink d'une valeur de 4500 $ . Possibilit\u00e9 d'une page de profil d'artiste et d'exposition en ligne sur CollexArt . Exposition suppl\u00e9mentaire pour certains artistes."
+    },
+    "seeds": [6,8,68,686,689868],
+    "temperatures": [0.0]
+  
+  }
+  
