@@ -1,0 +1,164 @@
+{
+  "config": {
+    "models": [
+      "cogito:14b"
+    ],
+    "system_prompts": {
+      "systeme": "/set system \"\"\"Enable deep thinking subroutine.\"\"\"\nTu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique."
+    },
+    "user_prompts": {
+      "utilisateur": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date."
+    },
+    "contexts": {
+      "sources": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !"
+    },
+    "seeds": [
+      6,
+      8,
+      68,
+      86,
+      886
+    ],
+    "temperatures": [
+      0.0
+    ],
+    "nom_test": "9-9-99-hard",
+    "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+    "resultats": [
+      "09/09/99",
+      "1999-09-09",
+      "09/09/1999"
+    ]
+  },
+  "results": [
+    {
+      "model": "cogito:14b",
+      "system_prompt": "/set system \"\"\"Enable deep thinking subroutine.\"\"\"\nTu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 6,
+      "temperature": 0.0,
+      "response": "<think>\nD'accord, examinons chaque source pour trouver une date.\n\nSource 1 mentionne \"en 2025\" mais ne donne pas de mois ou de jour précis. Donc, pas d'information utile ici.\n\nSource 2 indique \"99\", ce qui pourrait signifier l'an 1999. Ensuite, il est dit qu'il s'est passé un mois après le 9 août. Ainsi, en ajoutant un mois au 9 août 1999, on obtient le 9 septembre 1999.\n\nSource 3 ne fournit aucune date précise.\n\nSource 4 mentionne \"déjà passé en 2020\", mais sans plus de détails. Pas d'information utile ici non plus.\n\nSource 5 parle de jeudi, mais pas de date spécifique.\n\nLa seule source qui donne une date complète est la Source 2 : le 9 septembre 1999.\n</think>\n\n09/09/1999",
+      "response_time": 7.452419281005859,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    },
+    {
+      "model": "cogito:14b",
+      "system_prompt": "/set system \"\"\"Enable deep thinking subroutine.\"\"\"\nTu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 8,
+      "temperature": 0.0,
+      "response": "<think>\nD'accord, examinons chaque source pour trouver une date.\n\nSource 1 mentionne \"en 2025\" mais ne donne pas de mois ou de jour précis. Donc, pas d'information utile ici.\n\nSource 2 indique \"99\", ce qui pourrait signifier l'an 1999. Ensuite, il est dit qu'il s'est passé un mois après le 9 août. Ainsi, en ajoutant un mois au 9 août 1999, on obtient le 9 septembre 1999.\n\nSource 3 ne fournit aucune date précise.\n\nSource 4 mentionne \"déjà passé en 2020\", mais sans plus de détails. Pas d'information utile ici non plus.\n\nSource 5 parle de jeudi, mais pas de date spécifique.\n\nLa seule source qui donne une date complète est la Source 2 : le 9 septembre 1999.\n</think>\n\n09/09/1999",
+      "response_time": 7.359171390533447,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    },
+    {
+      "model": "cogito:14b",
+      "system_prompt": "/set system \"\"\"Enable deep thinking subroutine.\"\"\"\nTu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 68,
+      "temperature": 0.0,
+      "response": "<think>\nD'accord, examinons chaque source pour trouver une date.\n\nSource 1 mentionne \"en 2025\" mais ne donne pas de mois ou de jour précis. Donc, pas d'information utile ici.\n\nSource 2 indique \"99\", ce qui pourrait signifier l'an 1999. Ensuite, il est dit qu'il s'est passé un mois après le 9 août. Ainsi, en ajoutant un mois au 9 août 1999, on obtient le 9 septembre 1999.\n\nSource 3 ne fournit aucune date précise.\n\nSource 4 mentionne \"déjà passé en 2020\", mais sans plus de détails. Pas d'information utile ici non plus.\n\nSource 5 parle de jeudi, mais pas de date spécifique.\n\nLa seule source qui donne une date complète est la Source 2 : le 9 septembre 1999.\n</think>\n\n09/09/1999",
+      "response_time": 7.578906297683716,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    },
+    {
+      "model": "cogito:14b",
+      "system_prompt": "/set system \"\"\"Enable deep thinking subroutine.\"\"\"\nTu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 86,
+      "temperature": 0.0,
+      "response": "<think>\nD'accord, examinons chaque source pour trouver une date.\n\nSource 1 mentionne \"en 2025\" mais ne donne pas de mois ou de jour précis. Donc, pas d'information utile ici.\n\nSource 2 indique \"99\", ce qui pourrait signifier l'an 1999. Ensuite, il est dit qu'il s'est passé un mois après le 9 août. Ainsi, en ajoutant un mois au 9 août 1999, on obtient le 9 septembre 1999.\n\nSource 3 ne fournit aucune date précise.\n\nSource 4 mentionne \"déjà passé en 2020\", mais sans plus de détails. Pas d'information utile ici non plus.\n\nSource 5 parle de jeudi, mais pas de date spécifique.\n\nLa seule source qui donne une date complète est la Source 2 : le 9 septembre 1999.\n</think>\n\n09/09/1999",
+      "response_time": 7.097484827041626,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    },
+    {
+      "model": "cogito:14b",
+      "system_prompt": "/set system \"\"\"Enable deep thinking subroutine.\"\"\"\nTu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 886,
+      "temperature": 0.0,
+      "response": "<think>\nD'accord, examinons chaque source pour trouver une date.\n\nSource 1 mentionne \"en 2025\" mais ne donne pas de mois ou de jour précis. Donc, pas d'information utile ici.\n\nSource 2 indique \"99\", ce qui pourrait signifier l'an 1999. Ensuite, il est dit qu'il s'est passé un mois après le 9 août. Ainsi, en ajoutant un mois au 9 août 1999, on obtient le 9 septembre 1999.\n\nSource 3 ne fournit aucune date précise.\n\nSource 4 mentionne \"déjà passé en 2020\", mais sans plus de détails. Pas d'information utile ici non plus.\n\nSource 5 parle de jeudi, mais pas de date spécifique.\n\nLa seule source qui donne une date complète est la Source 2 : le 9 septembre 1999.\n</think>\n\n09/09/1999",
+      "response_time": 7.099171876907349,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    }
+  ],
+  "system_info": {
+    "os": "Windows",
+    "os_version": "10.0.19045",
+    "python_version": "3.9.18 | packaged by conda-forge | (main, Aug 30 2023, 03:40:31) [MSC v.1929 64 bit (AMD64)]",
+    "ollama_version": "0.6.5",
+    "evallm_version": "4.0.1",
+    "cpu": {
+      "model": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+      "cores": 8,
+      "threads": 8,
+      "freq": {
+        "current": 3501.0,
+        "min": 0.0,
+        "max": 3501.0
+      }
+    },
+    "memory": {
+      "total_gb": 31.874404907226562,
+      "available_gb": 21.244857788085938,
+      "used_gb": 10.629547119140625,
+      "percent": 33.3
+    },
+    "gpu": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": 24576.0,
+        "memory_used": 11154.0,
+        "memory_free": 13173.0,
+        "gpu_load": 87.0
+      }
+    ],
+    "hostname": "DESKTOP-GFRJJ8Q"
+  },
+  "timestamp": "2025-04-08T11:31:45.423268"
+}
