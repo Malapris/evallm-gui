@@ -1,10 +1,12 @@
-ollama
+ ollama
 json-repair
 rich
 pydantic
 jinja2
 psutil
-gputil
+GPUtil
 requests
 fastapi
-uvicorn
+uvicorn[standard]
+aiofiles
+pydantic-core>=2.33.1

@@ -1,4 +1,26 @@
 import sys
+import os
+import importlib.util
+
+# Ensure distutils available on Python 3.12+ without importing setuptools
+try:
+    import distutils
+except ModuleNotFoundError:
+    vendored_dir = None
+    for p in sys.path:
+        candidate = os.path.join(p, 'setuptools', '_distutils')
+        if os.path.isdir(candidate):
+            vendored_dir = candidate
+            break
+    if not vendored_dir:
+        raise ModuleNotFoundError("Cannot find vendored distutils in any setuptools installation")
+    init_file = os.path.join(vendored_dir, '__init__.py')
+    spec = importlib.util.spec_from_file_location("distutils", init_file)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    sys.modules['distutils'] = module
+    distutils = module
+
 from pathlib import Path
 import json
 from typing import List, Dict
@@ -37,7 +59,7 @@ def create_directories():
 # Configuration du logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
     handlers=[
         logging.StreamHandler()
     ]
@@ -345,29 +367,38 @@ async def run_test(config: TestConfig):
         except Exception as e:
             logger.error(f"Erreur lors de la récupération des tests existants: {e}")
         
-        # Force l'enregistrement dans tous les cas
-        try:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            test_file = TESTS_DIR / f"{test_name_sanitized}_{timestamp}.json"
-            logger.info(f"Tentative de sauvegarde du test dans: {test_file}")
-            
-            # Vérifier que le chemin est valide
-            if not TESTS_DIR.exists():
-                logger.error(f"Le dossier _tests n'existe pas: {TESTS_DIR}")
-                TESTS_DIR.mkdir(parents=True, exist_ok=True)
-                logger.info(f"Dossier _tests créé: {TESTS_DIR}")
-            
-            # Sauvegarder le fichier
-            with open(test_file, 'w', encoding='utf-8') as f:
-                f.write(json.dumps(cleaned_config, indent=2, ensure_ascii=False))
-            
-            # Vérifier que le fichier a bien été créé
-            if test_file.exists():
-                logger.info(f"Test sauvegardé avec succès dans {test_file}")
-            else:
-                logger.error(f"Échec de la sauvegarde du test dans {test_file}")
-        except Exception as e:
-            logger.error(f"Erreur lors de la sauvegarde du test dans _tests: {e}", exc_info=True)
+        # Vérifier si le test existe déjà
+        if test_name_sanitized in existing_tests:
+            logger.info(f"Le test {test_name_sanitized} existe déjà, pas de sauvegarde")
+        else:
+            try:
+                # Si le test a un nom, on utilise directement ce nom
+                if test_name and test_name != "test_sans_nom":
+                    test_file = TESTS_DIR / f"{test_name_sanitized}.json"
+                else:
+                    # Sinon on ajoute un timestamp
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    test_file = TESTS_DIR / f"{test_name_sanitized}_{timestamp}.json"
+                
+                logger.info(f"Tentative de sauvegarde du test dans: {test_file}")
+                
+                # Vérifier que le chemin est valide
+                if not TESTS_DIR.exists():
+                    logger.error(f"Le dossier _tests n'existe pas: {TESTS_DIR}")
+                    TESTS_DIR.mkdir(parents=True, exist_ok=True)
+                    logger.info(f"Dossier _tests créé: {TESTS_DIR}")
+                
+                # Sauvegarder le fichier
+                with open(test_file, 'w', encoding='utf-8') as f:
+                    f.write(json.dumps(cleaned_config, indent=2, ensure_ascii=False))
+                
+                # Vérifier que le fichier a bien été créé
+                if test_file.exists():
+                    logger.info(f"Test sauvegardé avec succès dans {test_file}")
+                else:
+                    logger.error(f"Échec de la sauvegarde du test dans {test_file}")
+            except Exception as e:
+                logger.error(f"Erreur lors de la sauvegarde du test dans _tests: {e}", exc_info=True)
         
         return {"id": test_id, "results": cleaned_results, "result_file": html_file_path}
     except Exception as e:
