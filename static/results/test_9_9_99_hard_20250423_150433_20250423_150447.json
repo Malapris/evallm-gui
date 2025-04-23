@@ -1,0 +1,143 @@
+{
+  "config": {
+    "models": [
+      "granite3.3:8b"
+    ],
+    "system_prompts": {
+      "systeme": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_2": "role control, content thinking, Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.\n"
+    },
+    "user_prompts": {
+      "utilisateur": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date."
+    },
+    "contexts": {
+      "sources": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !"
+    },
+    "seeds": [
+      6,
+      8
+    ],
+    "temperatures": [
+      0.0
+    ],
+    "nom_test": "9-9-99-hard",
+    "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+    "resultats": [
+      "09/09/99",
+      "1999-09-09",
+      "09/09/1999"
+    ]
+  },
+  "results": [
+    {
+      "model": "granite3.3:8b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 6,
+      "temperature": 0.0,
+      "response": "25/06/2025, 09/08/1999, indéterminé, 01/01/2020, indéterminé",
+      "response_time": 1.649287223815918,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    },
+    {
+      "model": "granite3.3:8b",
+      "system_prompt": "Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.",
+      "system_prompt_id": "systeme",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 8,
+      "temperature": 0.0,
+      "response": "25/06/2025, 09/08/1999, 01/01/2020, 00/00/0000",
+      "response_time": 1.1161344051361084,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    },
+    {
+      "model": "granite3.3:8b",
+      "system_prompt": "role control, content thinking, Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.\n",
+      "system_prompt_id": "system_2",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 6,
+      "temperature": 0.0,
+      "response": "25/12/2025, 09/08/1999, indéterminé, 01/01/2020, indéterminé",
+      "response_time": 1.8591504096984863,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    },
+    {
+      "model": "granite3.3:8b",
+      "system_prompt": "role control, content thinking, Tu es un expert en analyse de données et de textes, tu es très précis, tu ne laisses rien au hasard et tu donnes un seul résultat simple et synthétique.\n",
+      "system_prompt_id": "system_2",
+      "user_prompt": "Les sources suivantes font référence à une date, donne cette date au format JJ/MM/AAAA et aucune autre information, pas de commentaire, pas de phrase, pas de mot, juste la date.",
+      "user_prompt_id": "utilisateur",
+      "context": "source 1 : C'était quand nous avons pris le train en pour aller à Paris, mais aujourdrhui en 2025 on y va en vélo.\nsource 2 : C'était en 99, un mois après le 9 aout, vers 10h15 je me souviens, il faisait froid à Limoges.\n source 3 : aujourd'hui je ne m'en souviens plus ! \n source 4 : c'était déjà passé en 2020 ! \n source 5 : jeudi il sera trop tard !",
+      "context_id": "sources",
+      "seed": 8,
+      "temperature": 0.0,
+      "response": "25/12/2025, 09/08/1999, indéterminé, 01/01/2020, indéterminé",
+      "response_time": 1.5693373680114746,
+      "commentaire": "Ce test (dur) cherche à faire deviner la date du 9 septembre 1999 au LLM sans lui donner directement.",
+      "Resultats": [
+        "09/09/99",
+        "1999-09-09",
+        "09/09/1999"
+      ]
+    }
+  ],
+  "system_info": {
+    "os": "Windows",
+    "os_version": "10.0.19045",
+    "python_version": "3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]",
+    "ollama_version": "0.6.5",
+    "evallm_version": "4.0.1",
+    "cpu": {
+      "model": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+      "cores": 8,
+      "threads": 8,
+      "freq": {
+        "current": 3501.0,
+        "min": 0.0,
+        "max": 3501.0
+      }
+    },
+    "memory": {
+      "total_gb": 31.874404907226562,
+      "available_gb": 0.19295883178710938,
+      "used_gb": 31.681446075439453,
+      "percent": 99.4
+    },
+    "gpu": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total": 24576.0,
+        "memory_used": 15911.0,
+        "memory_free": 8416.0,
+        "gpu_load": 100.0
+      }
+    ],
+    "hostname": "DESKTOP-GFRJJ8Q"
+  },
+  "timestamp": "2025-04-23T15:04:47.948591"
+}

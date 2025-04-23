@@ -19,7 +19,7 @@ import webbrowser
 import shutil
 import requests
 from jinja2 import Environment, FileSystemLoader
-
+ 
 # Constantes
 DEFAULT_OLLAMA_URL = 'http://localhost:11434'
 OLLAMA_API_URL = f"{DEFAULT_OLLAMA_URL}/api/version"
